@@ -12,7 +12,7 @@
                     "id": "9c2bcc1b-bc50-4192-a1dd-ee61ebd731bb",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Hold,MultiTap,Tap",
+                    "interactions": "Hold,MultiTap(tapDelay=0.1),Tap",
                     "initialStateCheck": false
                 },
                 {
@@ -30,7 +30,7 @@
                     "id": "880a1015-2abf-4e60-bda4-18bcfe266bd1",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "MultiTap",
+                    "interactions": "MultiTap(tapDelay=0.5)",
                     "initialStateCheck": false
                 },
                 {

@@ -52,6 +52,12 @@ public class ScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeginD
 
     bool isDragging;
     float inertia;
+    // Expose a public Property for other scripts to access safely
+    public float Inertia 
+    {
+        get { return inertia; }
+        set { inertia = value; }
+    }
 
     float startPosContent;
     float startPosMouse;
@@ -80,6 +86,12 @@ public class ScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeginD
                 return _padScroll;
         }
     }
+
+    public void AddInertia(float amount)
+    {
+        inertia += amount;
+    }
+
 
     //Get TrackPad Scroll
     void OnGUI() {
@@ -207,6 +219,7 @@ public class ScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeginD
         }
 
         if (isInitialized) {
+            
             if (!isDragging) {
                 if (contentTarget.anchoredPosition.y + inertia < 0) {
                     if (isElastic) {
@@ -371,7 +384,7 @@ public class ScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeginD
         startPosContent = contentTarget.anchoredPosition.y;
     }
 
-    bool isInArea;
+    bool isInArea = true;
 
     public void OnPointerEnter(PointerEventData eventData) {
         isInArea = true;

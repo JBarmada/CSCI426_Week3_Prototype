@@ -2501,6 +2501,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7817251506741685100, guid: 5667cac651955634c849427787500207, type: 3}
   m_PrefabInstance: {fileID: 848680282}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1181148801 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7817251506741685096, guid: 5667cac651955634c849427787500207, type: 3}
+  m_PrefabInstance: {fileID: 848680282}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c54b901c47eedc4d9aba70e48210d21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1277497613
 GameObject:
   m_ObjectHideFlags: 0
@@ -3503,11 +3514,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679746516271866285, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 357
+      value: 402
       objectReference: {fileID: 0}
     - target: {fileID: 1679746516271866285, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 182
+      value: 220
       objectReference: {fileID: 0}
     - target: {fileID: 1679746516271866285, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3549,6 +3560,10 @@ PrefabInstance:
       propertyPath: actionRef
       value: 
       objectReference: {fileID: 1417116755}
+    - target: {fileID: 6272226424064685878, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: scrollMechanic
+      value: 
+      objectReference: {fileID: 1181148801}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

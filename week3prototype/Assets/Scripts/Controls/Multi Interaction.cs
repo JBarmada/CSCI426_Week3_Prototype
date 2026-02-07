@@ -9,7 +9,22 @@ public class MultiInteraction : MonoBehaviour
     // single tap: slows down the scrolling every time you tap, up to a certain point, if its already slowed down below the point, it will speed up the scrolling up to a certain point
     // hold: starts the scrolling once you release, and the longer you held, the faster it scrolls - if it is already scrolling, it will stop the scrolling
     // multi tap: slows the scrolling, and initiates a "like" action
-    private 
+    [Header("Tap Mechanic Settings")]
+    public ScrollMechanic scrollMechanic; // Reference to the ScrollMechanic script
+    public float SingleTapSlowAmount = 3f; // Amount to slow down the scrolling on tap
+    public float MultiTapSlowAmount = 1f; // Amount to slow down the scrolling on multi tap
+    public float tapSpeedThreshold = 1f; // if below this, tap will speed up instead
+    public float tapSpeedUpAmount = 2f; // Amount to speed up the scrolling on tap if below threshold
+    [Header("Hold Mechanic Settings")]
+    public float maxHoldDuration = 3f; // max duration for speedup calc
+    public float holdSpeedMultiplier = 10f; // Multiplier for scrolling speed up on hold release
+
+    [Header("Scroll Speed Limits")]
+    public float minSpeed = -30f; // Minimum speed for scrolling
+    public float maxSpeed = 30f; // Maximum speed for scrolling
+    
+    private float holdStartTime; // Time when hold interaction started
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable() {
         actionRef.action.Enable();
@@ -17,6 +32,38 @@ public class MultiInteraction : MonoBehaviour
     void OnDisable() {
         actionRef.action.Disable();
 
+    }
+
+    void processSingleTap() {
+        if (scrollMechanic == null) {
+            Debug.LogError("ScrollMechanic reference is not assigned in the inspector.");
+            return;
+        }
+        // 1. Get current velocity and its direction
+        float velocity = scrollMechanic.Inertia;
+        float direction = Mathf.Sign(velocity); // Returns 1 if positive, -1 if negative
+        float currentSpeed = Mathf.Abs(velocity); // Absolute speed (always positive)
+
+        // Handle case where scroll is stopped (Sign(0) is 1, which is fine, defaults to up)
+        if (velocity == 0) direction = -1; // Optional: Choose default direction if stopped
+
+        if (currentSpeed < tapSpeedThreshold)
+        {
+            // SPEED UP: Add speed to the magnitude, relying on direction later
+            // Note: We modify the variable directly here for cleaner logic
+            currentSpeed += tapSpeedUpAmount;
+        } 
+        else 
+        {
+            // SLOW DOWN: Multiply the magnitude
+            currentSpeed *= SingleTapSlowAmount; 
+        }
+
+        // 2. Clamp the MAGNITUDE (Speed), not the raw Inertia
+        currentSpeed = Mathf.Clamp(currentSpeed, minSpeed, maxSpeed);
+
+        // 3. Re-apply the direction to the scroll mechanic
+        scrollMechanic.Inertia = currentSpeed * direction;
     }
     void Start()
     {
@@ -45,6 +92,7 @@ public class MultiInteraction : MonoBehaviour
                 Debug.Log("Hold interaction performed");
             } else if (ctx.interaction is TapInteraction) {
                 Debug.Log("Tap interaction performed");
+                processSingleTap();
             } else if (ctx.interaction is MultiTapInteraction) {
                 Debug.Log("MultiTap interaction performed");
             }

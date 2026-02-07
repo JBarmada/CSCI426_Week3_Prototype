@@ -1,0 +1,107 @@
+{
+    "version": 1,
+    "name": "playerControls",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "4ffcb25f-d638-44cd-860a-ed80cd792084",
+            "actions": [
+                {
+                    "name": "Multi Action",
+                    "type": "Button",
+                    "id": "9c2bcc1b-bc50-4192-a1dd-ee61ebd731bb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold,MultiTap,Tap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Single Tap",
+                    "type": "Button",
+                    "id": "1347e095-bb94-44be-815f-796c5604906c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Double tap",
+                    "type": "Button",
+                    "id": "880a1015-2abf-4e60-bda4-18bcfe266bd1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "MultiTap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Hold space",
+                    "type": "Button",
+                    "id": "552ec3aa-5e82-414d-b619-bf4a0a03a813",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "MultiTap",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2097be49-5630-4a64-8e4b-f1f5dac9806c",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Multi Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4cec7186-edb4-4bdb-b6ee-d62930788779",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Single Tap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "612bab04-a8a5-4741-a841-c75879cd8e5a",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Double tap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "493c4b3c-d3a9-488b-8413-074072f1e919",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Hold space",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

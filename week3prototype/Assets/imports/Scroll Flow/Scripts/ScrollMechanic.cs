@@ -24,7 +24,7 @@ public class ScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeginD
 
     [Header("Settings")]
     [Space(20)]
-    public float heightTemplate = 27; //Height of template rect texts
+    public float heightTemplate = 50; //Height of template rect texts
 
     public AnimationCurve curve; //Curve for controlling "Shape" of scroll
     public AnimationCurve curveShift; //Curve for controlling text offset

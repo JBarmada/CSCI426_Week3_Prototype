@@ -6,7 +6,9 @@ public class MultiInteraction : MonoBehaviour
 {
 
     public InputActionReference actionRef; 
-
+    // single tap: slows down the scrolling every time you tap, up to a certain point, if its already slowed down below the point, it will speed up the scrolling up to a certain point
+    // hold: starts the scrolling once you release, and the longer you held, the faster it scrolls - if it is already scrolling, it will stop the scrolling
+    // multi tap: slows the scrolling, and initiates a "like" action
     private 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable() {
@@ -48,12 +50,22 @@ public class MultiInteraction : MonoBehaviour
             }
         };
 
+        actionRef.action.canceled += ctx => {
+            if (ctx.interaction is HoldInteraction) {
+                Debug.Log("Hold interaction canceled");
+            } else if (ctx.interaction is TapInteraction) {
+                Debug.Log("Tap interaction canceled");
+            } else if (ctx.interaction is MultiTapInteraction) {
+                Debug.Log("MultiTap interaction canceled");
+            }
+        };
+
     }
 
     // Update is called once per frame
     void Update()
     {   
-        
+        //actionRef.action.GetTimeCompletedPercentage();
     }
     
     

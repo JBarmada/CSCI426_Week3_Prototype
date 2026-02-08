@@ -16,7 +16,7 @@ public class HoldChargeHandler : MonoBehaviour
     public InputActionReference actionRef;
 
     [Header("Dependencies")]
-    public ScrollMechanic scrollMechanic;
+    public NewScrollMechanic scrollMechanic;
 
     [Header("Charge Settings")]
     public float maxHoldDuration = 2f;

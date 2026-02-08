@@ -10,7 +10,7 @@ using UnityEngine.InputSystem.Interactions;
 public class TapScrollHandler : MonoBehaviour
 {
     public InputActionReference actionRef;
-    public ScrollMechanic scrollMechanic;
+    public NewScrollMechanic scrollMechanic;
 
     [Header("Tap Tuning")]
     public float tapSpeedThreshold = 5f;

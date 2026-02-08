@@ -61,7 +61,7 @@ namespace Mechanics
                     targetImage.color = Color.red;
                     break;
                 case PostType.Neutral:
-                    targetImage.color = Color.white; 
+                    targetImage.color = Color.gray; 
                     break;
             }
         }

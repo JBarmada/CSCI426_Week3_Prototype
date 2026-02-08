@@ -9,8 +9,9 @@ namespace Mechanics
         public PostType currentType;
 
         [Header("Settings")]
-        // Assigned automatically if null, but you can drag a child 'Glow' image here
-        public Image targetImage;
+        // CHANGED: Now looking for a RawImage instead of Image
+        public RawImage targetImage; 
+        [Range(0, 255)] public int alpha = 56;
 
         public void InitializeRandom()
         {
@@ -21,11 +22,11 @@ namespace Mechanics
             {
                 currentType = PostType.Gold;
             }
-            else if (val < 0.40f) // 0.10 + 0.30
+            else if (val < 0.40f) 
             {
                 currentType = PostType.Positive;
             }
-            else if (val < 0.70f) // 0.40 + 0.30
+            else if (val < 0.70f) 
             {
                 currentType = PostType.Negative;
             }
@@ -39,29 +40,36 @@ namespace Mechanics
 
         private void UpdateVisuals()
         {
-            // Auto-detect image if not assigned
+            // Auto-detect RawImage if not assigned
             if (targetImage == null)
             {
-                targetImage = GetComponent<Image>();
-                // Fallback to searching children if main object has no image
-                if (targetImage == null) targetImage = GetComponentInChildren<Image>();
+                // First, look on this object
+                targetImage = GetComponent<RawImage>();
+                
+                // If not found, look in the children (This is likely where yours is)
+                if (targetImage == null) targetImage = GetComponentInChildren<RawImage>();
             }
 
-            if (targetImage == null) return;
+            if (targetImage == null) 
+            {
+                Debug.LogWarning($"No RawImage found on {gameObject.name} or its children!");
+                return;
+            }
 
+            // Apply colors based on type
             switch (currentType)
             {
                 case PostType.Gold:
-                    targetImage.color = Color.yellow;
+                    targetImage.color = new Color(1f, 0.84f, 0f, alpha / 255f);
                     break;
                 case PostType.Positive:
-                    targetImage.color = Color.green;
+                    targetImage.color = new Color(0f, 1f, 0f, alpha / 255f);
                     break;
                 case PostType.Negative:
-                    targetImage.color = Color.red;
+                    targetImage.color = new Color(1f, 0f, 0f, alpha / 255f);
                     break;
                 case PostType.Neutral:
-                    targetImage.color = Color.gray; 
+                    targetImage.color = new Color(0f, 0f, 1f, alpha / 255f);
                     break;
             }
         }

@@ -2510,7 +2510,7 @@ MonoBehaviour:
   - 
   - 
   templateValues: {fileID: 2488041822340301321, guid: ec5178f5f4697b3459d39d4ffe505824, type: 3}
-  camera: {fileID: 519420031}
+  targetCamera: {fileID: 519420031}
   targetCanvas: {fileID: 1581989729}
   contentTarget: {fileID: 255045360}
   contentSize: {fileID: 255045361}
@@ -2572,7 +2572,7 @@ MonoBehaviour:
   maxFontSize: 20
   isElastic: 1
   maxElastic: 50
-  inertiaSense: 2
+  inertiaSense: 0.5
   isCanUseMouseWheel: 1
   isInvertMouseWheel: 0
   mouseWheelSensibility: 0.5

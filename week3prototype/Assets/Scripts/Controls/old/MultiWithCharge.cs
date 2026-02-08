@@ -30,9 +30,9 @@ public class MultiWithCharge : MonoBehaviour
     public float shakeIntensity = 15f;    // Increased default for UI (Pixels are smaller than World Units)
     public float zoomAmount = 1.1f;       // Scale Multiplier (1.1 = 110% size)
     [Header("Release Feel")]
-    public float preLaunchPause = 0.2f;   // The "Hit Stop" freeze
-    public float recoilDuration = 0.5f;   // Time to settle
-    public float recoilIntensity = 40f;   // Violent shake amount (Higher than hold shake)
+    public float preLaunchPause = 0.35f;   // The "Hit Stop" freeze
+    public float recoilDuration = 1.2f;   // Time to settle
+    public float recoilIntensity = 70f;   // Violent shake amount (Higher than hold shake)
     private Coroutine releaseRoutine;
     
     // Internal storage for UI positions

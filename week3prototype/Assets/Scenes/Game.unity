@@ -1908,7 +1908,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 554749491}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0988aa3beb89274ea31635d634529db, type: 3}
   m_Name: 
@@ -1927,9 +1927,9 @@ MonoBehaviour:
   finalLoopDuration: 0.5
   shakeIntensity: 5
   zoomAmount: 1.5
-  preLaunchPause: 0.2
-  recoilDuration: 0.5
-  recoilIntensity: 40
+  preLaunchPause: 0.35
+  recoilDuration: 1.2
+  recoilIntensity: 75
   audioSource: {fileID: 554749495}
   loopAudioSource: {fileID: 554749496}
   speedUpSound: {fileID: 8300000, guid: 8719c23e09fee1e4f88a714d20aa2cd0, type: 3}
@@ -3701,6 +3701,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7817251506741685103, guid: 5667cac651955634c849427787500207, type: 3}
   m_PrefabInstance: {fileID: 848680282}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1058424418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: Gameplay/Multi Action
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: 1175f7b4dd52ff64ca8d5de1dd0fe010, type: 3}
+  m_ActionId: 9c2bcc1b-bc50-4192-a1dd-ee61ebd731bb
 --- !u!1 &1135769541
 GameObject:
   m_ObjectHideFlags: 0
@@ -4450,6 +4464,20 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5667cac651955634c849427787500207, type: 3}
+--- !u!114 &1312677102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1515ab76e54f068e2f2207940fab32, type: 3}
+  m_Name: Gameplay/Multi Action
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.InputActionReference
+  m_Asset: {fileID: -944628639613478452, guid: 1175f7b4dd52ff64ca8d5de1dd0fe010, type: 3}
+  m_ActionId: 9c2bcc1b-bc50-4192-a1dd-ee61ebd731bb
 --- !u!224 &1328439543 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7817251506741685100, guid: 5667cac651955634c849427787500207, type: 3}
@@ -5271,9 +5299,69 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: actionRef
+      value: 
+      objectReference: {fileID: 1312677102}
+    - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: loopSource
+      value: 
+      objectReference: {fileID: 554749496}
+    - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: launchSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 344823b78d64f2a4c8da594e70f4634e, type: 3}
+    - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: oneShotSource
+      value: 
+      objectReference: {fileID: 554749495}
+    - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: maxChargeSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b9996a258ee565e46b38ffca6ba21d91, type: 3}
+    - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: scrollMechanic
+      value: 
+      objectReference: {fileID: 1181148801}
+    - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: chargeLoopSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 728d43b6b0df6d64b9d6b114e8799317, type: 3}
+    - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: chargeBuildupSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 8019639e2e2f57f4e871e1fa684a05ba, type: 3}
     - target: {fileID: 3843804063585114650, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6251255081673306082, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: actionRef
+      value: 
+      objectReference: {fileID: 1058424418}
+    - target: {fileID: 6251255081673306082, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 554749495}
+    - target: {fileID: 6251255081673306082, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: speedUpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 8719c23e09fee1e4f88a714d20aa2cd0, type: 3}
+    - target: {fileID: 6251255081673306082, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: slowDownSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 9a12ae4abc7fc7c45ba39d4e9fc45f5d, type: 3}
+    - target: {fileID: 6251255081673306082, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: scrollMechanic
+      value: 
+      objectReference: {fileID: 1181148801}
+    - target: {fileID: 6251255081673306082, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: slowDownVolume
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 6251255081673306082, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: tapShakeIntensity
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6272226424064685878, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: actionRef

@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1679746516271866285}
   - component: {fileID: 374647309610956872}
-  - component: {fileID: 6272226424064685878}
+  - component: {fileID: 6251255081673306082}
+  - component: {fileID: 2410560930230008884}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -63,7 +64,7 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &6272226424064685878
+--- !u!114 &6251255081673306082
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,7 +73,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 3843804063585114650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75913b194c3010941a8b86029ca4ab26, type: 3}
+  m_Script: {fileID: 11500000, guid: e2b3d58897c8a4149af1ab93bc42b9f8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MultiInteraction
+  m_EditorClassIdentifier: Assembly-CSharp::TapScrollHandler
   actionRef: {fileID: 0}
+  scrollMechanic: {fileID: 0}
+  tapSpeedThreshold: 5
+  tapSpeedUpAmount: 0.4
+  slowMultiplier: 0.6
+  audioSource: {fileID: 0}
+  speedUpSound: {fileID: 0}
+  slowDownSound: {fileID: 0}
+  volume: 0.6
+--- !u!114 &2410560930230008884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3843804063585114650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7384e9ab7443342a983fb8cdf6e235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HoldChargeHandler
+  actionRef: {fileID: 0}
+  scrollMechanic: {fileID: 0}
+  maxHoldDuration: 2
+  minHoldPower: 10
+  maxHoldPower: 80
+  shakeIntensity: 15
+  zoomAmount: 1.1
+  preLaunchPause: 0.35
+  recoilDuration: 1.2
+  recoilIntensity: 70
+  oneShotSource: {fileID: 0}
+  loopSource: {fileID: 0}
+  chargeBuildupSound: {fileID: 0}
+  chargeLoopSound: {fileID: 0}
+  maxChargeSound: {fileID: 0}
+  launchSound: {fileID: 0}
+  maxChargePitch: 2

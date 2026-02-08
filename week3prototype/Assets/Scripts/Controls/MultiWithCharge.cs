@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
@@ -28,6 +29,11 @@ public class MultiWithCharge : MonoBehaviour
     [Header("Visual Juice (Shake & Zoom)")]
     public float shakeIntensity = 15f;    // Increased default for UI (Pixels are smaller than World Units)
     public float zoomAmount = 1.1f;       // Scale Multiplier (1.1 = 110% size)
+    [Header("Release Feel")]
+    public float preLaunchPause = 0.2f;   // The "Hit Stop" freeze
+    public float recoilDuration = 0.5f;   // Time to settle
+    public float recoilIntensity = 40f;   // Violent shake amount (Higher than hold shake)
+    private Coroutine releaseRoutine;
     
     // Internal storage for UI positions
     private Vector2 originalCanvasPos;    
@@ -128,8 +134,10 @@ public class MultiWithCharge : MonoBehaviour
 
     void StartHold()
     {
-         Debug.Log("[Charge] StartHold called");
-        // Slow existing motion before charging
+        Debug.Log("[Charge] StartHold called");
+        // 1. Stop any release animation if we press again
+        if (releaseRoutine != null) StopCoroutine(releaseRoutine);
+        // 2. Slow existing motion before charging
         if (Mathf.Abs(scrollMechanic.Inertia) > 1.0f)
             scrollMechanic.Inertia *= 0.5f;
 
@@ -157,27 +165,67 @@ public class MultiWithCharge : MonoBehaviour
         isHolding = false;
         isLoopingCharge = false;
 
-        // 1. Stop Charge Audio/Effects
-        if (loopAudioSource != null) loopAudioSource.Stop();
-        ResetVisuals();
-
-        // 2. Calculate Launch Power
-        // Ratio 0 to 1 based on how long we held
+        // 1. Calculate Launch Power
         float ratio = Mathf.Clamp01(holdTimer / maxHoldDuration); 
         
-        // If held for a tiny fraction, ignore (prevents accidental tiny launches)
-        if (ratio < 0.1f) return; 
+        // If held for a tiny fraction, just cancel everything
+        if (ratio < 0.1f) {
+            ResetVisuals();
+            if (loopAudioSource != null) loopAudioSource.Stop();
+            return;
+        }
 
-        float launchVelocity = Mathf.Lerp(minHoldPower, maxHoldPower, ratio);
+        // 2. Start the Release Sequence (Pause -> Launch -> Shake)
+        releaseRoutine = StartCoroutine(ReleaseSequence(ratio));
+    }
 
-        // 3. Apply Velocity (Launch Upwards by default, or flip based on need)
-        scrollMechanic.Inertia = launchVelocity; // Positive = Scroll Up, Negative = Down
+    IEnumerator ReleaseSequence(float chargeRatio)
+    {
+        // --- PHASE 1: THE PAUSE (Hit Stop) ---
+        // Stop the charging sound immediately (silence helps the impact)
+        if (loopAudioSource != null) loopAudioSource.Stop();
+        
+        // Wait for 0.2 seconds while keeping visuals FROZEN in their tense state
+        yield return new WaitForSeconds(preLaunchPause);
 
-        // 4. Play Launch Sound
+
+        // --- PHASE 2: LAUNCH ---
+        float launchVelocity = Mathf.Lerp(minHoldPower, maxHoldPower, chargeRatio);
+        scrollMechanic.Inertia = launchVelocity; 
+
         if (audioSource != null && launchSound != null) {
             audioSource.pitch = 1f;
             audioSource.PlayOneShot(launchSound);
         }
+
+        // --- PHASE 3: VIOLENT SHAKE & SETTLE ---
+        float elapsed = 0f;
+        Vector3 startScale = scrollMechanic.targetCanvas.localScale; // Should be the zoomed-in scale
+
+        while (elapsed < recoilDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / recoilDuration;
+            
+            // 1. Decay Factor (1.0 -> 0.0)
+            float decay = 1f - t; 
+
+            // 2. Violent Recoil Shake
+            // Shake intensity decays over time
+            Vector2 shake = UnityEngine.Random.insideUnitCircle * recoilIntensity * decay;
+            scrollMechanic.targetCanvas.anchoredPosition = originalCanvasPos + shake;
+
+            // 3. Smooth Settle (Scale goes back to normal)
+            // "SmoothStep" for a nicer curve
+            float smoothT = t * t * (3f - 2f * t); 
+            scrollMechanic.targetCanvas.localScale = Vector3.Lerp(startScale, originalCanvasScale, smoothT);
+            
+            yield return null;
+        }
+
+        // --- CLEANUP ---
+        ResetVisuals();
+        releaseRoutine = null;
     }
 
     // Update controls the continuous "Juice" (Shake, Zoom, Audio Pitch)

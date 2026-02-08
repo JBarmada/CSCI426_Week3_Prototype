@@ -26,10 +26,12 @@ public class MultiWithCharge : MonoBehaviour
     public float finalLoopDuration = 0.5f; // How many seconds from the end to loop
     
     [Header("Visual Juice (Shake & Zoom)")]
-    public float shakeIntensity = 5f;    // How much to shake the UI/Camera
-    public float zoomAmount = 0.8f;      // Target Ortho Size multiplier (e.g. 0.8 = 80% size)
-    private float defaultOrthoSize;      // To store original camera size
-    private Vector3 originalCamPos;      // To store original camera position
+    public float shakeIntensity = 15f;    // Increased default for UI (Pixels are smaller than World Units)
+    public float zoomAmount = 1.1f;       // Scale Multiplier (1.1 = 110% size)
+    
+    // Internal storage for UI positions
+    private Vector2 originalCanvasPos;    
+    private Vector3 originalCanvasScale;
 
     [Header("Audio Settings")]
     public AudioSource audioSource;
@@ -55,7 +57,7 @@ public class MultiWithCharge : MonoBehaviour
     private float holdTimer = 0f;
     private bool hasPlayedMaxSound = false;
     private bool isLoopingCharge = false;
-    private float lastAudioTime = -1f;
+    // private float lastAudioTime = -1f;
 
     void OnEnable() {
         if(actionRef != null) actionRef.action.Enable();
@@ -70,11 +72,24 @@ public class MultiWithCharge : MonoBehaviour
             Debug.LogError("References missing in MultiInteraction.");
             return;
         }
+        if (!(actionRef.action.interactions.Contains("Hold") 
+        && actionRef.action.interactions.Contains("Tap") 
+        && actionRef.action.interactions.Contains("MultiTap"))) {
+            Debug.LogError("InputAction does not contain the required interactions: Hold, Tap, MultiTap.");
+            return;
+            
+        }
+        if (audioSource == null) {
+            Debug.LogWarning("AudioSource reference is missing. Audio feedback will not work.");
+        }
+        if (loopAudioSource == null) {
+            Debug.LogWarning("Loop AudioSource reference is missing. Looping charge sound will not work.");
+        }
 
         // Store original camera settings for reset later
-        if(scrollMechanic.camera != null) {
-            defaultOrthoSize = scrollMechanic.camera.orthographicSize;
-            originalCamPos = scrollMechanic.camera.transform.position;
+        if(scrollMechanic.targetCanvas != null) {
+            originalCanvasPos = scrollMechanic.targetCanvas.anchoredPosition;
+            originalCanvasScale = scrollMechanic.targetCanvas.localScale;
         }
 
         // Setup Interaction Callbacks
@@ -82,7 +97,7 @@ public class MultiWithCharge : MonoBehaviour
             if (ctx.interaction is TapInteraction) {
                 // We handle tap in 'performed'
             } 
-            else if (ctx.interaction is HoldInteraction || ctx.interaction is SlowTapInteraction) {
+            else if (ctx.interaction is HoldInteraction) {
                 
             }
         };
@@ -91,10 +106,15 @@ public class MultiWithCharge : MonoBehaviour
             if (ctx.interaction is TapInteraction) {
                 processSingleTap();
             } 
-            if(ctx.interaction is HoldInteraction)
+            else if(ctx.interaction is HoldInteraction)
             {
                 // We use 'performed' to catch the hold without overlapping with tap's 'started'
                 StartHold(); 
+                Debug.Log("[Charge] Hold PERFORMED");
+            }
+            else if(ctx.interaction is MultiTapInteraction)
+            {
+                Debug.Log("[Charge] MultiTap PERFORMED - Slow down!");
             }
         };
 
@@ -175,33 +195,33 @@ public class MultiWithCharge : MonoBehaviour
             float ratio = Mathf.Clamp01(holdTimer / maxHoldDuration);
 
             // --- 1. VISUALS: Zoom & Shake ---
-            if (scrollMechanic.camera != null)
+            if (scrollMechanic.targetCanvas != null)
             {
-                // Zoom In (Lerp Ortho Size)
-                float targetSize = defaultOrthoSize * zoomAmount;
-                scrollMechanic.camera.orthographicSize = Mathf.Lerp(defaultOrthoSize, targetSize, ratio);
+                // Zoom: We Scale the UI Up (e.g. 1.0 -> 1.1)
+                // Note: Ensure your TargetCanvas pivot is in the center (0.5, 0.5) for best results
+                Vector3 targetScale = originalCanvasScale * zoomAmount;
+                scrollMechanic.targetCanvas.localScale = Vector3.Lerp(originalCanvasScale, targetScale, ratio);
 
-                // Shake (Increases with ratio)
-                float currentShake = shakeIntensity * ratio * 0.1f; 
-                // Shake Camera Position (Or you could shake the Canvas RectTransform)
-                Vector3 shakeOffset = (Vector3)UnityEngine.Random.insideUnitCircle * currentShake;
-                scrollMechanic.camera.transform.position = originalCamPos + shakeOffset;
+                // Shake: We move the AnchoredPosition
+                float currentShake = shakeIntensity * ratio; 
+                Vector2 shakeOffset = UnityEngine.Random.insideUnitCircle * currentShake;
+                scrollMechanic.targetCanvas.anchoredPosition = originalCanvasPos + shakeOffset;
             }
 
             // --- AUDIO: Pitch ramp + loop switch ---
             if (loopAudioSource != null)
             {
                  // Log state changes once
-                if (loopAudioSource.time != lastAudioTime)
-                {
-                    Debug.Log(
-                        $"[Charge][Audio] clip={loopAudioSource.clip?.name} " +
-                        $"time={loopAudioSource.time:F2} / {loopAudioSource.clip?.length:F2} " +
-                        $"isPlaying={loopAudioSource.isPlaying} " +
-                        $"looping={isLoopingCharge}"
-                    );
-                    lastAudioTime = loopAudioSource.time;
-                }
+                // if (loopAudioSource.time != lastAudioTime)
+                // {
+                //     Debug.Log(
+                //         $"[Charge][Audio] clip={loopAudioSource.clip?.name} " +
+                //         $"time={loopAudioSource.time:F2} / {loopAudioSource.clip?.length:F2} " +
+                //         $"isPlaying={loopAudioSource.isPlaying} " +
+                //         $"looping={isLoopingCharge}"
+                //     );
+                //     lastAudioTime = loopAudioSource.time;
+                // }
             
                 if(loopAudioSource.isPlaying)
                 {
@@ -240,9 +260,10 @@ public class MultiWithCharge : MonoBehaviour
 
     void ResetVisuals()
     {
-        if (scrollMechanic.camera != null) {
-            scrollMechanic.camera.orthographicSize = defaultOrthoSize;
-            scrollMechanic.camera.transform.position = originalCamPos;
+        // Restore original UI state
+        if (scrollMechanic.targetCanvas != null) {
+            scrollMechanic.targetCanvas.anchoredPosition = originalCanvasPos;
+            scrollMechanic.targetCanvas.localScale = originalCanvasScale;
         }
     }
 
@@ -258,13 +279,16 @@ public class MultiWithCharge : MonoBehaviour
         if (velocity == 0) direction = 1;
 
         if (currentSpeed < tapSpeedThreshold) {
+            Debug.Log($"[Tap] Speed up! Current: {currentSpeed:F2} + {tapSpeedUpAmount}");
             currentSpeed += tapSpeedUpAmount;
+
             if (audioSource != null) {
                 audioSource.pitch = speedUpPitch;
                 audioSource.PlayOneShot(speedUpSound, speedUpVolume);
             }
         } 
         else {
+            Debug.Log($"[Tap] Slow down! Current: {currentSpeed:F2} * {SingleTapSlowAmount}");
             currentSpeed *= SingleTapSlowAmount; 
             if (audioSource != null) {
                 audioSource.pitch = slowDownPitch;

@@ -4,6 +4,8 @@ using UnityEngine.InputSystem.Interactions;
 
 public class MultiInteraction : MonoBehaviour
 {
+    //reference HealthController script 
+    public HealthController healthControl; 
 
     public InputActionReference actionRef; 
     // single tap: slows down the scrolling every time you tap, up to a certain point, if its already slowed down below the point, it will speed up the scrolling up to a certain point
@@ -94,6 +96,8 @@ public class MultiInteraction : MonoBehaviour
     }
     void Start()
     {
+        healthControl = GameObject.FindGameObjectWithTag("HealthTag").GetComponent<HealthController>(); 
+
         if (actionRef == null) {
             Debug.LogError("InputActionReference is not assigned in the inspector.");
             return;
@@ -141,8 +145,23 @@ public class MultiInteraction : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
         //actionRef.action.GetTimeCompletedPercentage();
+        
+        //float currVelocity = scrollMechanic.Inertia;
+        //float currSpeed = Mathf.Abs(currVelocity);
+        //float proportion = currSpeed / 20;
+        //Debug.Log("fill amount: " + proportion);
+
+
+        //if(healthControl == null)
+        //{
+        //    Debug.Log("could not find health control");
+        //}
+        //healthControl.UpdateHealthBar(gameObject, 10, 20); 
+
+        
+
     }
     
     

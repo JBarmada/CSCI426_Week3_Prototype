@@ -102,7 +102,7 @@ public class MultiWithCharge : MonoBehaviour
     void StartHold()
     {
         // 1. If we are already scrolling fast, just slow it down to a stop then charge
-        while (Mathf.Abs(scrollMechanic.Inertia) > 1.0f) {
+        if (Mathf.Abs(scrollMechanic.Inertia) > 1.0f) {
             scrollMechanic.Inertia *= 0.5f;
         }
 
@@ -154,9 +154,9 @@ public class MultiWithCharge : MonoBehaviour
     {   
         // Robustness: If Input System says button is NOT pressed, force release
         // This handles cases where 'canceled' might not fire in edge cases
-        if (isHolding && !actionRef.action.IsPressed()) {
-            ReleaseHold();
-        }
+        // if (isHolding && !actionRef.action.IsPressed()) {
+        //     ReleaseHold();
+        // }
 
         if (isHolding)
         {

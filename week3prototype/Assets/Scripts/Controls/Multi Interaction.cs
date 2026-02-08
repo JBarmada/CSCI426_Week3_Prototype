@@ -25,7 +25,14 @@ public class MultiInteraction : MonoBehaviour
 
     [Header("Audio Settings")]
     public AudioSource audioSource;
-    public AudioClip tapClickSound; // A "thud" or "select" sound
+    // public AudioClip tapClickSound; // A "thud" or "select" sound
+    public AudioClip speedUpSound;   // Assign your bright/fast sound here
+    public AudioClip slowDownSound; 
+    [Header("Audio Modulation")]
+    [Range(1f, 2f)] public float speedUpPitch = 1.2f;
+    [Range(0f, 1f)] public float slowDownPitch = 0.7f;
+    [Range(0f, 1f)] public float speedUpVolume = 1.0f;
+    [Range(0f, 1f)] public float slowDownVolume = 0.6f;
     
     private float holdStartTime; // Time when hold interaction started
 
@@ -54,15 +61,22 @@ public class MultiInteraction : MonoBehaviour
         if (currentSpeed < tapSpeedThreshold)
         {
             // SPEED UP: Add speed to the magnitude, relying on direction later
-            // Note: We modify the variable directly here for cleaner logic
             Debug.Log("Speeding up from " + currentSpeed);
             currentSpeed += tapSpeedUpAmount;
+            if (audioSource != null) {
+                audioSource.pitch = speedUpPitch; // e.g. 1.2
+                audioSource.PlayOneShot(speedUpSound, speedUpVolume);
+            }
         } 
         else 
         {
             // SLOW DOWN: Multiply the magnitude
             Debug.Log("Slowing down from " + currentSpeed);
             currentSpeed *= SingleTapSlowAmount; 
+            if (audioSource != null) {
+                audioSource.pitch = slowDownPitch; // e.g. 0.7
+                audioSource.PlayOneShot(slowDownSound, slowDownVolume);
+            }
         }
 
         // 2. Clamp the MAGNITUDE (Speed), not the raw Inertia
@@ -71,11 +85,11 @@ public class MultiInteraction : MonoBehaviour
         // 3. Re-apply the direction to the scroll mechanic
         scrollMechanic.Inertia = currentSpeed * direction;
         // --- ADD AUDIO ---
-        if (audioSource != null && tapClickSound != null) {
-            // Reset pitch to normal for taps (in case the scroll script changed it)
-            audioSource.pitch = 1f; 
-            audioSource.PlayOneShot(tapClickSound);
-        }
+        // if (audioSource != null && tapClickSound != null) {
+        //     // Reset pitch to normal for taps (in case the scroll script changed it)
+        //     audioSource.pitch = 1f; 
+        //     audioSource.PlayOneShot(tapClickSound);
+        // }
         // -----------------
     }
     void Start()
@@ -94,11 +108,11 @@ public class MultiInteraction : MonoBehaviour
 
         actionRef.action.started += ctx => {
             if (ctx.interaction is HoldInteraction) {
-                Debug.Log("Hold interaction started");
+                // Debug.Log("Hold interaction started");
             } else if (ctx.interaction is TapInteraction) {
-                Debug.Log("Tap interaction started");
+                // Debug.Log("Tap interaction started");
             } else if (ctx.interaction is MultiTapInteraction) {
-                Debug.Log("MultiTap interaction started");
+                // Debug.Log("MultiTap interaction started");
             }
         };
 
@@ -115,11 +129,11 @@ public class MultiInteraction : MonoBehaviour
 
         actionRef.action.canceled += ctx => {
             if (ctx.interaction is HoldInteraction) {
-                Debug.Log("Hold interaction canceled");
+                // Debug.Log("Hold interaction canceled");
             } else if (ctx.interaction is TapInteraction) {
-                Debug.Log("Tap interaction canceled");
+                // Debug.Log("Tap interaction canceled");
             } else if (ctx.interaction is MultiTapInteraction) {
-                Debug.Log("MultiTap interaction canceled");
+                // Debug.Log("MultiTap interaction canceled");
             }
         };
 

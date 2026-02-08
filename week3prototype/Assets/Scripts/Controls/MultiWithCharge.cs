@@ -53,6 +53,7 @@ public class MultiWithCharge : MonoBehaviour
     private bool isHolding = false;
     private float holdTimer = 0f;
     private bool hasPlayedMaxSound = false;
+    int loopStartSample;
 
     void OnEnable() {
         if(actionRef != null) actionRef.action.Enable();
@@ -112,6 +113,8 @@ public class MultiWithCharge : MonoBehaviour
         hasPlayedMaxSound = false;
 
         // Audio: Start Charging
+        loopStartSample = Mathf.FloorToInt(
+        (chargingSound.length - finalLoopDuration) * chargingSound.frequency);
         if (loopAudioSource != null && chargingSound != null) {
             loopAudioSource.clip = chargingSound;
             loopAudioSource.loop = false;
@@ -182,13 +185,12 @@ public class MultiWithCharge : MonoBehaviour
             {
                 // Ramp pitch from 1.0 to maxChargePitch
                 loopAudioSource.pitch = Mathf.Lerp(1.0f, maxChargePitch, ratio);
-                // CUSTOM LOOP CHECK:
-                // If we are near the end of the clip (within 0.05s margin), jump back by loopDuration
-                if (loopAudioSource.time >= chargingSound.length - 0.05f)
+
+                int totalSamples = chargingSound.samples;
+
+                if (loopAudioSource.timeSamples >= totalSamples - 256)
                 {
-                    // Ensure we don't jump back to negative time
-                    float jumpBackPoint = Mathf.Max(0, chargingSound.length - finalLoopDuration);
-                    loopAudioSource.time = jumpBackPoint;
+                    loopAudioSource.timeSamples = loopStartSample;
                 }
             }
 

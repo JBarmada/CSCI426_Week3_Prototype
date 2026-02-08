@@ -117,21 +117,7 @@ public class MultiTapHandler : MonoBehaviour
         // 3. Visual FX (Heart)
         if (heartPrefab != null)
         {
-            // CHANGE 1: Parent to the POST (info.transform) so position is relative to it
-            GameObject heart = Instantiate(heartPrefab, info.transform);
-            
-            RectTransform heartRect = heart.GetComponent<RectTransform>();
-            if (heartRect != null)
-            {
-                // CHANGE 2: Set precise position (65, -40) relative to the post center
-                heartRect.anchoredPosition = new Vector2(65f, -40f);
-            }
-
-            // CHANGE 3: Force it to draw ON TOP of the post image
-            heart.transform.SetAsLastSibling();
-
-            // CHANGE 4: Animate (Grow -> Shrink)
-            StartCoroutine(AnimateHeart(heart));
+            Instantiate(heartPrefab, info.transform);
         }
 
         // 4. Shake
@@ -139,48 +125,6 @@ public class MultiTapHandler : MonoBehaviour
         
         Debug.Log($"Liked Post Type: {info.currentType}");
     }
-
-    // New Animation Routine
-    IEnumerator AnimateHeart(GameObject heart)
-    {
-        float growTime = 0.2f;
-        float stayTime = 0.1f;
-        float shrinkTime = 0.2f;
-        float targetScale = 17f;
-
-        // Start hidden
-        heart.transform.localScale = Vector3.zero;
-
-        // Grow
-        float elapsed = 0f;
-        while (elapsed < growTime)
-        {
-            if (heart == null) yield break;
-            elapsed += Time.deltaTime;
-            float t = elapsed / growTime;
-            // Smooth pop effect
-            heart.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one * targetScale, t);
-            yield return null;
-        }
-
-        // Stay
-        if (heart != null) heart.transform.localScale = Vector3.one * targetScale;
-        yield return new WaitForSeconds(stayTime);
-
-        // Shrink
-        elapsed = 0f;
-        while (elapsed < shrinkTime)
-        {
-            if (heart == null) yield break;
-            elapsed += Time.deltaTime;
-            float t = elapsed / shrinkTime;
-            heart.transform.localScale = Vector3.Lerp(Vector3.one * targetScale, Vector3.zero, t);
-            yield return null;
-        }
-
-        if (heart != null) Destroy(heart);
-    }
-
     // --- Shake Logic ---
     void TriggerTapShake()
     {

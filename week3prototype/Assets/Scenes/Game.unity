@@ -2585,21 +2585,6 @@ MonoBehaviour:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
   templateValues: {fileID: 2488041822340301321, guid: ec5178f5f4697b3459d39d4ffe505824, type: 3}
   targetCamera: {fileID: 519420031}
   targetCanvas: {fileID: 1581989729}

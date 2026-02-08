@@ -1368,6 +1368,10 @@ PrefabInstance:
       value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 7817251506741685096, guid: 5667cac651955634c849427787500207, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7817251506741685096, guid: 5667cac651955634c849427787500207, type: 3}
       propertyPath: tickSound
       value: 
       objectReference: {fileID: 8300000, guid: 40e2eaf7c4a5ccf4db628e676c59a9ab, type: 3}
@@ -2368,7 +2372,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 848680282}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1056754265}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c54b901c47eedc4d9aba70e48210d21, type: 3}
   m_Name: 
@@ -2485,6 +2489,16 @@ MonoBehaviour:
   initTest: 1
   isInfinite: 1
   testData:
+  - pls generate
+  - come on
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -2555,7 +2569,7 @@ MonoBehaviour:
   shiftDown: 32
   padding: 0
   colorPad: 0.115
-  maxFontSize: 48.2
+  maxFontSize: 20
   isElastic: 1
   maxElastic: 50
   inertiaSense: 2

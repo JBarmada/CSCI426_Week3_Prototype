@@ -11,10 +11,10 @@ public class MultiInteraction : MonoBehaviour
     // multi tap: slows the scrolling, and initiates a "like" action
     [Header("Tap Mechanic Settings")]
     public ScrollMechanic scrollMechanic; // Reference to the ScrollMechanic script
-    public float SingleTapSlowAmount = 3f; // Amount to slow down the scrolling on tap
-    public float MultiTapSlowAmount = 1f; // Amount to slow down the scrolling on multi tap
-    public float tapSpeedThreshold = 1f; // if below this, tap will speed up instead
-    public float tapSpeedUpAmount = 2f; // Amount to speed up the scrolling on tap if below threshold
+    public float SingleTapSlowAmount = 0.6f; // Slows down tap by this factor
+    public float MultiTapSlowAmount = 0.8f; // Amount to slow down the scrolling on multi tap
+    public float tapSpeedThreshold = 1.5f; // if below this, tap will speed up instead
+    public float tapSpeedUpAmount = 0.5f; // Amount to speed up the scrolling on tap if below threshold
     [Header("Hold Mechanic Settings")]
     public float maxHoldDuration = 3f; // max duration for speedup calc
     public float holdSpeedMultiplier = 10f; // Multiplier for scrolling speed up on hold release
@@ -22,6 +22,10 @@ public class MultiInteraction : MonoBehaviour
     [Header("Scroll Speed Limits")]
     public float minSpeed = -30f; // Minimum speed for scrolling
     public float maxSpeed = 30f; // Maximum speed for scrolling
+
+    [Header("Audio Settings")]
+    public AudioSource audioSource;
+    public AudioClip tapClickSound; // A "thud" or "select" sound
     
     private float holdStartTime; // Time when hold interaction started
 
@@ -45,17 +49,19 @@ public class MultiInteraction : MonoBehaviour
         float currentSpeed = Mathf.Abs(velocity); // Absolute speed (always positive)
 
         // Handle case where scroll is stopped (Sign(0) is 1, which is fine, defaults to up)
-        if (velocity == 0) direction = -1; // Optional: Choose default direction if stopped
+        if (velocity == 0) direction = 1; // Optional: Choose default direction if stopped
 
         if (currentSpeed < tapSpeedThreshold)
         {
             // SPEED UP: Add speed to the magnitude, relying on direction later
             // Note: We modify the variable directly here for cleaner logic
+            Debug.Log("Speeding up from " + currentSpeed);
             currentSpeed += tapSpeedUpAmount;
         } 
         else 
         {
             // SLOW DOWN: Multiply the magnitude
+            Debug.Log("Slowing down from " + currentSpeed);
             currentSpeed *= SingleTapSlowAmount; 
         }
 
@@ -64,6 +70,13 @@ public class MultiInteraction : MonoBehaviour
 
         // 3. Re-apply the direction to the scroll mechanic
         scrollMechanic.Inertia = currentSpeed * direction;
+        // --- ADD AUDIO ---
+        if (audioSource != null && tapClickSound != null) {
+            // Reset pitch to normal for taps (in case the scroll script changed it)
+            audioSource.pitch = 1f; 
+            audioSource.PlayOneShot(tapClickSound);
+        }
+        // -----------------
     }
     void Start()
     {
@@ -71,7 +84,9 @@ public class MultiInteraction : MonoBehaviour
             Debug.LogError("InputActionReference is not assigned in the inspector.");
             return;
         }
-        if (!(actionRef.action.interactions.Contains("Hold") && actionRef.action.interactions.Contains("Tap") && actionRef.action.interactions.Contains("MultiTap"))) {
+        if (!(actionRef.action.interactions.Contains("Hold") 
+        && actionRef.action.interactions.Contains("Tap") 
+        && actionRef.action.interactions.Contains("MultiTap"))) {
             Debug.LogError("InputAction does not contain the required interactions: Hold, Tap, MultiTap.");
             return;
             

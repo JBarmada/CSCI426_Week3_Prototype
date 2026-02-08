@@ -50,6 +50,15 @@ public class ScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeginD
     public float mouseWheelSensibility = 0.5f;
     public float touchpadSensibility = 0.5f;
 
+
+    [Header("Audio Settings")]
+    public AudioSource audioSource; // Assign a component with PlayOnAwake = false
+    public AudioClip tickSound;     // A short "tick" or "click" sound
+    [Range(0.1f, 2f)] public float minPitch = 0.9f;
+    [Range(0.1f, 2f)] public float maxPitch = 1.2f;
+    
+    private int _lastCenterIndex = -1; // To track changes
+
     bool isDragging;
     float inertia;
     // Expose a public Property for other scripts to access safely
@@ -343,7 +352,27 @@ public class ScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeginD
                 padCount, 0, contentTarget.childCount - 1);*/
 
             currentCenter = Mathf.Clamp(Mathf.RoundToInt(contentPos / (heightText * 2)), 0, contentTarget.childCount - 1);
-
+            // --- START AUDIO LOGIC ---
+            if (currentCenter != _lastCenterIndex)
+            {
+                // Only play if this isn't the very first initialization frame
+                if (_lastCenterIndex != -1 && audioSource != null && tickSound != null)
+                {
+                    // Calculate speed ratio (assuming 50 is a high speed based on your maxElastic)
+                    float speedRatio = Mathf.Clamp01(Mathf.Abs(inertia) / 50f);
+                    
+                    // Interpolate pitch: Faster scroll = Higher pitch
+                    audioSource.pitch = Mathf.Lerp(minPitch, maxPitch, speedRatio);
+                    
+                    // Add tiny random variation so it doesn't sound robotic
+                    audioSource.pitch += UnityEngine.Random.Range(-0.05f, 0.05f);
+                    
+                    // PlayOneShot allows sounds to overlap (good for fast scrolling)
+                    audioSource.PlayOneShot(tickSound);
+                }
+                _lastCenterIndex = currentCenter;
+            }
+            // --- END AUDIO LOGIC ---
             if (maxID > minID) {
                 for (int i = minID; i < maxID; i++) {
                     var currentRect = contentTarget.transform.GetChild(i).GetComponent<RectTransform>();

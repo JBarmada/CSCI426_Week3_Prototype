@@ -60,6 +60,7 @@ public class NewScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeg
     [Range(0.1f, 2f)] public float maxPitch = 1.2f;
 
     private int _lastCenterIndex = -1; 
+    private int sessionSeed; // A unique seed for this play session
 
     bool isDragging;
     float inertia;
@@ -114,6 +115,9 @@ public class NewScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeg
 
     private void Start()
     {
+        // Generate a random seed for this specific play session
+        sessionSeed = UnityEngine.Random.Range(0, 1000000);
+
         heightText = heightTemplate / 2;
         middle = GetComponent<RectTransform>().sizeDelta.y / 2;
         contentSize.topPad = middle - heightText;
@@ -205,8 +209,19 @@ public class NewScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeg
         // --- NEW LOGIC: Attach PostInfo and Initialize ---
         PostInfo postInfo = instance.GetComponent<PostInfo>();
         if (postInfo == null) postInfo = instance.AddComponent<PostInfo>();
+        
+        // FIX: Use SessionSeed + Index to ensure randomness per game, but consistency per index
+        var previousState = UnityEngine.Random.state; 
+        
+        // Use unchecked to allow overflow wrapping safely
+        unchecked 
+        {
+             UnityEngine.Random.InitState(sessionSeed + (index * 777)); 
+        }
+
         postInfo.InitializeRandom();
-        // ------------------------------------------------
+        UnityEngine.Random.state = previousState; 
+        // -------------------------------------
 
         var textComponent = instance.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         // depending on post type, set different text.

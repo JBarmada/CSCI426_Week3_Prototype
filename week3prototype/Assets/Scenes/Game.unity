@@ -1931,9 +1931,10 @@ MonoBehaviour:
   loopAudioSource: {fileID: 554749496}
   speedUpSound: {fileID: 8300000, guid: 8719c23e09fee1e4f88a714d20aa2cd0, type: 3}
   slowDownSound: {fileID: 8300000, guid: 9a12ae4abc7fc7c45ba39d4e9fc45f5d, type: 3}
-  chargingSound: {fileID: 8300000, guid: 8019639e2e2f57f4e871e1fa684a05ba, type: 3}
+  chargeBuildupSound: {fileID: 8300000, guid: 8019639e2e2f57f4e871e1fa684a05ba, type: 3}
   maxChargeSound: {fileID: 8300000, guid: b9996a258ee565e46b38ffca6ba21d91, type: 3}
   launchSound: {fileID: 8300000, guid: 344823b78d64f2a4c8da594e70f4634e, type: 3}
+  chargeLoopSound: {fileID: 8300000, guid: 728d43b6b0df6d64b9d6b114e8799317, type: 3}
   maxChargePitch: 2
   speedUpPitch: 1.55
   slowDownPitch: 0.3
@@ -5155,7 +5156,7 @@ PrefabInstance:
       objectReference: {fileID: 1417116755}
     - target: {fileID: 6272226424064685878, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6272226424064685878, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: audioSource
@@ -5209,12 +5210,13 @@ PrefabInstance:
       propertyPath: SingleTapSlowAmount
       value: 0.6
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6272226424064685878, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3843804063585114650, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
-      insertIndex: 2
+      insertIndex: -1
       addedObject: {fileID: 554749497}
     - targetCorrespondingSourceObject: {fileID: 3843804063585114650, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       insertIndex: -1

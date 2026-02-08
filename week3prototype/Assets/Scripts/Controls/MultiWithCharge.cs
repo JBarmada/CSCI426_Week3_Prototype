@@ -38,9 +38,10 @@ public class MultiWithCharge : MonoBehaviour
     [Header("Audio Clips")]
     public AudioClip speedUpSound;   
     public AudioClip slowDownSound; 
-    public AudioClip chargingSound;    // *NEW* Loopable rising sound
-    public AudioClip maxChargeSound;   // *NEW* "Ding" or "Ready" sound
-    public AudioClip launchSound;      // *NEW* "Whoosh" sound
+    public AudioClip chargeBuildupSound;   // rising sound
+    public AudioClip maxChargeSound;   //  "Ready" sound
+    public AudioClip launchSound;      // "Whoosh" sound
+    public AudioClip chargeLoopSound;
 
     [Header("Audio Modulation")]
     [Range(1f, 3f)] public float maxChargePitch = 2.0f; // Pitch at max charge
@@ -53,7 +54,8 @@ public class MultiWithCharge : MonoBehaviour
     private bool isHolding = false;
     private float holdTimer = 0f;
     private bool hasPlayedMaxSound = false;
-    int loopStartSample;
+    private bool isLoopingCharge = false;
+    private float lastAudioTime = -1f;
 
     void OnEnable() {
         if(actionRef != null) actionRef.action.Enable();
@@ -78,11 +80,10 @@ public class MultiWithCharge : MonoBehaviour
         // Setup Interaction Callbacks
         actionRef.action.started += ctx => {
             if (ctx.interaction is TapInteraction) {
-                // Tap logic is immediate
+                // We handle tap in 'performed'
             } 
             else if (ctx.interaction is HoldInteraction || ctx.interaction is SlowTapInteraction) {
-                // We use 'started' to catch the very beginning of the press
-                StartHold(); 
+                
             }
         };
 
@@ -90,6 +91,11 @@ public class MultiWithCharge : MonoBehaviour
             if (ctx.interaction is TapInteraction) {
                 processSingleTap();
             } 
+            if(ctx.interaction is HoldInteraction)
+            {
+                // We use 'performed' to catch the hold without overlapping with tap's 'started'
+                StartHold(); 
+            }
         };
 
         actionRef.action.canceled += ctx => {
@@ -102,23 +108,24 @@ public class MultiWithCharge : MonoBehaviour
 
     void StartHold()
     {
-        // 1. If we are already scrolling fast, just slow it down to a stop then charge
-        if (Mathf.Abs(scrollMechanic.Inertia) > 1.0f) {
+         Debug.Log("[Charge] StartHold called");
+        // Slow existing motion before charging
+        if (Mathf.Abs(scrollMechanic.Inertia) > 1.0f)
             scrollMechanic.Inertia *= 0.5f;
-        }
 
-        // 2. Begin Charge
         isHolding = true;
         holdTimer = 0f;
         hasPlayedMaxSound = false;
+        isLoopingCharge = false;
 
-        // Audio: Start Charging
-        loopStartSample = Mathf.FloorToInt(
-        (chargingSound.length - finalLoopDuration) * chargingSound.frequency);
-        if (loopAudioSource != null && chargingSound != null) {
-            loopAudioSource.clip = chargingSound;
+        // --- AUDIO: Play buildup ---
+        if (loopAudioSource != null && chargeBuildupSound != null)
+        {
+            loopAudioSource.Stop();
+            loopAudioSource.clip = chargeBuildupSound;
+            Debug.Log("[Charge] Playing BUILDUP clip");
             loopAudioSource.loop = false;
-            loopAudioSource.pitch = 1.0f;
+            loopAudioSource.pitch = 1f;
             loopAudioSource.Play();
         }
     }
@@ -128,6 +135,7 @@ public class MultiWithCharge : MonoBehaviour
         if (!isHolding) return;
 
         isHolding = false;
+        isLoopingCharge = false;
 
         // 1. Stop Charge Audio/Effects
         if (loopAudioSource != null) loopAudioSource.Stop();
@@ -180,29 +188,53 @@ public class MultiWithCharge : MonoBehaviour
                 scrollMechanic.camera.transform.position = originalCamPos + shakeOffset;
             }
 
-            // --- 2. AUDIO: Pitch Ramping and Custom looping ---
-            if (loopAudioSource != null && loopAudioSource.isPlaying)
+            // --- AUDIO: Pitch ramp + loop switch ---
+            if (loopAudioSource != null)
             {
-                // Ramp pitch from 1.0 to maxChargePitch
-                loopAudioSource.pitch = Mathf.Lerp(1.0f, maxChargePitch, ratio);
-
-                int totalSamples = chargingSound.samples;
-
-                if (loopAudioSource.timeSamples >= totalSamples - 256)
+                 // Log state changes once
+                if (loopAudioSource.time != lastAudioTime)
                 {
-                    loopAudioSource.timeSamples = loopStartSample;
+                    Debug.Log(
+                        $"[Charge][Audio] clip={loopAudioSource.clip?.name} " +
+                        $"time={loopAudioSource.time:F2} / {loopAudioSource.clip?.length:F2} " +
+                        $"isPlaying={loopAudioSource.isPlaying} " +
+                        $"looping={isLoopingCharge}"
+                    );
+                    lastAudioTime = loopAudioSource.time;
                 }
-            }
-
-            // --- 3. MAX CHARGE EVENT ---
-            if (ratio >= 1.0f && !hasPlayedMaxSound)
-            {
-                hasPlayedMaxSound = true;
-                if (audioSource != null && maxChargeSound != null) {
-                    audioSource.PlayOneShot(maxChargeSound);
+            
+                if(loopAudioSource.isPlaying)
+                {
+                    // Pitch ramps smoothly regardless of clip
+                    loopAudioSource.pitch = Mathf.Lerp(1f, maxChargePitch, ratio);
                 }
 
-            }
+                    // When buildup finishes, switch to looping clip
+                    if (!isLoopingCharge &&
+                        loopAudioSource.clip == chargeBuildupSound &&
+                        !loopAudioSource.isPlaying)
+                    {
+                        Debug.Log("[Charge] Buildup finished → switching to LOOP");
+                        isLoopingCharge = true;
+
+                        loopAudioSource.Stop();
+                        loopAudioSource.clip = chargeLoopSound;
+                        loopAudioSource.loop = true;
+                        loopAudioSource.pitch = Mathf.Lerp(1f, maxChargePitch, ratio);
+                        loopAudioSource.Play();
+                    }
+                
+
+                // --- 3. MAX CHARGE EVENT ---
+                if (ratio >= 1.0f && !hasPlayedMaxSound)
+                {
+                    hasPlayedMaxSound = true;
+                    if (audioSource != null && maxChargeSound != null) {
+                        audioSource.PlayOneShot(maxChargeSound);
+                    }
+
+                }
+             }
         }
     }
 

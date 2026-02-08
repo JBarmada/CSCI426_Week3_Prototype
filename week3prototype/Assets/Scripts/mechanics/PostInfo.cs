@@ -12,21 +12,26 @@ namespace Mechanics
         // CHANGED: Now looking for a RawImage instead of Image
         public RawImage targetImage; 
         [Range(0, 255)] public int alpha = 56;
+        [Range(0,255)] public int blueAlpha = 100;
+        [Range(0f, 1f)] public float goldProbability = 0.1f;
+        [Range(0f, 1f)] public float positiveProbability = 0.3f;
+        [Range(0f, 1f)] public float negativeProbability = 0.1f;
+
 
         public void InitializeRandom()
         {
-            // Probabilities: Gold (10%), Positive (30%), Negative (30%), Neutral (30%)
+            // Probabilities: Gold (10%), Positive (30%), Negative (10%), Neutral (50%)
             float val = Random.value;
 
-            if (val < 0.10f)
+            if (val < goldProbability)
             {
                 currentType = PostType.Gold;
             }
-            else if (val < 0.40f) 
+            else if (val < goldProbability + positiveProbability) 
             {
                 currentType = PostType.Positive;
             }
-            else if (val < 0.70f) 
+            else if (val < goldProbability + positiveProbability + negativeProbability) 
             {
                 currentType = PostType.Negative;
             }
@@ -69,7 +74,7 @@ namespace Mechanics
                     targetImage.color = new Color(1f, 0f, 0f, alpha / 255f);
                     break;
                 case PostType.Neutral:
-                    targetImage.color = new Color(0f, 0f, 1f, alpha / 255f);
+                    targetImage.color = new Color(0f, 0f, 1f, blueAlpha / 255f);
                     break;
             }
         }

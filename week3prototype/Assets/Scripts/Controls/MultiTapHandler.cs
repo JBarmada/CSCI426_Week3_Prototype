@@ -7,20 +7,20 @@ using Mechanics; // Access PostInfo
 public class MultiTapHandler : MonoBehaviour
 {
     [Header("Input")]
-    public InputActionReference actionRef; // Assign your "MultiTap" action here
+    public InputActionReference actionRef; 
 
     [Header("Dependencies")]
     public NewScrollMechanic scrollMechanic;
 
     [Header("Game Settings")]
     [Tooltip("Multiplier applied to inertia on tap (e.g. 0.95 = 5% slowdown)")]
-    public float slowDownAmount = 0.95f; 
+    public float SpeedFactor = 0.95f; 
     
     [Tooltip("How long (in seconds) you can still like a Gold post after it leaves the center")]
     public float goldGracePeriod = 0.5f;
 
     [Header("Feedback")]
-    public GameObject heartPrefab; // Assign a prefab (e.g. an Image of a heart)
+    public GameObject heartPrefab; 
     public AudioSource audioSource;
     public AudioClip likeSound_Neu;
     public AudioClip likeSound_Pos;
@@ -41,7 +41,6 @@ public class MultiTapHandler : MonoBehaviour
 
     private void Start()
     {
-        // Cache original canvas position for the shake effect
         if (scrollMechanic != null && scrollMechanic.targetCanvas != null)
             originalCanvasPos = scrollMechanic.targetCanvas.anchoredPosition;
 
@@ -59,7 +58,6 @@ public class MultiTapHandler : MonoBehaviour
     {
         if (scrollMechanic == null) return;
 
-        // Track changes to center object to handle timers
         GameObject current = scrollMechanic.GetCurrentCenterObject();
         if (current != lastCenterObj)
         {
@@ -77,9 +75,6 @@ public class MultiTapHandler : MonoBehaviour
         GameObject currentCenter = scrollMechanic.GetCurrentCenterObject();
         GameObject target = currentCenter;
 
-        // --- GOLD GRACE PERIOD LOGIC ---
-        // If the PREVIOUS center was Gold, and we haven't moved away from it for too long.
-        // We prioritize liking that previous Gold post over the current one.
         if (lastCenterObj != null && lastCenterObj != currentCenter && timeSinceLastChange < goldGracePeriod)
         {
             PostInfo lastInfo = lastCenterObj.GetComponent<PostInfo>();
@@ -103,7 +98,7 @@ public class MultiTapHandler : MonoBehaviour
     private void ApplyEffects(PostInfo info)
     {
         // 1. Slow Scale
-        scrollMechanic.Inertia *= slowDownAmount;
+        scrollMechanic.Inertia *= SpeedFactor;
 
         // 2. Play Audio
         if (audioSource != null)
@@ -122,19 +117,68 @@ public class MultiTapHandler : MonoBehaviour
         // 3. Visual FX (Heart)
         if (heartPrefab != null)
         {
-            // Spawn heart at the post's world position, inside the canvas hierarchy
-            Transform parent = scrollMechanic.targetCanvas.parent; // Usually main Canvas
-            GameObject heart = Instantiate(heartPrefab, parent);
-            heart.transform.position = info.transform.position;
+            // CHANGE 1: Parent to the POST (info.transform) so position is relative to it
+            GameObject heart = Instantiate(heartPrefab, info.transform);
             
-            // Optional: Destroy heart after 1 second if the prefab doesn't handle it
-            Destroy(heart, 1.0f);
+            RectTransform heartRect = heart.GetComponent<RectTransform>();
+            if (heartRect != null)
+            {
+                // CHANGE 2: Set precise position (65, -40) relative to the post center
+                heartRect.anchoredPosition = new Vector2(65f, -40f);
+            }
+
+            // CHANGE 3: Force it to draw ON TOP of the post image
+            heart.transform.SetAsLastSibling();
+
+            // CHANGE 4: Animate (Grow -> Shrink)
+            StartCoroutine(AnimateHeart(heart));
         }
 
         // 4. Shake
         TriggerTapShake();
         
         Debug.Log($"Liked Post Type: {info.currentType}");
+    }
+
+    // New Animation Routine
+    IEnumerator AnimateHeart(GameObject heart)
+    {
+        float growTime = 0.2f;
+        float stayTime = 0.1f;
+        float shrinkTime = 0.2f;
+        float targetScale = 17f;
+
+        // Start hidden
+        heart.transform.localScale = Vector3.zero;
+
+        // Grow
+        float elapsed = 0f;
+        while (elapsed < growTime)
+        {
+            if (heart == null) yield break;
+            elapsed += Time.deltaTime;
+            float t = elapsed / growTime;
+            // Smooth pop effect
+            heart.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one * targetScale, t);
+            yield return null;
+        }
+
+        // Stay
+        if (heart != null) heart.transform.localScale = Vector3.one * targetScale;
+        yield return new WaitForSeconds(stayTime);
+
+        // Shrink
+        elapsed = 0f;
+        while (elapsed < shrinkTime)
+        {
+            if (heart == null) yield break;
+            elapsed += Time.deltaTime;
+            float t = elapsed / shrinkTime;
+            heart.transform.localScale = Vector3.Lerp(Vector3.one * targetScale, Vector3.zero, t);
+            yield return null;
+        }
+
+        if (heart != null) Destroy(heart);
     }
 
     // --- Shake Logic ---

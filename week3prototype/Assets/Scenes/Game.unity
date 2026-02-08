@@ -882,14 +882,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MultiTapHandler
   actionRef: {fileID: 326018179}
   scrollMechanic: {fileID: 1181148808}
-  slowDownAmount: 0.95
+  SpeedFactor: 0.95
   goldGracePeriod: 0.5
   heartPrefab: {fileID: 6210608408421401737, guid: 697b6c52ed1357a4a937aeb943587305, type: 3}
   audioSource: {fileID: 554749502}
-  likeSound_Neu: {fileID: 0}
-  likeSound_Pos: {fileID: 0}
-  likeSound_Neg: {fileID: 0}
-  likeSound_Gold: {fileID: 0}
+  likeSound_Neu: {fileID: 8300000, guid: 8719c23e09fee1e4f88a714d20aa2cd0, type: 3}
+  likeSound_Pos: {fileID: 8300000, guid: 558cfa822b9893b4092caaf4cea7a482, type: 3}
+  likeSound_Neg: {fileID: 8300000, guid: 0c41cc80bd4d35e4493b26bb02b23672, type: 3}
+  likeSound_Gold: {fileID: 8300000, guid: 5eecff1ecc9d2014ab62deca0ddec978, type: 3}
   shakeIntensity: 6
   shakeDuration: 0.08
 --- !u!1001 &575608265
@@ -3186,7 +3186,7 @@ PrefabInstance:
     - target: {fileID: 6251255081673306082, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: speedUpSound
       value: 
-      objectReference: {fileID: 8300000, guid: 8719c23e09fee1e4f88a714d20aa2cd0, type: 3}
+      objectReference: {fileID: 8300000, guid: e0b42c8d3f5f220428d58c355008d7de, type: 3}
     - target: {fileID: 6251255081673306082, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: slowDownSound
       value: 

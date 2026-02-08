@@ -209,7 +209,15 @@ public class NewScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeg
         // ------------------------------------------------
 
         var textComponent = instance.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        textComponent.text = $"this is test data {index}";
+        // depending on post type, set different text.
+        if(postInfo.currentType == PostInfo.PostType.Gold)
+            textComponent.text = $"Gold Post #{index}";
+        else if(postInfo.currentType == PostInfo.PostType.Positive)
+            textComponent.text = $"Positive Post #{index}";
+        else if(postInfo.currentType == PostInfo.PostType.Negative)
+            textComponent.text = $"Negative Post #{index}";
+        else
+            textComponent.text = $"Neutral Post #{index}";
         instance.name = index + "";
         instance.GetComponent<RectTransform>().sizeDelta =
             new Vector2(GetComponent<RectTransform>().sizeDelta.x, heightTemplate);

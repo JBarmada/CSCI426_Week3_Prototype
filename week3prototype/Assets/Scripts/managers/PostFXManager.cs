@@ -17,14 +17,26 @@ public class PostFXManager : MonoBehaviour
         public float destroyDelay;      // Auto destroy time (0 = no destroy)
     }
 
+    [System.Serializable]
+    public struct SpecialEffect
+    {
+        public PostInfo.PostSpecial special;
+        public GameObject effectPrefab;
+        public AudioClip effectSound;
+        public bool parentToPost;
+        public float destroyDelay;
+    }
+
     [Header("Configuration")]
     public List<TypeEffect> effectsList;
+    public List<SpecialEffect> specialEffectsList;
 
     [Header("References")]
     public AudioSource audioSource; // Assign this in Inspector!
 
     // Internal dictionary for faster lookup, instead of looping through list every time
     private Dictionary<PostInfo.PostType, TypeEffect> effectsDict;
+    private Dictionary<PostInfo.PostSpecial, SpecialEffect> specialEffectsDict;
 
     private void Awake()
     {
@@ -46,6 +58,15 @@ public class PostFXManager : MonoBehaviour
             if (!effectsDict.ContainsKey(effect.type))
             {
                 effectsDict.Add(effect.type, effect);
+            }
+        }
+
+        specialEffectsDict = new Dictionary<PostInfo.PostSpecial, SpecialEffect>();
+        foreach (var effect in specialEffectsList)
+        {
+            if (!specialEffectsDict.ContainsKey(effect.special))
+            {
+                specialEffectsDict.Add(effect.special, effect);
             }
         }
     }
@@ -81,6 +102,36 @@ public class PostFXManager : MonoBehaviour
                 }
 
                 // Auto Destroy?
+                if (effectData.destroyDelay > 0f)
+                {
+                    Destroy(instance, effectData.destroyDelay);
+                }
+            }
+        }
+    }
+
+    public void TriggerSpecialEffect(PostInfo.PostSpecial special, Transform targetTransform)
+    {
+        if (specialEffectsDict == null) return;
+        if (special == PostInfo.PostSpecial.None) return;
+
+        if (specialEffectsDict.TryGetValue(special, out SpecialEffect effectData))
+        {
+            if (effectData.effectSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(effectData.effectSound);
+            }
+
+            if (effectData.effectPrefab != null)
+            {
+                Transform parent = effectData.parentToPost ? targetTransform : targetTransform.root;
+                GameObject instance = Instantiate(effectData.effectPrefab, parent);
+
+                if (!effectData.parentToPost)
+                {
+                    instance.transform.position = targetTransform.position;
+                }
+
                 if (effectData.destroyDelay > 0f)
                 {
                     Destroy(instance, effectData.destroyDelay);

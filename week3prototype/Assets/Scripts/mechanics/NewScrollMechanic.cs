@@ -189,10 +189,7 @@ public class NewScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeg
 
         var textComponent = instance.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         
-        if(postInfo.currentType == PostInfo.PostType.Gold) textComponent.text = $"Gold Post #{index}";
-        else if(postInfo.currentType == PostInfo.PostType.Positive) textComponent.text = $"Positive Post #{index}";
-        else if(postInfo.currentType == PostInfo.PostType.Negative) textComponent.text = $"Negative Post #{index}";
-        else textComponent.text = $"Neutral Post #{index}";
+        textComponent.text = postInfo.GetDisplayLabel(index);
 
         instance.name = index + "";
         instance.GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().sizeDelta.x, heightTemplate);
@@ -202,6 +199,48 @@ public class NewScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeg
     {
         if (contentTarget.childCount == 0 || currentCenter < 0 || currentCenter >= contentTarget.childCount) return null;
         return contentTarget.GetChild(currentCenter).gameObject;
+    }
+
+    public int ConvertNegativeToSpecial(PostInfo.PostSpecial special, float fraction)
+    {
+        if (contentTarget == null || fraction <= 0f) return 0;
+
+        var candidates = new List<PostInfo>();
+        for (int i = 0; i < contentTarget.childCount; i++)
+        {
+            var postInfo = contentTarget.GetChild(i).GetComponent<PostInfo>();
+            if (postInfo == null) continue;
+            if (postInfo.currentType != PostInfo.PostType.Negative) continue;
+            if (postInfo.currentSpecial != PostInfo.PostSpecial.None) continue;
+            candidates.Add(postInfo);
+        }
+
+        int toConvert = Mathf.FloorToInt(candidates.Count * fraction);
+        if (toConvert <= 0) return 0;
+
+        for (int i = 0; i < candidates.Count; i++)
+        {
+            int swapIndex = UnityEngine.Random.Range(i, candidates.Count);
+            var temp = candidates[i];
+            candidates[i] = candidates[swapIndex];
+            candidates[swapIndex] = temp;
+        }
+
+        for (int i = 0; i < toConvert; i++)
+        {
+            var postInfo = candidates[i];
+            postInfo.SetSpecial(special);
+
+            var textComponent = postInfo.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            if (textComponent != null)
+            {
+                int index = 0;
+                int.TryParse(postInfo.gameObject.name, out index);
+                textComponent.text = postInfo.GetDisplayLabel(index);
+            }
+        }
+
+        return toConvert;
     }
 
     public int GetCurrentValue()

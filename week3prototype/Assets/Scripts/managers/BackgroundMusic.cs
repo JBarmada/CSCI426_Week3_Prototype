@@ -45,6 +45,11 @@ public class BackgroundMusic : MonoBehaviour
         if (_audioSource != null) _audioSource.volume = volume;
     }
 
+    public AudioClip CurrentClip
+    {
+        get { return _audioSource != null ? _audioSource.clip : null; }
+    }
+
      // NEW HELPER
     public bool IsPlayingClip(AudioClip clip)
     {

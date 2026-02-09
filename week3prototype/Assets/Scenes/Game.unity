@@ -2234,6 +2234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MultiTapHandler
   actionRef: {fileID: 326018179}
   scrollMechanic: {fileID: 1181148808}
+  spaceInvaderGame: {fileID: 134327684}
   SpeedFactor: 0.5
   goldGracePeriod: 0.5
   pushForce: 5
@@ -2243,6 +2244,9 @@ MonoBehaviour:
   likeSound_Pos: {fileID: 8300000, guid: 558cfa822b9893b4092caaf4cea7a482, type: 3}
   likeSound_Neg: {fileID: 8300000, guid: 0c41cc80bd4d35e4493b26bb02b23672, type: 3}
   likeSound_Gold: {fileID: 8300000, guid: 5eecff1ecc9d2014ab62deca0ddec978, type: 3}
+  likeSound_SpaceInvader: {fileID: 8300000, guid: 1293d4fde6186cd41b5174fa9f52040e, type: 3}
+  spaceInvaderMusicClip: {fileID: 8300000, guid: 51a4f1157b7ff1449b5e5cf064d584c7, type: 3}
+  spaceInvaderMusicFadeDuration: 0.5
   shakeIntensity: 6
   shakeDuration: 0.08
 --- !u!114 &554749505 stripped
@@ -3453,6 +3457,12 @@ MonoBehaviour:
   - type: 3
     effectPrefab: {fileID: 8689718771515645360, guid: 9d64bbd856601e24d8a1699dcbe2bec4, type: 3}
     effectSound: {fileID: 8300000, guid: 251689c92ce939e4c9b60bf808c19e07, type: 3}
+    parentToPost: 0
+    destroyDelay: 1
+  specialEffectsList:
+  - special: 1
+    effectPrefab: {fileID: 3384366999043453948, guid: 7c19ad7a926fc084ea69d9ba4fedeeab, type: 3}
+    effectSound: {fileID: 8300000, guid: e0b61cc9161cb254b985e29ad2b7235a, type: 3}
     parentToPost: 0
     destroyDelay: 1
   audioSource: {fileID: 840196399}
@@ -8978,6 +8988,10 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: evolvedTapPush
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: maxChargeSound
       value: 
       objectReference: {fileID: 8300000, guid: b9996a258ee565e46b38ffca6ba21d91, type: 3}
@@ -9014,8 +9028,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 8019639e2e2f57f4e871e1fa684a05ba, type: 3}
     - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: evolvedInertiaSense
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: flipstoSpawnInvaders
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: spaceInvaderConversionRate
+      value: 0.81
       objectReference: {fileID: 0}
     - target: {fileID: 3843804063585114650, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: m_Name

@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
+using Mechanics;
 
 /// <summary>
 /// Handles HOLD interaction:
@@ -61,6 +62,10 @@ public class HoldChargeHandler : MonoBehaviour
     [Header("Bonus Games")]
     public SpaceInvaderMiniGame spaceInvaderGame; // NEW: Assign in inspector
     public float flipstoSpawnInvaders = 2f; // How many flips before spawning invaders (e.g. 3 = on 6th charge)
+    public bool bonusGameActive = false; // Flag to control if bonus game can be activated
+    [Header("Post Specials")]
+    [Range(0f, 1f)]
+    public float spaceInvaderConversionRate = 0.05f;
 
 
     // --- Internal State ---
@@ -131,7 +136,11 @@ public class HoldChargeHandler : MonoBehaviour
         maxSoundPlayed = false;
         holdTimer = 0f;
         // FADE OUT CURRENT MUSIC
-        fadeCheckRoutine = StartCoroutine(CheckMusicFade());
+        if(fullChargeCount >= 1)
+        {
+            fadeCheckRoutine = StartCoroutine(CheckMusicFade());
+        }
+        
         // Play buildup audio
         loopSource.Stop();
         loopSource.clip = chargeBuildupSound;
@@ -150,7 +159,7 @@ public class HoldChargeHandler : MonoBehaviour
         }
 
         // Wait 1.5 seconds before fading out background music
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2.5f);
 
         if (isHolding && BackgroundMusic.Instance != null)
         {
@@ -190,23 +199,7 @@ public class HoldChargeHandler : MonoBehaviour
     {
         loopSource.Stop();
         yield return new WaitForSeconds(preLaunchPause);
-         // MUSIC SWAP LOGIC
-        if (BackgroundMusic.Instance != null)
-        {
-            // If we are already playing fun music, keep it playing
-            bool isAlreadyFun = BackgroundMusic.Instance.IsPlayingClip(funMusicClip);
-
-            // If launch is strong (>50%) AND we aren't already playing fun music
-            if (ratio > 0.5f && funMusicClip != null && !isAlreadyFun)
-            {
-                BackgroundMusic.Instance.CrossfadeMusic(funMusicClip, 0.2f);
-            }
-            else
-            {
-                // Otherwise just restore volume (in case we faded out)
-                BackgroundMusic.Instance.FadeIn(0.5f);
-            }
-        }
+        
 
         float launchVelocity = Mathf.Lerp(minHoldPower, maxHoldPower, ratio);
         scrollMechanic.Inertia = launchVelocity;
@@ -221,33 +214,58 @@ public class HoldChargeHandler : MonoBehaviour
             
             if (screenFlipper != null && fullChargeCount % 2 == 0)
             {
-                screenFlipper.DoFlip();
-                flipEventCount++; 
-                if (enableEvolution && !hasEvolved)
-            {
-                hasEvolved = true;
+                 // MUSIC SWAP LOGIC
+                if (BackgroundMusic.Instance != null)
+                {
+                    // If we are already playing fun music, keep it playing
+                    bool isAlreadyFun = BackgroundMusic.Instance.IsPlayingClip(funMusicClip);
 
-                // 1. Loosen Friction (Scroll Mechanic)
+                    // If launch is strong (>50%) AND we aren't already playing fun music
+                    if (ratio > 0.5f && funMusicClip != null && !isAlreadyFun)
+                    {
+                        BackgroundMusic.Instance.CrossfadeMusic(funMusicClip, 0.2f);
+                    }
+                    else
+                    {
+                        // Otherwise just restore volume (in case we faded out)
+                        BackgroundMusic.Instance.FadeIn(0.5f);
+                    }
+                }
+                screenFlipper.DoFlip();
                 if (scrollMechanic != null)
                 {
-                    scrollMechanic.inertiaSense = evolvedInertiaSense;
+                    scrollMechanic.ConvertNegativeToSpecial(PostInfo.PostSpecial.SpaceInvader, spaceInvaderConversionRate);
                 }
-
-                // 2. Boost Tap Speed (Tap Handler)
-                if (tapScrollHandler != null)
+                flipEventCount++; 
+                if (enableEvolution && !hasEvolved)
                 {
-                    tapScrollHandler.tapSpeedUpAmount = evolvedTapPush;
-                }
+                    hasEvolved = true;
 
-                Debug.Log($"[Gameplay] EVOLVED! InertiaSense: {evolvedInertiaSense}, TapPush: {evolvedTapPush}");
-            }
+                    // 1. Loosen Friction (Scroll Mechanic)
+                    if (scrollMechanic != null)
+                    {
+                        scrollMechanic.inertiaSense = evolvedInertiaSense;
+                    }
+
+                    // 2. Boost Tap Speed (Tap Handler)
+                    if (tapScrollHandler != null)
+                    {
+                        tapScrollHandler.tapSpeedUpAmount = evolvedTapPush;
+                    }
+
+                    Debug.Log($"[Gameplay] EVOLVED! InertiaSense: {evolvedInertiaSense}, TapPush: {evolvedTapPush}");
+                }
 
 
                 // TRIGGER SPACE INVADERS ON x FLIP (Charge #6)
                 
                 if (flipEventCount >= flipstoSpawnInvaders && spaceInvaderGame != null)
                  {
-                    spaceInvaderGame.ActivateGame();
+                    if (bonusGameActive)
+                    {
+                        spaceInvaderGame.ActivateGame();
+
+                    }
                  }
             }
             

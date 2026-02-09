@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -54,6 +55,9 @@ public class SpaceInvaderMiniGame : MonoBehaviour
 
     // Public State
     public bool GameWon { get; private set; }
+
+    public event Action OnGameStarted;
+    public event Action<bool> OnGameEnded;
 
     // Internal
     private readonly List<GameObject> aliens = new();
@@ -120,6 +124,7 @@ public class SpaceInvaderMiniGame : MonoBehaviour
         alienDirection = 1;
 
         StartNextRound();
+        OnGameStarted?.Invoke();
     }
 
     public void DeactivateGame()
@@ -135,6 +140,8 @@ public class SpaceInvaderMiniGame : MonoBehaviour
     {
         isGameActive = false;
         GameWon = win;
+
+        OnGameEnded?.Invoke(win);
 
         AudioClip clip = win ? gameWinSound : gameOverSound;
         float duration = 1.0f; // Default duration if no sound
@@ -190,7 +197,7 @@ public class SpaceInvaderMiniGame : MonoBehaviour
         {
             for (int c = 0; c < columns; c++)
             {
-                if (Random.value > columnSpawnChance) continue;
+                if (UnityEngine.Random.value > columnSpawnChance) continue;
 
                 GameObject alien = Instantiate(alienPrefab, alienContainer);
                 alien.transform.localScale = Vector3.one * alienScale;

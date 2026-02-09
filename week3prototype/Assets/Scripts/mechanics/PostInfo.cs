@@ -6,7 +6,9 @@ namespace Mechanics
     public class PostInfo : MonoBehaviour
     {
         public enum PostType { Neutral, Positive, Negative, Gold }
+        public enum PostSpecial { None, SpaceInvader, Cat, Ice, Fire, Snoopdog }
         public PostType currentType;
+        public PostSpecial currentSpecial = PostSpecial.None;
 
         [Header("Settings")]
         // CHANGED: Now an array to target all 4 images at once
@@ -23,6 +25,8 @@ namespace Mechanics
         {
             // Probabilities: Gold (10%), Positive (30%), Negative (10%), Neutral (50%)
             float val = Random.value;
+
+            currentSpecial = PostSpecial.None;
 
             if (val < goldProbability)
             {
@@ -42,6 +46,50 @@ namespace Mechanics
             }
 
             UpdateVisuals();
+        }
+
+        public void SetSpecial(PostSpecial special)
+        {
+            currentSpecial = special;
+        }
+
+        public string GetDisplayLabel(int index)
+        {
+            if (currentSpecial != PostSpecial.None)
+            {
+                return $"{GetSpecialLabel(currentSpecial)} Post #{index}";
+            }
+
+            switch (currentType)
+            {
+                case PostType.Gold:
+                    return $"Gold Post #{index}";
+                case PostType.Positive:
+                    return $"Positive Post #{index}";
+                case PostType.Negative:
+                    return $"Negative Post #{index}";
+                default:
+                    return $"Neutral Post #{index}";
+            }
+        }
+
+        private string GetSpecialLabel(PostSpecial special)
+        {
+            switch (special)
+            {
+                case PostSpecial.SpaceInvader:
+                    return "Space Invader";
+                case PostSpecial.Cat:
+                    return "Cat";
+                case PostSpecial.Ice:
+                    return "Ice";
+                case PostSpecial.Fire:
+                    return "Fire";
+                case PostSpecial.Snoopdog:
+                    return "Snoopdog";
+                default:
+                    return "Special";
+            }
         }
 
         private void UpdateVisuals()

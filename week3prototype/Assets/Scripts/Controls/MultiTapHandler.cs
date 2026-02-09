@@ -11,6 +11,7 @@ public class MultiTapHandler : MonoBehaviour
 
     [Header("Dependencies")]
     public NewScrollMechanic scrollMechanic;
+    public SpaceInvaderMiniGame spaceInvaderGame;
 
     [Header("Game Settings")]
     [Tooltip("Multiplier applied to inertia on tap (e.g. 0.95 = 5% slowdown)")]
@@ -29,6 +30,11 @@ public class MultiTapHandler : MonoBehaviour
     public AudioClip likeSound_Pos;
     public AudioClip likeSound_Neg;
     public AudioClip likeSound_Gold;
+    public AudioClip likeSound_SpaceInvader;
+
+    [Header("Space Invader Music")]
+    public AudioClip spaceInvaderMusicClip;
+    public float spaceInvaderMusicFadeDuration = 0.5f;
 
     [Header("Shake Settings")]
     public float shakeIntensity = 6f;
@@ -39,6 +45,8 @@ public class MultiTapHandler : MonoBehaviour
     private float timeSinceLastChange;
     private Vector2 originalCanvasPos;
     private Coroutine shakeRoutine;
+    private bool invaderMusicActive;
+    private AudioClip priorMusicClip;
 
     //dopamine manager testing 
     DopamineManager dopInstance;
@@ -63,9 +71,6 @@ public class MultiTapHandler : MonoBehaviour
         };
     }
 
-    void OnEnable() => actionRef.action.Enable();
-    void OnDisable() => actionRef.action.Disable();
-
     private void Update()
     {
         if (scrollMechanic == null) return;
@@ -80,6 +85,18 @@ public class MultiTapHandler : MonoBehaviour
         {
             timeSinceLastChange += Time.deltaTime;
         }
+    }
+
+    void OnEnable()
+    {
+        actionRef.action.Enable();
+        RegisterInvaderGameEvents(true);
+    }
+
+    void OnDisable()
+    {
+        actionRef.action.Disable();
+        RegisterInvaderGameEvents(false);
     }
 
     private void DetermineAndLikeTarget()
@@ -119,8 +136,14 @@ public class MultiTapHandler : MonoBehaviour
         if (PostFXManager.Instance != null)
         {
             PostFXManager.Instance.TriggerEffect(info.currentType, info.transform);
+            PostFXManager.Instance.TriggerSpecialEffect(info.currentSpecial, info.transform);
         }
         // ------------------------------------------------
+
+        if (info.currentSpecial == PostInfo.PostSpecial.SpaceInvader)
+        {
+            StartSpaceInvaderGame();
+        }
 
         // 3. Force Move Logic
         if (Mathf.Abs(scrollMechanic.Inertia) < 5f)
@@ -140,6 +163,10 @@ public class MultiTapHandler : MonoBehaviour
                 case PostInfo.PostType.Positive: clip = likeSound_Pos; break;
                 case PostInfo.PostType.Negative: clip = likeSound_Neg; break;
                 case PostInfo.PostType.Gold: clip = likeSound_Gold; break;
+            }
+            if (info.currentSpecial == PostInfo.PostSpecial.SpaceInvader && likeSound_SpaceInvader != null)
+            {
+                clip = likeSound_SpaceInvader;
             }
             if (clip != null) audioSource.PlayOneShot(clip);
         }
@@ -161,6 +188,61 @@ public class MultiTapHandler : MonoBehaviour
         
         
         Debug.Log($"Liked Post Type: {info.currentType}");
+    }
+
+    private void RegisterInvaderGameEvents(bool register)
+    {
+        if (spaceInvaderGame == null) return;
+
+        if (register)
+        {
+            spaceInvaderGame.OnGameStarted += HandleInvaderGameStarted;
+            spaceInvaderGame.OnGameEnded += HandleInvaderGameEnded;
+        }
+        else
+        {
+            spaceInvaderGame.OnGameStarted -= HandleInvaderGameStarted;
+            spaceInvaderGame.OnGameEnded -= HandleInvaderGameEnded;
+        }
+    }
+
+    private void StartSpaceInvaderGame()
+    {
+        if (spaceInvaderGame == null) return;
+        spaceInvaderGame.ActivateGame();
+    }
+
+    private void HandleInvaderGameStarted()
+    {
+        if (BackgroundMusic.Instance == null || spaceInvaderMusicClip == null) return;
+        if (BackgroundMusic.Instance.IsPlayingClip(spaceInvaderMusicClip))
+        {
+            invaderMusicActive = true;
+            return;
+        }
+
+        priorMusicClip = BackgroundMusic.Instance.CurrentClip;
+        invaderMusicActive = true;
+        BackgroundMusic.Instance.CrossfadeMusic(spaceInvaderMusicClip, spaceInvaderMusicFadeDuration);
+    }
+
+    private void HandleInvaderGameEnded(bool win)
+    {
+        if (!invaderMusicActive) return;
+        invaderMusicActive = false;
+
+        if (BackgroundMusic.Instance == null) return;
+
+        if (priorMusicClip != null)
+        {
+            BackgroundMusic.Instance.CrossfadeMusic(priorMusicClip, spaceInvaderMusicFadeDuration);
+        }
+        else
+        {
+            BackgroundMusic.Instance.FadeIn(spaceInvaderMusicFadeDuration);
+        }
+
+        priorMusicClip = null;
     }
 
     // --- Shake Logic ---

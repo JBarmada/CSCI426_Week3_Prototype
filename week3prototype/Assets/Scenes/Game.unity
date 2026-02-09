@@ -934,6 +934,7 @@ MonoBehaviour:
   scrollMechanic: {fileID: 1181148808}
   SpeedFactor: 0.95
   goldGracePeriod: 0.5
+  pushForce: 2
   heartPrefab: {fileID: 6210608408421401737, guid: 697b6c52ed1357a4a937aeb943587305, type: 3}
   audioSource: {fileID: 554749502}
   likeSound_Neu: {fileID: 8300000, guid: 8719c23e09fee1e4f88a714d20aa2cd0, type: 3}
@@ -1373,6 +1374,51 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &840196396
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 840196398}
+  - component: {fileID: 840196397}
+  m_Layer: 0
+  m_Name: PostFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &840196397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840196396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cee21ec16ad0a1d428a7138a5cebeb6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  effectsList: []
+--- !u!4 &840196398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840196396}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.4501, y: -1.16593, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &848680282
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4080,6 +4126,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 99455787}
+  - {fileID: 840196398}
   - {fileID: 619394802}
   - {fileID: 692275969}
   - {fileID: 1645697859150598403}

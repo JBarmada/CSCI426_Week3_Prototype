@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
-using Mechanics; // Access PostInfo
+using Mechanics; 
 
 public class MultiTapHandler : MonoBehaviour
 {
@@ -19,8 +19,11 @@ public class MultiTapHandler : MonoBehaviour
     [Tooltip("How long (in seconds) you can still like a Gold post after it leaves the center")]
     public float goldGracePeriod = 0.5f;
 
+    [Tooltip("Strength of the push to the next post")]
+    public float pushForce = 2f;
+
     [Header("Feedback")]
-    public GameObject heartPrefab; 
+    public GameObject heartPrefab; // Keep this for universal feedback
     public AudioSource audioSource;
     public AudioClip likeSound_Neu;
     public AudioClip likeSound_Pos;
@@ -34,8 +37,6 @@ public class MultiTapHandler : MonoBehaviour
     // State
     private GameObject lastCenterObj;
     private float timeSinceLastChange;
-
-    // Shake internal
     private Vector2 originalCanvasPos;
     private Coroutine shakeRoutine;
 
@@ -97,16 +98,28 @@ public class MultiTapHandler : MonoBehaviour
 
     private void ApplyEffects(PostInfo info)
     {
-        // 1. Update Stats (NEW)
+        // 1. Update Stats 
         if (GameStatsManager.Instance != null)
         {
             GameStatsManager.Instance.TrackLike(info.currentType);
         }
 
-        // 2. Slow Scale
+        // 2. Trigger SPECIAL VISUAL FX (Manager) -----
+        if (PostFXManager.Instance != null)
+        {
+            PostFXManager.Instance.TriggerEffect(info.currentType, info.transform);
+        }
+        // ------------------------------------------------
+
+        // 3. Force Move Logic
+        if (Mathf.Abs(scrollMechanic.Inertia) < 5f)
+        {
+            scrollMechanic.Inertia += pushForce; // Push forward on tap
+        }
+        
         scrollMechanic.Inertia *= SpeedFactor;
 
-        // 3. Play Audio
+        // 4. Play Audio
         if (audioSource != null)
         {
             AudioClip clip = null;
@@ -120,13 +133,13 @@ public class MultiTapHandler : MonoBehaviour
             if (clip != null) audioSource.PlayOneShot(clip);
         }
 
-        // 4. Visual FX (Heart)
+        // 5. Universal Heart Feedback
         if (heartPrefab != null)
         {
             Instantiate(heartPrefab, info.transform);
         }
 
-        // 5. Shake
+        // 6. Shake
         TriggerTapShake();
         
         Debug.Log($"Liked Post Type: {info.currentType}");

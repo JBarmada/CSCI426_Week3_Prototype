@@ -12,12 +12,16 @@ public class PostFXManager : MonoBehaviour
     {
         public PostInfo.PostType type;
         public GameObject effectPrefab; // Confetti, Explosion, Sparkles, etc.
+        public AudioClip effectSound;   // NEW: Unique sound for this effect (e.g. party horn)
         public bool parentToPost;       // Should it move with the post?
         public float destroyDelay;      // Auto destroy time (0 = no destroy)
     }
 
     [Header("Configuration")]
-    public List<TypeEffect> effectsList; 
+    public List<TypeEffect> effectsList;
+
+    [Header("References")]
+    public AudioSource audioSource; // Assign this in Inspector!
 
     // Internal dictionary for faster lookup, instead of looping through list every time
     private Dictionary<PostInfo.PostType, TypeEffect> effectsDict;
@@ -27,10 +31,18 @@ public class PostFXManager : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
+        // Auto-add AudioSource if missing
+        if (audioSource == null) 
+        {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
         // Build the dictionary
         effectsDict = new Dictionary<PostInfo.PostType, TypeEffect>();
         foreach (var effect in effectsList)
         {
+            // Avoid duplicates
             if (!effectsDict.ContainsKey(effect.type))
             {
                 effectsDict.Add(effect.type, effect);
@@ -39,7 +51,7 @@ public class PostFXManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Spawns the effect associated with the specific PostType.
+    /// Spawns the effect AND plays the sound associated with the specific PostType.
     /// </summary>
     /// <param name="type">The type of post (Gold, Positive, etc)</param>
     /// <param name="targetTransform">Where should the effect appear?</param>
@@ -47,24 +59,32 @@ public class PostFXManager : MonoBehaviour
     {
         if (effectsDict.TryGetValue(type, out TypeEffect effectData))
         {
-            if (effectData.effectPrefab == null) return;
-
-            // Determine parent
-            Transform parent = effectData.parentToPost ? targetTransform : targetTransform.root; // root is usually Canvas
-            
-            // Spawn
-            GameObject instance = Instantiate(effectData.effectPrefab, parent);
-            
-            // If not parented to post, we must manually set position to match target
-            if (!effectData.parentToPost)
+            // 1. Play Sound (if exists)
+            if (effectData.effectSound != null && audioSource != null)
             {
-                instance.transform.position = targetTransform.position;
+                audioSource.PlayOneShot(effectData.effectSound);
             }
 
-            // Auto Destroy?
-            if (effectData.destroyDelay > 0f)
+            // 2. Spawn Visual Effect (if exists)
+            if (effectData.effectPrefab != null)
             {
-                Destroy(instance, effectData.destroyDelay);
+                // Determine parent
+                Transform parent = effectData.parentToPost ? targetTransform : targetTransform.root; // root is usually Canvas
+                
+                // Spawn
+                GameObject instance = Instantiate(effectData.effectPrefab, parent);
+                
+                // If not parented to post, we must manually set position to match target
+                if (!effectData.parentToPost)
+                {
+                    instance.transform.position = targetTransform.position;
+                }
+
+                // Auto Destroy?
+                if (effectData.destroyDelay > 0f)
+                {
+                    Destroy(instance, effectData.destroyDelay);
+                }
             }
         }
     }

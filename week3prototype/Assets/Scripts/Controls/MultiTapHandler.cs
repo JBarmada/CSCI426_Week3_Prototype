@@ -40,8 +40,19 @@ public class MultiTapHandler : MonoBehaviour
     private Vector2 originalCanvasPos;
     private Coroutine shakeRoutine;
 
+    //dopamine manager testing 
+    DopamineManager dopInstance;
+
     private void Start()
     {
+        //dopamine manager testing 
+        dopInstance = DopamineManager.Instance;
+        if (dopInstance != null)
+        {
+            dopInstance.Start();
+        }
+
+
         if (scrollMechanic != null && scrollMechanic.targetCanvas != null)
             originalCanvasPos = scrollMechanic.targetCanvas.anchoredPosition;
 
@@ -141,6 +152,13 @@ public class MultiTapHandler : MonoBehaviour
 
         // 6. Shake
         TriggerTapShake();
+
+        //attempt to get dopamine bar change 
+        if(dopInstance != null)
+        {
+            dopInstance.TrackDopEffects(info.currentType);
+        }
+        
         
         Debug.Log($"Liked Post Type: {info.currentType}");
     }

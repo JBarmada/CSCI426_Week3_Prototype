@@ -84,6 +84,8 @@ public class HoldChargeHandler : MonoBehaviour
     Coroutine releaseRoutine;
     Coroutine fadeCheckRoutine; // NEW: To handle delayed fade
 
+    bool launchLoopWasPlaying;
+
 
     void OnEnable() => actionRef.action.Enable();
     void OnDisable() => actionRef.action.Disable();
@@ -114,6 +116,8 @@ public class HoldChargeHandler : MonoBehaviour
 
     void StartHold()
     {
+        if (GameMenusManager.Instance != null && GameMenusManager.Instance.IsPaused) return;
+
         if (releaseRoutine != null)
             StopCoroutine(releaseRoutine);
 
@@ -170,6 +174,8 @@ public class HoldChargeHandler : MonoBehaviour
 
     void ReleaseHold()
     {
+        if (GameMenusManager.Instance != null && GameMenusManager.Instance.IsPaused) return;
+
         isHolding = false;
         isLooping = false;
         if (fadeCheckRoutine != null) 
@@ -308,7 +314,14 @@ public class HoldChargeHandler : MonoBehaviour
         }
 
         //Debug.Break();
-         if (isHyperdrive)
+        if (GameMenusManager.Instance != null && GameMenusManager.Instance.IsPaused)
+        {
+            yield return null;
+            while (GameMenusManager.Instance != null && GameMenusManager.Instance.IsPaused)
+                yield return null;
+        }
+
+        if (isHyperdrive)
         {
             // Play looping launch sound
             loopSource.clip = launchSound;
@@ -325,6 +338,12 @@ public class HoldChargeHandler : MonoBehaviour
         float t = 0f;
         while (t < recoilDuration)
         {
+            if (GameMenusManager.Instance != null && GameMenusManager.Instance.IsPaused)
+            {
+                yield return null;
+                continue;
+            }
+
             t += Time.deltaTime;
             float decay = 1f - (t / recoilDuration);
 
@@ -342,6 +361,24 @@ public class HoldChargeHandler : MonoBehaviour
 
     void Update()
     {   
+        if (GameMenusManager.Instance != null && GameMenusManager.Instance.IsPaused)
+        {
+            if (loopSource != null && loopSource.isPlaying && loopSource.clip == launchSound)
+            {
+                launchLoopWasPlaying = true;
+                loopSource.Stop();
+                loopSource.loop = false;
+            }
+            return;
+        }
+
+        if (launchLoopWasPlaying && loopSource != null && loopSource.clip == launchSound)
+        {
+            launchLoopWasPlaying = false;
+            loopSource.loop = true;
+            loopSource.Play();
+        }
+
         // Monitor Hyperdrive: Stop effect if speed drops below threshold
         if (activeHyperdrive != null)
         {

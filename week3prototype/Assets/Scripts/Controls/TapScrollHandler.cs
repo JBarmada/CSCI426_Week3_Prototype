@@ -52,6 +52,8 @@ public class TapScrollHandler : MonoBehaviour
 
     void ProcessTap()
     {
+        if (GameMenusManager.Instance != null && GameMenusManager.Instance.IsPaused) return;
+
         float velocity = scrollMechanic.Inertia;
         float direction = Mathf.Sign(velocity == 0 ? 1 : velocity);
         float speed = Mathf.Abs(velocity);

@@ -73,6 +73,7 @@ public class MultiTapHandler : MonoBehaviour
 
     private void Update()
     {
+        if (GameMenusManager.Instance != null && GameMenusManager.Instance.IsPaused) return;
         if (scrollMechanic == null) return;
 
         GameObject current = scrollMechanic.GetCurrentCenterObject();
@@ -101,6 +102,8 @@ public class MultiTapHandler : MonoBehaviour
 
     private void DetermineAndLikeTarget()
     {
+        if (GameMenusManager.Instance != null && GameMenusManager.Instance.IsPaused) return;
+
         GameObject currentCenter = scrollMechanic.GetCurrentCenterObject();
         GameObject target = currentCenter;
 

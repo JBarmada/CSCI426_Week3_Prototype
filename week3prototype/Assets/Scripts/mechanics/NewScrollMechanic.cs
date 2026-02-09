@@ -109,6 +109,8 @@ public class NewScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeg
 
     void OnGUI()
     {
+        if (GameMenusManager.Instance != null && GameMenusManager.Instance.IsPaused) return;
+
         if (Event.current.type == EventType.ScrollWheel)
             _padScroll = (-Event.current.delta.y / 10) * touchpadSensibility;
         else
@@ -250,6 +252,8 @@ public class NewScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeg
 
     private void Update()
     {
+        if (GameMenusManager.Instance != null && GameMenusManager.Instance.IsPaused) return;
+
         if (Input.GetMouseButtonUp(0)) isDragging = false;
         if (isCanUseMouseWheel && isInArea && Input.mouseScrollDelta.y != 0) isDragging = true;
         else if (!Input.GetMouseButton(0)) isDragging = false;

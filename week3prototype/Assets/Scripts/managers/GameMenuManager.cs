@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class GameMenusManager : MonoBehaviour
 {
+    public static GameMenusManager Instance { get; private set; }
+
     [Header("UI")]
     public SlideUpPanel pauseMenu;
 
@@ -11,6 +13,17 @@ public class GameMenusManager : MonoBehaviour
     public bool IsPaused { get; private set; }
 
     private bool tabHeld;
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
 
     void Start()
     {

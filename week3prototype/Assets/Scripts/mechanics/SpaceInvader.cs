@@ -226,6 +226,7 @@ public class SpaceInvaderMiniGame : MonoBehaviour
     // =====================================================
     void Update()
     {
+        if (GameMenusManager.Instance != null && GameMenusManager.Instance.IsPaused) return;
         if (!isGameActive) return;
 
         MoveShip();
@@ -309,6 +310,7 @@ public class SpaceInvaderMiniGame : MonoBehaviour
     // =====================================================
     void OnFire(InputAction.CallbackContext ctx)
     {
+        if (GameMenusManager.Instance != null && GameMenusManager.Instance.IsPaused) return;
         if (!isGameActive || ctx.interaction is not MultiTapInteraction) return;
         Fire();
     }
@@ -330,6 +332,12 @@ public class SpaceInvaderMiniGame : MonoBehaviour
 
         while (bullet != null && isGameActive)
         {
+            if (GameMenusManager.Instance != null && GameMenusManager.Instance.IsPaused)
+            {
+                yield return null;
+                continue;
+            }
+
             Vector3 next = bullet.position + Vector3.up * bulletSpeed * Time.deltaTime;
 
             for (int i = aliens.Count - 1; i >= 0; i--)

@@ -136,26 +136,27 @@ public class SpaceInvaderMiniGame : MonoBehaviour
         isGameActive = false;
         GameWon = win;
 
-        if (win)
+        AudioClip clip = win ? gameWinSound : gameOverSound;
+        float duration = 1.0f; // Default duration if no sound
+
+        if (audioSource != null && clip != null)
         {
-            if (audioSource != null && gameWinSound != null)
-                audioSource.PlayOneShot(gameWinSound);
-        }
-        else
-        {
-            if (audioSource != null && gameOverSound != null)
-                audioSource.PlayOneShot(gameOverSound);
+            audioSource.PlayOneShot(clip);
+            duration = clip.length;
         }
 
-        StartCoroutine(GameEndSequence());
+        StartCoroutine(GameEndSequence(duration));
     }
 
-    IEnumerator GameEndSequence()
+    IEnumerator GameEndSequence(float duration)
     {
-        // Blink 4 times
-        for (int i = 0; i < 4; i++)
+        float endTime = Time.time + duration;
+
+        while (Time.time < endTime)
         {
-            spaceContainer.gameObject.SetActive(!spaceContainer.gameObject.activeSelf);
+            if (spaceContainer != null)
+                spaceContainer.gameObject.SetActive(!spaceContainer.gameObject.activeSelf);
+            
             yield return new WaitForSeconds(0.2f);
         }
         

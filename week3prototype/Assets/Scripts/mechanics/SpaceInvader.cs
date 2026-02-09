@@ -47,9 +47,13 @@ public class SpaceInvaderMiniGame : MonoBehaviour
     public AudioClip shootSound;
     public AudioClip alienHitSound;
     public AudioClip gameOverSound;
+    public AudioClip gameWinSound;
 
     [Header("Debug")]
     public bool startOnAwake = false;
+
+    // Public State
+    public bool GameWon { get; private set; }
 
     // Internal
     private readonly List<GameObject> aliens = new();
@@ -105,6 +109,9 @@ public class SpaceInvaderMiniGame : MonoBehaviour
     // =====================================================
     public void ActivateGame()
     {
+        if (spaceContainer != null) 
+            spaceContainer.gameObject.SetActive(true);
+
         StopAllCoroutines();
         ClearAliens();
 
@@ -120,6 +127,39 @@ public class SpaceInvaderMiniGame : MonoBehaviour
         isGameActive = false;
         StopAllCoroutines();
         ClearAliens();
+        if (spaceContainer != null) 
+            spaceContainer.gameObject.SetActive(false);
+    }
+
+    private void EndGame(bool win)
+    {
+        isGameActive = false;
+        GameWon = win;
+
+        if (win)
+        {
+            if (audioSource != null && gameWinSound != null)
+                audioSource.PlayOneShot(gameWinSound);
+        }
+        else
+        {
+            if (audioSource != null && gameOverSound != null)
+                audioSource.PlayOneShot(gameOverSound);
+        }
+
+        StartCoroutine(GameEndSequence());
+    }
+
+    IEnumerator GameEndSequence()
+    {
+        // Blink 4 times
+        for (int i = 0; i < 4; i++)
+        {
+            spaceContainer.gameObject.SetActive(!spaceContainer.gameObject.activeSelf);
+            yield return new WaitForSeconds(0.2f);
+        }
+        
+        DeactivateGame();
     }
 
     // =====================================================
@@ -131,7 +171,7 @@ public class SpaceInvaderMiniGame : MonoBehaviour
 
         if (currentRound > maxRounds)
         {
-            DeactivateGame();
+            EndGame(true);
             return;
         }
 
@@ -250,10 +290,7 @@ public class SpaceInvaderMiniGame : MonoBehaviour
 
             if (Vector3.Distance(a.transform.position, ship.position) < shipCollisionRadius)
             {
-                if (audioSource != null && gameOverSound != null)
-                    audioSource.PlayOneShot(gameOverSound);
-
-                DeactivateGame();
+                EndGame(false);
                 break;
             }
         }
@@ -273,7 +310,8 @@ public class SpaceInvaderMiniGame : MonoBehaviour
         if (audioSource != null && shootSound != null)
             audioSource.PlayOneShot(shootSound);
 
-        GameObject bullet = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+        // Parent to spaceContainer so it hides with the game
+        GameObject bullet = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity, spaceContainer);
         bullet.transform.localScale = Vector3.one * bulletScale;
         StartCoroutine(MoveBullet(bullet.transform));
     }

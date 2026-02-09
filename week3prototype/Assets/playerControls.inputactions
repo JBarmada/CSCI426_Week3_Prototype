@@ -12,7 +12,7 @@
                     "id": "9c2bcc1b-bc50-4192-a1dd-ee61ebd731bb",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Hold,MultiTap(tapDelay=0.1),Tap",
+                    "interactions": "Hold,MultiTap(tapDelay=0.3),Tap",
                     "initialStateCheck": false
                 },
                 {

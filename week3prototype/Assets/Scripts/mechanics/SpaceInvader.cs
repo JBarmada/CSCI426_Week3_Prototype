@@ -42,6 +42,12 @@ public class SpaceInvaderMiniGame : MonoBehaviour
     [Header("Input")]
     public InputActionReference fireAction;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip shootSound;
+    public AudioClip alienHitSound;
+    public AudioClip gameOverSound;
+
     [Header("Debug")]
     public bool startOnAwake = false;
 
@@ -59,6 +65,7 @@ public class SpaceInvaderMiniGame : MonoBehaviour
     void Awake()
     {
         CacheBounds();
+        if (audioSource == null) audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -243,6 +250,9 @@ public class SpaceInvaderMiniGame : MonoBehaviour
 
             if (Vector3.Distance(a.transform.position, ship.position) < shipCollisionRadius)
             {
+                if (audioSource != null && gameOverSound != null)
+                    audioSource.PlayOneShot(gameOverSound);
+
                 DeactivateGame();
                 break;
             }
@@ -260,6 +270,9 @@ public class SpaceInvaderMiniGame : MonoBehaviour
 
     void Fire()
     {
+        if (audioSource != null && shootSound != null)
+            audioSource.PlayOneShot(shootSound);
+
         GameObject bullet = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
         bullet.transform.localScale = Vector3.one * bulletScale;
         StartCoroutine(MoveBullet(bullet.transform));
@@ -285,6 +298,9 @@ public class SpaceInvaderMiniGame : MonoBehaviour
                 float d = DistancePointToSegment(a.transform.position, prev, next);
                 if (d <= alienCollisionRadius)
                 {
+                    if (audioSource != null && alienHitSound != null)
+                        audioSource.PlayOneShot(alienHitSound);
+
                     Destroy(a);
                     aliens.RemoveAt(i);
                     Destroy(bullet.gameObject);

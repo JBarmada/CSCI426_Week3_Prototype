@@ -306,7 +306,7 @@ MonoBehaviour:
   shipCollisionRadius: 0.5
   projectilePrefab: {fileID: 7439991692745370487, guid: 428030ac408d26b4fb70f2cea93a868a, type: 3}
   firePoint: {fileID: 2110371291}
-  bulletSpeed: 14
+  bulletSpeed: 16
   alienCollisionRadius: 0.45
   bulletScale: 0.2
   alienPrefab: {fileID: 4946289613103517311, guid: aaf8f951fac6f02429439063c4c40e0b, type: 3}
@@ -319,8 +319,12 @@ MonoBehaviour:
   alienScale: 0.2
   maxRounds: 3
   spawnHeightOffset: 3.5
-  columnSpawnChance: 0.4
+  columnSpawnChance: 0.5
   fireAction: {fileID: 291188251}
+  audioSource: {fileID: 134327687}
+  shootSound: {fileID: 8300000, guid: f36cf8b5790b40e4e912e3302c1261d1, type: 3}
+  alienHitSound: {fileID: 8300000, guid: fc9aaea8001d73242aea4bc5626bbc08, type: 3}
+  gameOverSound: {fileID: 8300000, guid: e66c788bbc8c7444db1fcf15f983755e, type: 3}
   startOnAwake: 1
 --- !u!114 &134327685
 MonoBehaviour:
@@ -372,7 +376,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

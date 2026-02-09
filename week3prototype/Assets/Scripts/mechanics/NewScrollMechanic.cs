@@ -233,6 +233,7 @@ public class NewScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeg
             textComponent.text = $"Negative Post #{index}";
         else
             textComponent.text = $"Neutral Post #{index}";
+
         instance.name = index + "";
         instance.GetComponent<RectTransform>().sizeDelta =
             new Vector2(GetComponent<RectTransform>().sizeDelta.x, heightTemplate);
@@ -442,9 +443,18 @@ public class NewScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeg
             
             currentCenter = Mathf.Clamp(Mathf.RoundToInt(contentPos / (heightText * 2)), 0, contentTarget.childCount - 1);
             
-            // Audio Logic
+            // --- Audio and stats LOGIC HERE ---
             if (currentCenter != _lastCenterIndex)
             {
+                // Ensure we only count stats if we have initialized (> -1)
+                // and avoid counting the same post rapidly if logic flickers (handled by center check)
+                if (_lastCenterIndex != -1)
+                {
+                     if (GameStatsManager.Instance != null)
+                        GameStatsManager.Instance.TrackScroll();
+                }
+
+                // audio logic
                 if (_lastCenterIndex != -1 && audioSource != null && tickSound != null)
                 {
                     float speedRatio = Mathf.Clamp01(Mathf.Abs(inertia) / 50f);
@@ -454,6 +464,7 @@ public class NewScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeg
                 }
                 _lastCenterIndex = currentCenter;
             }
+            // ---------------------------
 
             if (maxID > minID)
             {

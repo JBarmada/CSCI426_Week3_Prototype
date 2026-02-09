@@ -97,10 +97,16 @@ public class MultiTapHandler : MonoBehaviour
 
     private void ApplyEffects(PostInfo info)
     {
-        // 1. Slow Scale
+        // 1. Update Stats (NEW)
+        if (GameStatsManager.Instance != null)
+        {
+            GameStatsManager.Instance.TrackLike(info.currentType);
+        }
+
+        // 2. Slow Scale
         scrollMechanic.Inertia *= SpeedFactor;
 
-        // 2. Play Audio
+        // 3. Play Audio
         if (audioSource != null)
         {
             AudioClip clip = null;
@@ -114,17 +120,18 @@ public class MultiTapHandler : MonoBehaviour
             if (clip != null) audioSource.PlayOneShot(clip);
         }
 
-        // 3. Visual FX (Heart)
+        // 4. Visual FX (Heart)
         if (heartPrefab != null)
         {
             Instantiate(heartPrefab, info.transform);
         }
 
-        // 4. Shake
+        // 5. Shake
         TriggerTapShake();
         
         Debug.Log($"Liked Post Type: {info.currentType}");
     }
+
     // --- Shake Logic ---
     void TriggerTapShake()
     {

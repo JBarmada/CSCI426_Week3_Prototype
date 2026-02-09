@@ -31,13 +31,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2488041822422771105}
-  - {fileID: 5088769816928417636}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 286.124, y: 27}
+  m_SizeDelta: {x: 286.124, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2488041822340301319
 CanvasRenderer:
@@ -61,6 +60,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Mechanics.PostInfo
   currentType: 0
   targetImage: {fileID: 6631692673878510059}
+  alpha: 56
+  blueAlpha: 100
+  goldProbability: 0.1
+  positiveProbability: 0.3
+  negativeProbability: 0.1
 --- !u!1 &2488041822422771106
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +94,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5088769816928417636}
   m_Father: {fileID: 2488041822340301320}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -192,7 +197,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0.043273926, z: 0, w: 1.0481567}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -223,17 +228,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8650016550951062758}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2488041822340301320}
+  m_Father: {fileID: 2488041822422771105}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0011888, y: 0.0000094175}
-  m_SizeDelta: {x: 286.12, y: 27}
+  m_AnchoredPosition: {x: 0.0011888, y: 0}
+  m_SizeDelta: {x: 286.12, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4743945904605499978
 CanvasRenderer:

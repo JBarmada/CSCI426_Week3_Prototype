@@ -17,6 +17,8 @@ public class HoldChargeHandler : MonoBehaviour
 
     [Header("Dependencies")]
     public NewScrollMechanic scrollMechanic;
+    public TapScrollHandler tapScrollHandler; // NEW: Assign this in Inspector!
+
 
     [Header("Charge Settings")]
     public float maxHoldDuration = 2f;
@@ -44,12 +46,21 @@ public class HoldChargeHandler : MonoBehaviour
     [Range(1f, 3f)] public float maxChargePitch = 2f;
     [Header("Music Switch")]
     public AudioClip funMusicClip; // Assign "Fun" music here
-
-
+    [Header("Gameplay Evolution")]
+    public bool enableEvolution = true; // Flag to enable/disable this feature
+    public float evolvedInertiaSense = 0.2f; // New friction (very slippery)
+    public float evolvedTapPush = 20f; 
 
     [Header("Hyperdrive FX")]
     public GameObject hyperdrivePrefab;
     public float hyperdriveSpeedThreshold = 30f; // Speed at which the effect cuts off
+
+     [Header("Screen Flip")]
+    public ScreenFlipper screenFlipper; // Assign new script here
+    private int fullChargeCount = 0;
+    [Header("Bonus Games")]
+    public SpaceInvaderMiniGame spaceInvaderGame; // NEW: Assign in inspector
+    public float flipstoSpawnInvaders = 2f; // How many flips before spawning invaders (e.g. 3 = on 6th charge)
 
 
     // --- Internal State ---
@@ -58,6 +69,9 @@ public class HoldChargeHandler : MonoBehaviour
     bool maxSoundPlayed;
     float holdTimer;
     GameObject activeHyperdrive;
+    bool hasEvolved; // Track if we've already loosened the game
+    private int flipEventCount = 0; // NEW: Track how many flips have happened
+
 
     Vector2 originalCanvasPos;
     Vector3 originalCanvasScale;
@@ -200,6 +214,45 @@ public class HoldChargeHandler : MonoBehaviour
         // Trigger Hyperdrive if valid and near max power (>95%)
         if (hyperdrivePrefab != null && ratio >= 0.95f)
         {
+            // Increment Count
+            fullChargeCount++;
+
+            // CHECK EVEN NUMBER (2, 4, 6...)
+            
+            if (screenFlipper != null && fullChargeCount % 2 == 0)
+            {
+                screenFlipper.DoFlip();
+                flipEventCount++; 
+
+                // TRIGGER SPACE INVADERS ON x FLIP (Charge #6)
+                
+                if (flipEventCount >= flipstoSpawnInvaders && spaceInvaderGame != null)
+                 {
+                    spaceInvaderGame.ActivateGame();
+                 }
+            }
+            
+        
+
+            if (enableEvolution && !hasEvolved)
+            {
+                hasEvolved = true;
+
+                // 1. Loosen Friction (Scroll Mechanic)
+                if (scrollMechanic != null)
+                {
+                    scrollMechanic.inertiaSense = evolvedInertiaSense;
+                }
+
+                // 2. Boost Tap Speed (Tap Handler)
+                if (tapScrollHandler != null)
+                {
+                    tapScrollHandler.tapSpeedUpAmount = evolvedTapPush;
+                }
+
+                Debug.Log($"[Gameplay] EVOLVED! InertiaSense: {evolvedInertiaSense}, TapPush: {evolvedTapPush}");
+            }
+
             if (activeHyperdrive != null) Destroy(activeHyperdrive);
             
             // 1. Instantiate (Like PostFXManager)

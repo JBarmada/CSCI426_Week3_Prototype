@@ -934,7 +934,7 @@ MonoBehaviour:
   scrollMechanic: {fileID: 1181148808}
   SpeedFactor: 0.95
   goldGracePeriod: 0.5
-  pushForce: 20
+  pushForce: 10
   heartPrefab: {fileID: 6210608408421401737, guid: 697b6c52ed1357a4a937aeb943587305, type: 3}
   audioSource: {fileID: 554749502}
   likeSound_Neu: {fileID: 8300000, guid: 8719c23e09fee1e4f88a714d20aa2cd0, type: 3}
@@ -3243,8 +3243,17 @@ MonoBehaviour:
   touchpadSensibility: 0.5
   audioSource: {fileID: 1181148804}
   tickSound: {fileID: 8300000, guid: 2ecaba3b285c1bf4ebac392aec364802, type: 3}
+  pitchBehavior: 2
   minPitch: 0.9
   maxPitch: 2
+  loopSpeed: 2
+  launchThreshold: 20
+  launchPattern:
+  - 1
+  - 1.2
+  - 1.5
+  - 1.8
+  - 2
 --- !u!1 &1231447139
 GameObject:
   m_ObjectHideFlags: 0
@@ -4128,6 +4137,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 344823b78d64f2a4c8da594e70f4634e, type: 3}
     - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: maxHoldPower
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: oneShotSource
       value: 
       objectReference: {fileID: 554749495}
@@ -4140,9 +4153,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1181148808}
     - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: shakeIntensity
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: chargeLoopSound
       value: 
       objectReference: {fileID: 8300000, guid: 728d43b6b0df6d64b9d6b114e8799317, type: 3}
+    - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: maxHoldDuration
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: chargeBuildupSound
       value: 
@@ -4176,8 +4197,16 @@ PrefabInstance:
       value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 6251255081673306082, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: tapSpeedUpAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6251255081673306082, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: tapShakeIntensity
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6251255081673306082, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: tapSpeedThreshold
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6272226424064685878, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: actionRef

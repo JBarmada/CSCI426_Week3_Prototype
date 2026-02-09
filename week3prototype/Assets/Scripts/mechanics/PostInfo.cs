@@ -9,10 +9,11 @@ namespace Mechanics
         public PostType currentType;
 
         [Header("Settings")]
-        // CHANGED: Now looking for a RawImage instead of Image
-        public RawImage targetImage; 
+        // CHANGED: Now an array to target all 4 images at once
+        public RawImage[] targetImages; 
+
         [Range(0, 255)] public int alpha = 56;
-        [Range(0,255)] public int blueAlpha = 100;
+        [Range(0, 255)] public int blueAlpha = 100;
         [Range(0f, 1f)] public float goldProbability = 0.1f;
         [Range(0f, 1f)] public float positiveProbability = 0.3f;
         [Range(0f, 1f)] public float negativeProbability = 0.1f;
@@ -45,37 +46,44 @@ namespace Mechanics
 
         private void UpdateVisuals()
         {
-            // Auto-detect RawImage if not assigned
-            if (targetImage == null)
+            // Auto-detect ALL RawImages if the list is empty
+            if (targetImages == null || targetImages.Length == 0)
             {
-                // First, look on this object
-                targetImage = GetComponent<RawImage>();
-                
-                // If not found, look in the children (This is likely where yours is)
-                if (targetImage == null) targetImage = GetComponentInChildren<RawImage>();
+                targetImages = GetComponentsInChildren<RawImage>();
             }
 
-            if (targetImage == null) 
+            if (targetImages == null || targetImages.Length == 0) 
             {
-                Debug.LogWarning($"No RawImage found on {gameObject.name} or its children!");
+                Debug.LogWarning($"No RawImages found on {gameObject.name} or its children!");
                 return;
             }
 
-            // Apply colors based on type
+            Color colorToApply = Color.white;
+
+            // Determine color based on type
             switch (currentType)
             {
                 case PostType.Gold:
-                    targetImage.color = new Color(1f, 0.84f, 0f, alpha / 255f);
+                    colorToApply = new Color(1f, 0.84f, 0f, alpha / 255f);
                     break;
                 case PostType.Positive:
-                    targetImage.color = new Color(0f, 1f, 0f, alpha / 255f);
+                    colorToApply = new Color(0f, 1f, 0f, alpha / 255f);
                     break;
                 case PostType.Negative:
-                    targetImage.color = new Color(1f, 0f, 0f, alpha / 255f);
+                    colorToApply = new Color(1f, 0f, 0f, alpha / 255f);
                     break;
                 case PostType.Neutral:
-                    targetImage.color = new Color(0f, 0f, 1f, blueAlpha / 255f);
+                    colorToApply = new Color(0f, 0f, 1f, blueAlpha / 255f);
                     break;
+            }
+
+            // Apply color to ALL images
+            foreach (RawImage img in targetImages)
+            {
+                if (img != null)
+                {
+                    img.color = colorToApply;
+                }
             }
         }
     }

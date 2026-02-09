@@ -42,17 +42,29 @@ public class HoldChargeHandler : MonoBehaviour
     public AudioClip launchSound;
 
     [Range(1f, 3f)] public float maxChargePitch = 2f;
+    [Header("Music Switch")]
+    public AudioClip funMusicClip; // Assign "Fun" music here
+
+
+
+    [Header("Hyperdrive FX")]
+    public GameObject hyperdrivePrefab;
+    public float hyperdriveSpeedThreshold = 30f; // Speed at which the effect cuts off
+
 
     // --- Internal State ---
     bool isHolding;
     bool isLooping;
     bool maxSoundPlayed;
     float holdTimer;
+    GameObject activeHyperdrive;
 
     Vector2 originalCanvasPos;
     Vector3 originalCanvasScale;
 
     Coroutine releaseRoutine;
+    Coroutine fadeCheckRoutine; // NEW: To handle delayed fade
+
 
     void OnEnable() => actionRef.action.Enable();
     void OnDisable() => actionRef.action.Disable();
@@ -86,6 +98,16 @@ public class HoldChargeHandler : MonoBehaviour
         if (releaseRoutine != null)
             StopCoroutine(releaseRoutine);
 
+        if (fadeCheckRoutine != null) StopCoroutine(fadeCheckRoutine);
+
+
+        // Stop hyperdrive if we grab the screen
+        if (activeHyperdrive != null)
+        {
+            Destroy(activeHyperdrive);
+            activeHyperdrive = null;
+        }
+
         // Reduce existing momentum before charging
         if (Mathf.Abs(scrollMechanic.Inertia) > 1f)
             scrollMechanic.Inertia *= 0.5f;
@@ -94,7 +116,8 @@ public class HoldChargeHandler : MonoBehaviour
         isLooping = false;
         maxSoundPlayed = false;
         holdTimer = 0f;
-
+        // FADE OUT CURRENT MUSIC
+        fadeCheckRoutine = StartCoroutine(CheckMusicFade());
         // Play buildup audio
         loopSource.Stop();
         loopSource.clip = chargeBuildupSound;
@@ -104,11 +127,33 @@ public class HoldChargeHandler : MonoBehaviour
 
         Debug.Log("[Hold] Charge buildup started");
     }
+    IEnumerator CheckMusicFade()
+    {
+        // Don't fade logic if "Fun Music" is already playing!
+        if (BackgroundMusic.Instance != null && BackgroundMusic.Instance.IsPlayingClip(funMusicClip))
+        {
+            yield break;
+        }
+
+        // Wait 1.5 seconds before fading out background music
+        yield return new WaitForSeconds(1.5f);
+
+        if (isHolding && BackgroundMusic.Instance != null)
+        {
+            BackgroundMusic.Instance.FadeOut(0.5f);
+        }
+    }
+
 
     void ReleaseHold()
     {
         isHolding = false;
         isLooping = false;
+        if (fadeCheckRoutine != null) 
+        {
+            StopCoroutine(fadeCheckRoutine);
+            fadeCheckRoutine = null;
+        }
 
         float ratio = Mathf.Clamp01(holdTimer / maxHoldDuration);
 
@@ -117,6 +162,10 @@ public class HoldChargeHandler : MonoBehaviour
         {
             ResetVisuals();
             loopSource.Stop();
+            // FIX: If we faded out but cancelled, restore volume immediately
+            if (BackgroundMusic.Instance != null)
+                 BackgroundMusic.Instance.FadeIn(0.2f);
+            
             return;
         }
 
@@ -127,11 +176,79 @@ public class HoldChargeHandler : MonoBehaviour
     {
         loopSource.Stop();
         yield return new WaitForSeconds(preLaunchPause);
+         // MUSIC SWAP LOGIC
+        if (BackgroundMusic.Instance != null)
+        {
+            // If we are already playing fun music, keep it playing
+            bool isAlreadyFun = BackgroundMusic.Instance.IsPlayingClip(funMusicClip);
+
+            // If launch is strong (>50%) AND we aren't already playing fun music
+            if (ratio > 0.5f && funMusicClip != null && !isAlreadyFun)
+            {
+                BackgroundMusic.Instance.CrossfadeMusic(funMusicClip, 0.2f);
+            }
+            else
+            {
+                // Otherwise just restore volume (in case we faded out)
+                BackgroundMusic.Instance.FadeIn(0.5f);
+            }
+        }
 
         float launchVelocity = Mathf.Lerp(minHoldPower, maxHoldPower, ratio);
         scrollMechanic.Inertia = launchVelocity;
+        bool isHyperdrive = false;
+        // Trigger Hyperdrive if valid and near max power (>95%)
+        if (hyperdrivePrefab != null && ratio >= 0.95f)
+        {
+            if (activeHyperdrive != null) Destroy(activeHyperdrive);
+            
+            // 1. Instantiate (Like PostFXManager)
+            activeHyperdrive = Instantiate(hyperdrivePrefab, scrollMechanic.targetCanvas);
+            
+            // 2. Reset Transform Basics
+            activeHyperdrive.transform.localPosition = new Vector3(0, 0, -500f); // Pull it CLOSER to camera
+            activeHyperdrive.transform.localRotation = Quaternion.identity;
+            activeHyperdrive.transform.localScale = Vector3.one; 
 
-        oneShotSource.PlayOneShot(launchSound);
+            // 3. Handle UI RectTransform stretching
+            RectTransform rt = activeHyperdrive.GetComponent<RectTransform>();
+            if (rt != null)
+            {
+                rt.anchorMin = Vector2.zero; // Bottom-Left
+                rt.anchorMax = Vector2.one;  // Top-Right
+                rt.offsetMin = Vector2.zero; 
+                rt.offsetMax = Vector2.zero; 
+            }
+
+            // 4. CRITICAL: Force Draw Order
+            activeHyperdrive.transform.SetAsLastSibling(); 
+            
+            // 5. CRITICAL: Fix Particle System Scaling
+            // If the prefab has particles, they might be tiny in UI coordinates (pixels).
+            // You might need to scale them up significantly if they look small.
+            var particles = activeHyperdrive.GetComponentsInChildren<ParticleSystem>();
+            foreach(var p in particles) {
+                var main = p.main;
+                main.scalingMode = ParticleSystemScalingMode.Hierarchy; 
+                main.simulationSpeed = 10f;
+            }
+            isHyperdrive = true;
+        }
+
+        //Debug.Break();
+         if (isHyperdrive)
+        {
+            // Play looping launch sound
+            loopSource.clip = launchSound;
+            loopSource.loop = true;
+            loopSource.pitch = 1f;
+            loopSource.Play();
+        }
+        else
+        {
+            // Standard one-shot
+            oneShotSource.PlayOneShot(launchSound);
+        }
 
         float t = 0f;
         while (t < recoilDuration)
@@ -152,7 +269,22 @@ public class HoldChargeHandler : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        // Monitor Hyperdrive: Stop effect if speed drops below threshold
+        if (activeHyperdrive != null)
+        {
+            if (Mathf.Abs(scrollMechanic.Inertia) < hyperdriveSpeedThreshold)
+            {
+                Destroy(activeHyperdrive);
+                activeHyperdrive = null;
+
+                // Stop audio if it's still playing the launch loop
+                if (loopSource.isPlaying && loopSource.clip == launchSound)
+                {
+                    loopSource.Stop();
+                }
+            }
+        }
         if (!isHolding) return;
 
         holdTimer += Time.deltaTime;

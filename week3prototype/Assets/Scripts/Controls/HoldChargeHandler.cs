@@ -223,18 +223,7 @@ public class HoldChargeHandler : MonoBehaviour
             {
                 screenFlipper.DoFlip();
                 flipEventCount++; 
-
-                // TRIGGER SPACE INVADERS ON x FLIP (Charge #6)
-                
-                if (flipEventCount >= flipstoSpawnInvaders && spaceInvaderGame != null)
-                 {
-                    spaceInvaderGame.ActivateGame();
-                 }
-            }
-            
-        
-
-            if (enableEvolution && !hasEvolved)
+                if (enableEvolution && !hasEvolved)
             {
                 hasEvolved = true;
 
@@ -253,6 +242,18 @@ public class HoldChargeHandler : MonoBehaviour
                 Debug.Log($"[Gameplay] EVOLVED! InertiaSense: {evolvedInertiaSense}, TapPush: {evolvedTapPush}");
             }
 
+
+                // TRIGGER SPACE INVADERS ON x FLIP (Charge #6)
+                
+                if (flipEventCount >= flipstoSpawnInvaders && spaceInvaderGame != null)
+                 {
+                    spaceInvaderGame.ActivateGame();
+                 }
+            }
+            
+        
+
+            
             if (activeHyperdrive != null) Destroy(activeHyperdrive);
             
             // 1. Instantiate (Like PostFXManager)

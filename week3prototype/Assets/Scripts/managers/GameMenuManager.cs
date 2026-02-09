@@ -1,0 +1,99 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+
+public class GameMenusManager : MonoBehaviour
+{
+    [Header("UI")]
+    public SlideUpPanel pauseMenu;
+
+    [Header("State")]
+    public bool IsPaused { get; private set; }
+
+    private bool tabHeld;
+
+    void Start()
+    {
+        Time.timeScale = 1f;
+        IsPaused = false;
+
+        if (pauseMenu)
+            pauseMenu.gameObject.SetActive(false);
+    }
+
+    void Update()
+    {
+        HandleInput();
+    }
+
+    void HandleInput()
+    {
+        var keyboard = Keyboard.current;
+        if (keyboard == null) return;
+
+        // Restart
+        if (keyboard.rKey.wasPressedThisFrame)
+        {
+            RestartScene();
+        }
+
+        // Pause toggle (Escape)
+        if (keyboard.escapeKey.wasPressedThisFrame)
+        {
+            TogglePause();
+        }
+
+        // Pause toggle (Tab, prevent hold repeat)
+        if (keyboard.tabKey.isPressed && !tabHeld)
+        {
+            TogglePause();
+        }
+
+        tabHeld = keyboard.tabKey.isPressed;
+    }
+
+    // ======================
+    // PAUSE CONTROL
+    // ======================
+
+    public void TogglePause()
+    {
+        IsPaused = !IsPaused;
+        Time.timeScale = IsPaused ? 0f : 1f;
+
+        if (!pauseMenu) return;
+
+        if (IsPaused)
+            pauseMenu.Show();
+        else
+            pauseMenu.Hide();
+    }
+
+    public void ResumeGame()
+    {
+        if (!IsPaused) return;
+
+        IsPaused = false;
+        Time.timeScale = 1f;
+
+        if (pauseMenu)
+            pauseMenu.Hide();
+    }
+
+    public void RestartScene()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void QuitGame()
+    {
+        Time.timeScale = 1f;
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+}

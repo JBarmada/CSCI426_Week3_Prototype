@@ -385,7 +385,7 @@ MonoBehaviour:
   alienHitSound: {fileID: 8300000, guid: fc9aaea8001d73242aea4bc5626bbc08, type: 3}
   gameOverSound: {fileID: 8300000, guid: e66c788bbc8c7444db1fcf15f983755e, type: 3}
   gameWinSound: {fileID: 8300000, guid: 06a3d3816de71ed438824c8277a395a4, type: 3}
-  startOnAwake: 1
+  startOnAwake: 0
 --- !u!114 &134327685
 MonoBehaviour:
   m_ObjectHideFlags: 0

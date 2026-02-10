@@ -9,11 +9,16 @@ namespace Mechanics
         public GameObject snoopPrefab;
         public int spawnCount = 4;
         public float effectDuration = 5f;
+        public float musicFadeTime = 0.5f;
+        public AudioClip snoopMusicClip;
 
         [Header("Spawn Tuning")]
         public float spawnRadius = 120f;
         public float orbitRadius = 80f;
         public float orbitSpeed = 90f;
+
+        private BackgroundMusic _music;
+        private bool _musicPushed;
 
         void Start()
         {
@@ -28,6 +33,13 @@ namespace Mechanics
             }
 
             SpawnSnoops();
+
+            _music = BackgroundMusic.Instance;
+            if (_music != null && snoopMusicClip != null)
+            {
+                _music.PushTemporaryMusic(snoopMusicClip, musicFadeTime);
+                _musicPushed = true;
+            }
 
             if (effectDuration > 0f)
             {
@@ -69,7 +81,22 @@ namespace Mechanics
         IEnumerator LifeCycleRoutine()
         {
             yield return new WaitForSeconds(effectDuration);
+            RestoreMusic();
             Destroy(gameObject);
+        }
+
+        void OnDestroy()
+        {
+            RestoreMusic();
+        }
+
+        void RestoreMusic()
+        {
+            if (_music != null && snoopMusicClip != null && _musicPushed)
+            {
+                _music.PopTemporaryMusic(snoopMusicClip, musicFadeTime);
+                _musicPushed = false;
+            }
         }
     }
 }

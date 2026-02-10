@@ -51,6 +51,8 @@ MonoBehaviour:
   snoopPrefab: {fileID: 6155271814103497540, guid: 455baa19f37ed9748bbaa4a21b97bb6f, type: 3}
   spawnCount: 4
   effectDuration: 5
+  musicFadeTime: 0.5
+  snoopMusicClip: {fileID: 8300000, guid: d183ef085d4e0c54d9de0149586953f6, type: 3}
   spawnRadius: 120
   orbitRadius: 80
   orbitSpeed: 90

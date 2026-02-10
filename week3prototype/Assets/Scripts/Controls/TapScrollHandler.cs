@@ -54,6 +54,11 @@ public class TapScrollHandler : MonoBehaviour
     {
         if (GameMenusManager.Instance != null && GameMenusManager.Instance.IsPaused) return;
 
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+
         float velocity = scrollMechanic.Inertia;
         float direction = Mathf.Sign(velocity == 0 ? 1 : velocity);
         float speed = Mathf.Abs(velocity);
@@ -63,14 +68,16 @@ public class TapScrollHandler : MonoBehaviour
         {
             speed += tapSpeedUpAmount;
             spedUp = true;
-            audioSource.PlayOneShot(speedUpSound, speedUpVolume);
+            if (audioSource != null && speedUpSound != null)
+                audioSource.PlayOneShot(speedUpSound, speedUpVolume);
             Debug.Log("[Tap] Speed UP");
         }
         else
         {
             speed *= slowMultiplier;
             spedUp = false;
-            audioSource.PlayOneShot(slowDownSound, slowDownVolume);
+            if (audioSource != null && slowDownSound != null)
+                audioSource.PlayOneShot(slowDownSound, slowDownVolume);
             Debug.Log("[Tap] Slow DOWN");
         }
 

@@ -13,7 +13,7 @@ namespace Mechanics
 
         [Header("Gameplay")]
         public NewScrollMechanic scrollMechanic;
-        public float inertiaBoost = 20f;
+        public float inertiaSenseMultiplier = 10f;
 
         [Header("Audio")]
         public AudioClip frostLoopClip;
@@ -26,6 +26,8 @@ namespace Mechanics
         private AudioSource _audioSource;
         private float _previousMusicPitch = 1f;
         private bool _musicPitchAdjusted;
+        private float _previousInertiaSense;
+        private bool _inertiaAdjusted;
 
         void Start()
         {
@@ -46,9 +48,16 @@ namespace Mechanics
             _audioSource.loop = true;
             _audioSource.volume = frostVolume;
 
+            if (scrollMechanic == null)
+            {
+                scrollMechanic = FindFirstObjectByType<NewScrollMechanic>();
+            }
+
             if (scrollMechanic != null)
             {
-                scrollMechanic.AddInertia(inertiaBoost);
+                _previousInertiaSense = scrollMechanic.inertiaSense;
+                scrollMechanic.inertiaSense = _previousInertiaSense * inertiaSenseMultiplier;
+                _inertiaAdjusted = true;
             }
 
             if (BackgroundMusic.Instance != null)
@@ -76,6 +85,7 @@ namespace Mechanics
             yield return FadeCanvas(1f, 0f, fadeInDuration);
 
             RestoreMusicPitch();
+            RestoreInertiaSense();
 
             Destroy(gameObject);
         }
@@ -102,6 +112,16 @@ namespace Mechanics
         void OnDestroy()
         {
             RestoreMusicPitch();
+            RestoreInertiaSense();
+        }
+
+        void RestoreInertiaSense()
+        {
+            if (scrollMechanic != null && _inertiaAdjusted)
+            {
+                scrollMechanic.inertiaSense = _previousInertiaSense;
+                _inertiaAdjusted = false;
+            }
         }
 
         void RestoreMusicPitch()

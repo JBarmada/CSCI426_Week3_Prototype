@@ -1,0 +1,2643 @@
+fileFormatVersion: 2
+guid: 832ff1770aa32ee4bbd21758b002c4eb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1691076734390976044
+    second: placidplace-fire-12469_0
+  - first:
+      213: -7237010803271292355
+    second: placidplace-fire-12469_1
+  - first:
+      213: -5004249537494437342
+    second: placidplace-fire-12469_2
+  - first:
+      213: 2338307052084159709
+    second: placidplace-fire-12469_3
+  - first:
+      213: 4677248996129997034
+    second: placidplace-fire-12469_4
+  - first:
+      213: -6090570942629279782
+    second: placidplace-fire-12469_5
+  - first:
+      213: -2289880083412047791
+    second: placidplace-fire-12469_6
+  - first:
+      213: -1755366296357248753
+    second: placidplace-fire-12469_7
+  - first:
+      213: -3449670577850371962
+    second: placidplace-fire-12469_8
+  - first:
+      213: 5413292469967306094
+    second: placidplace-fire-12469_9
+  - first:
+      213: 5584343575388067042
+    second: placidplace-fire-12469_10
+  - first:
+      213: -8433671381977973195
+    second: placidplace-fire-12469_11
+  - first:
+      213: -8185224382652853993
+    second: placidplace-fire-12469_12
+  - first:
+      213: -5264206403870610530
+    second: placidplace-fire-12469_13
+  - first:
+      213: -1677351904169711960
+    second: placidplace-fire-12469_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: placidplace-fire-12469_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8070
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2e3d498459e77710800000000000000
+      internalID: 1691076734390976044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_1
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 8070
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3aa95b8409f09b90800000000000000
+      internalID: -7237010803271292355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_2
+      rect:
+        serializedVersion: 2
+        x: 1912
+        y: 8070
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2223b3e2f855d8ab0800000000000000
+      internalID: -5004249537494437342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_3
+      rect:
+        serializedVersion: 2
+        x: 2868
+        y: 8070
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd4644fffd5537020800000000000000
+      internalID: 2338307052084159709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_4
+      rect:
+        serializedVersion: 2
+        x: 3824
+        y: 8070
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae0816c4e2de8e040800000000000000
+      internalID: 4677248996129997034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_5
+      rect:
+        serializedVersion: 2
+        x: 4780
+        y: 8070
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad704453ff1f97ba0800000000000000
+      internalID: -6090570942629279782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_6
+      rect:
+        serializedVersion: 2
+        x: 5736
+        y: 8070
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 158abf94236b830e0800000000000000
+      internalID: -2289880083412047791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7532
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f01eeee57afa3a7e0800000000000000
+      internalID: -1755366296357248753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_8
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 7532
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 680bc17f2ee4020d0800000000000000
+      internalID: -3449670577850371962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_9
+      rect:
+        serializedVersion: 2
+        x: 1912
+        y: 7532
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6db2b112d0ef1b40800000000000000
+      internalID: 5413292469967306094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_10
+      rect:
+        serializedVersion: 2
+        x: 2868
+        y: 7532
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e49dba05e29f7d40800000000000000
+      internalID: 5584343575388067042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_11
+      rect:
+        serializedVersion: 2
+        x: 3824
+        y: 7532
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53e33d4cf8495fa80800000000000000
+      internalID: -8433671381977973195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_12
+      rect:
+        serializedVersion: 2
+        x: 4780
+        y: 7532
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7115c198acd386e80800000000000000
+      internalID: -8185224382652853993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_13
+      rect:
+        serializedVersion: 2
+        x: 5736
+        y: 7532
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9ba4f8aa28c1f6b0800000000000000
+      internalID: -5264206403870610530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6994
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a6a3a48459d8b8e0800000000000000
+      internalID: -1677351904169711960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_15
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 6994
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff9d13474a37f8748b581411f91e21a1
+      internalID: -1789983320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_16
+      rect:
+        serializedVersion: 2
+        x: 1912
+        y: 6994
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a45136e16588cce4a8aa5511be960a5b
+      internalID: 10302045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_17
+      rect:
+        serializedVersion: 2
+        x: 2868
+        y: 6994
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6a17ff0bb9ed1a45add7c0080cf2b5c
+      internalID: 1046129259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_18
+      rect:
+        serializedVersion: 2
+        x: 3824
+        y: 6994
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39187bdfec7ceca42b237bad27fb888b
+      internalID: 651138329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_19
+      rect:
+        serializedVersion: 2
+        x: 4780
+        y: 6994
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57557f65f0378f344aa97fcd55f12487
+      internalID: -1740989041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_20
+      rect:
+        serializedVersion: 2
+        x: 5736
+        y: 6994
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a402bb2f115ede64bb358a1ac8825a93
+      internalID: -1298968944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6456
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 632788757e6ef07408c8e3ef6d05ffb1
+      internalID: -241459305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_22
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 6456
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20f2b98919fb8944d8fa01584e52ed00
+      internalID: -442138626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_23
+      rect:
+        serializedVersion: 2
+        x: 1912
+        y: 6456
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b84597f327f0efe4a86f83b9b7512054
+      internalID: 2144234572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_24
+      rect:
+        serializedVersion: 2
+        x: 2868
+        y: 6456
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91cbeb1d9d69bfe4989fe442f653501a
+      internalID: -305626034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_25
+      rect:
+        serializedVersion: 2
+        x: 3824
+        y: 6456
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa5362ad932038a4f9ba08c34e5c290d
+      internalID: 514576333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_26
+      rect:
+        serializedVersion: 2
+        x: 4780
+        y: 6456
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8112c6b91c53224f8ee4545f8c5bed6
+      internalID: 713744115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_27
+      rect:
+        serializedVersion: 2
+        x: 5736
+        y: 6456
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bccba6965f3d0914b823a133f007777e
+      internalID: 1146405802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5918
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7586efd771353504982f864b8757e495
+      internalID: 1340793209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_29
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 5918
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a08a0ba4ba9dcf040ad124cc89b21670
+      internalID: 124023209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_30
+      rect:
+        serializedVersion: 2
+        x: 1912
+        y: 5918
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fae9371563e86504bad2e491e315c802
+      internalID: -255684340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_31
+      rect:
+        serializedVersion: 2
+        x: 2868
+        y: 5918
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a4d6ea96ebe7e847969d2ea04e32b74
+      internalID: 916854684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_32
+      rect:
+        serializedVersion: 2
+        x: 3824
+        y: 5918
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5778078cf15b139468eeb03a261a570f
+      internalID: -2063787854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_33
+      rect:
+        serializedVersion: 2
+        x: 4780
+        y: 5918
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dae3d0f2a52d2a6488434c8231bd53ee
+      internalID: 1767381856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_34
+      rect:
+        serializedVersion: 2
+        x: 5736
+        y: 5918
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b36bf44bdfee1734fabba6956f6397f3
+      internalID: -46349369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5380
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f31561900c88cd94a844fd306cc7064f
+      internalID: -1799043457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_36
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 5380
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c66d1103f4b15843ade5113b42deef3
+      internalID: 600643155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_37
+      rect:
+        serializedVersion: 2
+        x: 1912
+        y: 5380
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 144895f1736fad946b80e0398bba5854
+      internalID: -434026356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_38
+      rect:
+        serializedVersion: 2
+        x: 2868
+        y: 5380
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c3ec1d616ed6b14c8d2e484139ef68b
+      internalID: -1035073836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_39
+      rect:
+        serializedVersion: 2
+        x: 3824
+        y: 5380
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06ef0a0339489a74c8980c3870e9a7a7
+      internalID: 849489560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_40
+      rect:
+        serializedVersion: 2
+        x: 4780
+        y: 5380
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b734c71390efce4d80b9f9bc1e69252
+      internalID: 1572699979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_41
+      rect:
+        serializedVersion: 2
+        x: 5736
+        y: 5380
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d8f1a868001aa741bf28a23ed4cf667
+      internalID: 1310298711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4842
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2db12942864ee0945885f03fa91474fa
+      internalID: 1419966153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_43
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 4842
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 693768f2ba0f1404eabe57760bdf11dd
+      internalID: -1961205469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_44
+      rect:
+        serializedVersion: 2
+        x: 1912
+        y: 4842
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d40a73b6dad13447b9f9c45c1e5af43
+      internalID: -1267026653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_45
+      rect:
+        serializedVersion: 2
+        x: 2868
+        y: 4842
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6af51c47d710f1042a897ae7d569b76a
+      internalID: 827710988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_46
+      rect:
+        serializedVersion: 2
+        x: 3824
+        y: 4842
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 142d93300ab95034aad12c8adf85485d
+      internalID: 728936250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_47
+      rect:
+        serializedVersion: 2
+        x: 4780
+        y: 4842
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96d9730b904ce7945ae4f84e5511fd1d
+      internalID: -1119546592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_48
+      rect:
+        serializedVersion: 2
+        x: 5736
+        y: 4842
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d81a055a6ce85a04bbb3677256a33a36
+      internalID: 1986627549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_49
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4304
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab15a7cc7d8bf6d4bab842eb4ca1ecea
+      internalID: 2083117830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_50
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 4304
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98052c09e11615d45b90b097add0dcbf
+      internalID: -312466616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_51
+      rect:
+        serializedVersion: 2
+        x: 1912
+        y: 4304
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7c055bde0b067b4fbdd63addc12555d
+      internalID: -1264396521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_52
+      rect:
+        serializedVersion: 2
+        x: 2868
+        y: 4304
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb283872852029948bb48c336a0311a9
+      internalID: 1107732832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_53
+      rect:
+        serializedVersion: 2
+        x: 3824
+        y: 4304
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9169feb82f881b54ea535170de750dd8
+      internalID: 103858380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_54
+      rect:
+        serializedVersion: 2
+        x: 4780
+        y: 4304
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ddd336fa5fe2d146813919cb709a9dc
+      internalID: 1530421233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_55
+      rect:
+        serializedVersion: 2
+        x: 5736
+        y: 4304
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8eae6f0f74d8fb142a5e53f3d2a96a0c
+      internalID: 995336256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_56
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3766
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af9aa2965eab5c14092146caa9d9fb06
+      internalID: 82801957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_57
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 3766
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0856dfa31bf614a4b9020d611f950bc3
+      internalID: -1206924065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_58
+      rect:
+        serializedVersion: 2
+        x: 1912
+        y: 3766
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47abd986c5d90d440a651872e7836ba1
+      internalID: 1209204710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_59
+      rect:
+        serializedVersion: 2
+        x: 2868
+        y: 3766
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dad213c4093a75d4e90f9563494f2ea1
+      internalID: -123389109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_60
+      rect:
+        serializedVersion: 2
+        x: 3824
+        y: 3766
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 669cd02753a086a4cb9c6f9a6c388bba
+      internalID: -1201449151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_61
+      rect:
+        serializedVersion: 2
+        x: 4780
+        y: 3766
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85ee4192dd1767a4292a0a78cc9be1b2
+      internalID: 762055579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_62
+      rect:
+        serializedVersion: 2
+        x: 5736
+        y: 3766
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81439feb2bfc21748bda32fd6b7ea015
+      internalID: 260666052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_63
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3228
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d13ea282c96392449aebab1f2d790bb6
+      internalID: -1179024198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_64
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 3228
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff98a0367f536f343b1aeb2b9af01432
+      internalID: -361907854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_65
+      rect:
+        serializedVersion: 2
+        x: 1912
+        y: 3228
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84d8e1380be3a4143aa02fbed9eb62ab
+      internalID: -914814014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_66
+      rect:
+        serializedVersion: 2
+        x: 2868
+        y: 3228
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 344f168b28011a34a8176f03bdf1e70e
+      internalID: 67705716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_67
+      rect:
+        serializedVersion: 2
+        x: 3824
+        y: 3228
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dbd7f9149ca19b4dac6c57e1f315736
+      internalID: 1714893800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_68
+      rect:
+        serializedVersion: 2
+        x: 4780
+        y: 3228
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 407fde81972e8174c8043054517efb46
+      internalID: -2023293388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_69
+      rect:
+        serializedVersion: 2
+        x: 5736
+        y: 3228
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef27ef7ab1f33334aae7c09f66608146
+      internalID: 999992497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_70
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2690
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83e2e446c0d276346b518d36a46d3fe8
+      internalID: -1233574272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_71
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 2690
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b96af7d8a11200a40b8d940166a06a8f
+      internalID: 887482907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_72
+      rect:
+        serializedVersion: 2
+        x: 1912
+        y: 2690
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97479b4ed060486468f93ade766d85b0
+      internalID: 1256662481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_73
+      rect:
+        serializedVersion: 2
+        x: 2868
+        y: 2690
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64a56b54cc9e76342ac265596321b0c7
+      internalID: -1491661906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_74
+      rect:
+        serializedVersion: 2
+        x: 3824
+        y: 2690
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e7d50312befc514eacd682e5a32267c
+      internalID: -782146890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_75
+      rect:
+        serializedVersion: 2
+        x: 4780
+        y: 2690
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f584b4587048f564c988c23409e003f0
+      internalID: -1585190552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_76
+      rect:
+        serializedVersion: 2
+        x: 5736
+        y: 2690
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f63c2de111822b40ae93c85435e9bb0
+      internalID: 859883608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_77
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2152
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7163df1e5c1e384792af83813ea0198
+      internalID: -1185886355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_78
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 2152
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf59ba6717231d043a0a4b76b6294bf9
+      internalID: -1112204263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_79
+      rect:
+        serializedVersion: 2
+        x: 1912
+        y: 2152
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b16c9cf530ee3a42baa16e5827d1fb0
+      internalID: -1108414069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_80
+      rect:
+        serializedVersion: 2
+        x: 2868
+        y: 2152
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 758baf8815f871e4ab74d28cdf779d42
+      internalID: -8740907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_81
+      rect:
+        serializedVersion: 2
+        x: 3824
+        y: 2152
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e5ea729c0b6001418e1a7e139ab27b6
+      internalID: -1883382070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_82
+      rect:
+        serializedVersion: 2
+        x: 4780
+        y: 2152
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0a70f7e5e75a7a46b46a7d23dfda29c
+      internalID: -189356892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_83
+      rect:
+        serializedVersion: 2
+        x: 5736
+        y: 2152
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04b48acb6ad7c5f419bf9f1087068c46
+      internalID: -1097257525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_84
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1614
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be4c62eb352a8e94f9464e0766e51a98
+      internalID: -1592998767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_85
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 1614
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df5fd19b0da094049b3829be3155defe
+      internalID: 713331023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_86
+      rect:
+        serializedVersion: 2
+        x: 1912
+        y: 1614
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a24716cf5adcf949a7a768ff00432f3
+      internalID: 2001974603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_87
+      rect:
+        serializedVersion: 2
+        x: 2868
+        y: 1614
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddf774786fdad1445a5de14b9ee8a275
+      internalID: -605464825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_88
+      rect:
+        serializedVersion: 2
+        x: 3824
+        y: 1614
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fced349abebc50e4f8ac9c8c49634b39
+      internalID: 434492815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_89
+      rect:
+        serializedVersion: 2
+        x: 4780
+        y: 1614
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22021c3d9901f7448aa06a2d0fd5f74a
+      internalID: 1080905555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_90
+      rect:
+        serializedVersion: 2
+        x: 5736
+        y: 1614
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03a22f13b985a584a841b55a0695637f
+      internalID: -1231172031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_91
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1076
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d18b96bf5bfeb2842a77890340e61177
+      internalID: 195318882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_92
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 1076
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25e15151f201cf741b5e7ecce4ae099a
+      internalID: 1325493502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_93
+      rect:
+        serializedVersion: 2
+        x: 1912
+        y: 1076
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 800890c11573ad3408f1310e9bbef675
+      internalID: 154329240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_94
+      rect:
+        serializedVersion: 2
+        x: 2868
+        y: 1076
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9110db5fe1733c549b7d6eebf3e36ccb
+      internalID: -348785455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_95
+      rect:
+        serializedVersion: 2
+        x: 3824
+        y: 1076
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6ca5228b378b0b4fbf2268a43f705f8
+      internalID: -637305530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_96
+      rect:
+        serializedVersion: 2
+        x: 4780
+        y: 1076
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ab5441940a47654686242453d4ffeec
+      internalID: -722583219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_97
+      rect:
+        serializedVersion: 2
+        x: 5736
+        y: 1076
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ac609030ce8c22429c7efe6dfdad542
+      internalID: 824580535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_98
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 538
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e6a45c591f43a84e949424e4bc27527
+      internalID: -1647515649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_99
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 538
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37ccf45fd2b04e34eb0a3cae2a564c35
+      internalID: 849902270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_100
+      rect:
+        serializedVersion: 2
+        x: 1912
+        y: 538
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9492cf93d2de1c244842d7ada2806152
+      internalID: 1728846758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_101
+      rect:
+        serializedVersion: 2
+        x: 2868
+        y: 538
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f00feb791e83d14cb99ab23b50f7a9e
+      internalID: 1687285951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_102
+      rect:
+        serializedVersion: 2
+        x: 3824
+        y: 538
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68982ba1657d5064c903bf282c2515d3
+      internalID: -130043114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_103
+      rect:
+        serializedVersion: 2
+        x: 4780
+        y: 538
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38ee1ddb6af854349b0d27376215d6e2
+      internalID: 103291906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_104
+      rect:
+        serializedVersion: 2
+        x: 5736
+        y: 538
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c94b539dfec182840953da06bc7845a4
+      internalID: 1458779776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_105
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d83c1393ec4ccb940871d076c34e1d80
+      internalID: 1042776643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placidplace-fire-12469_106
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 0
+        width: 956
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 637addec0d3e3bd4ba2b1293cbf4bfa5
+      internalID: 218129445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: fe084cf6274f444488723e19525caf94
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":956.0,"y":538.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      placidplace-fire-12469_0: 1691076734390976044
+      placidplace-fire-12469_1: -7237010803271292355
+      placidplace-fire-12469_10: 5584343575388067042
+      placidplace-fire-12469_100: 1728846758
+      placidplace-fire-12469_101: 1687285951
+      placidplace-fire-12469_102: -130043114
+      placidplace-fire-12469_103: 103291906
+      placidplace-fire-12469_104: 1458779776
+      placidplace-fire-12469_105: 1042776643
+      placidplace-fire-12469_106: 218129445
+      placidplace-fire-12469_107: 1193888478
+      placidplace-fire-12469_108: -129317179
+      placidplace-fire-12469_109: -1495398487
+      placidplace-fire-12469_11: -8433671381977973195
+      placidplace-fire-12469_110: -653593985
+      placidplace-fire-12469_111: 110700981
+      placidplace-fire-12469_12: -8185224382652853993
+      placidplace-fire-12469_13: -5264206403870610530
+      placidplace-fire-12469_14: -1677351904169711960
+      placidplace-fire-12469_15: -1789983320
+      placidplace-fire-12469_16: 10302045
+      placidplace-fire-12469_17: 1046129259
+      placidplace-fire-12469_18: 651138329
+      placidplace-fire-12469_19: -1740989041
+      placidplace-fire-12469_2: -5004249537494437342
+      placidplace-fire-12469_20: -1298968944
+      placidplace-fire-12469_21: -241459305
+      placidplace-fire-12469_22: -442138626
+      placidplace-fire-12469_23: 2144234572
+      placidplace-fire-12469_24: -305626034
+      placidplace-fire-12469_25: 514576333
+      placidplace-fire-12469_26: 713744115
+      placidplace-fire-12469_27: 1146405802
+      placidplace-fire-12469_28: 1340793209
+      placidplace-fire-12469_29: 124023209
+      placidplace-fire-12469_3: 2338307052084159709
+      placidplace-fire-12469_30: -255684340
+      placidplace-fire-12469_31: 916854684
+      placidplace-fire-12469_32: -2063787854
+      placidplace-fire-12469_33: 1767381856
+      placidplace-fire-12469_34: -46349369
+      placidplace-fire-12469_35: -1799043457
+      placidplace-fire-12469_36: 600643155
+      placidplace-fire-12469_37: -434026356
+      placidplace-fire-12469_38: -1035073836
+      placidplace-fire-12469_39: 849489560
+      placidplace-fire-12469_4: 4677248996129997034
+      placidplace-fire-12469_40: 1572699979
+      placidplace-fire-12469_41: 1310298711
+      placidplace-fire-12469_42: 1419966153
+      placidplace-fire-12469_43: -1961205469
+      placidplace-fire-12469_44: -1267026653
+      placidplace-fire-12469_45: 827710988
+      placidplace-fire-12469_46: 728936250
+      placidplace-fire-12469_47: -1119546592
+      placidplace-fire-12469_48: 1986627549
+      placidplace-fire-12469_49: 2083117830
+      placidplace-fire-12469_5: -6090570942629279782
+      placidplace-fire-12469_50: -312466616
+      placidplace-fire-12469_51: -1264396521
+      placidplace-fire-12469_52: 1107732832
+      placidplace-fire-12469_53: 103858380
+      placidplace-fire-12469_54: 1530421233
+      placidplace-fire-12469_55: 995336256
+      placidplace-fire-12469_56: 82801957
+      placidplace-fire-12469_57: -1206924065
+      placidplace-fire-12469_58: 1209204710
+      placidplace-fire-12469_59: -123389109
+      placidplace-fire-12469_6: -2289880083412047791
+      placidplace-fire-12469_60: -1201449151
+      placidplace-fire-12469_61: 762055579
+      placidplace-fire-12469_62: 260666052
+      placidplace-fire-12469_63: -1179024198
+      placidplace-fire-12469_64: -361907854
+      placidplace-fire-12469_65: -914814014
+      placidplace-fire-12469_66: 67705716
+      placidplace-fire-12469_67: 1714893800
+      placidplace-fire-12469_68: -2023293388
+      placidplace-fire-12469_69: 999992497
+      placidplace-fire-12469_7: -1755366296357248753
+      placidplace-fire-12469_70: -1233574272
+      placidplace-fire-12469_71: 887482907
+      placidplace-fire-12469_72: 1256662481
+      placidplace-fire-12469_73: -1491661906
+      placidplace-fire-12469_74: -782146890
+      placidplace-fire-12469_75: -1585190552
+      placidplace-fire-12469_76: 859883608
+      placidplace-fire-12469_77: -1185886355
+      placidplace-fire-12469_78: -1112204263
+      placidplace-fire-12469_79: -1108414069
+      placidplace-fire-12469_8: -3449670577850371962
+      placidplace-fire-12469_80: -8740907
+      placidplace-fire-12469_81: -1883382070
+      placidplace-fire-12469_82: -189356892
+      placidplace-fire-12469_83: -1097257525
+      placidplace-fire-12469_84: -1592998767
+      placidplace-fire-12469_85: 713331023
+      placidplace-fire-12469_86: 2001974603
+      placidplace-fire-12469_87: -605464825
+      placidplace-fire-12469_88: 434492815
+      placidplace-fire-12469_89: 1080905555
+      placidplace-fire-12469_9: 5413292469967306094
+      placidplace-fire-12469_90: -1231172031
+      placidplace-fire-12469_91: 195318882
+      placidplace-fire-12469_92: 1325493502
+      placidplace-fire-12469_93: 154329240
+      placidplace-fire-12469_94: -348785455
+      placidplace-fire-12469_95: -637305530
+      placidplace-fire-12469_96: -722583219
+      placidplace-fire-12469_97: 824580535
+      placidplace-fire-12469_98: -1647515649
+      placidplace-fire-12469_99: 849902270
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

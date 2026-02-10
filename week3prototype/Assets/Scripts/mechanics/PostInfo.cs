@@ -134,5 +134,10 @@ namespace Mechanics
                 }
             }
         }
+
+        public void RefreshVisuals()
+        {
+            UpdateVisuals();
+        }
     }
 }

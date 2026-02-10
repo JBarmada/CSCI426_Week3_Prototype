@@ -4052,14 +4052,20 @@ MonoBehaviour:
     parentToPost: 0
     useShakeContainer: 1
     destroyDelay: 5
+  - special: 4
+    effectPrefab: {fileID: 1474677316809230042, guid: c875ad5b06fa60d47966d7bc504a82b0, type: 3}
+    effectSound: {fileID: 8300000, guid: 5b72a717dd47fac418726407702c7fde, type: 3}
+    parentToPost: 0
+    useShakeContainer: 1
+    destroyDelay: 5
   conversionRules:
   - name: SpaceInvader
     specialType: 1
     targetTypeToConvert: 2
     addOnStart: 0
-    startRatio: 0.51
+    startRatio: 0.3
     addOnFlip: 1
-    flipRatio: 0.5
+    flipRatio: 0.15
   - name: Cat
     specialType: 2
     targetTypeToConvert: 1
@@ -4081,6 +4087,13 @@ MonoBehaviour:
     startRatio: 0.5
     addOnFlip: 1
     flipRatio: 0.2
+  - name: Fire
+    specialType: 4
+    targetTypeToConvert: 2
+    addOnStart: 1
+    startRatio: 0.25
+    addOnFlip: 1
+    flipRatio: 0.15
   audioSource: {fileID: 840196399}
   shakeContainer: {fileID: 1581989729}
 --- !u!4 &840196398

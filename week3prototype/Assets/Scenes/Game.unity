@@ -3446,11 +3446,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DopamineManager
   dopBar: {fileID: 1123049483}
   constantDecOn: 1
-  amtToConstDec: 1
+  amtToConstDec: 7
   goldAmt: 50
-  posAmt: 10
+  posAmt: 5
   negAmt: -10
-  neutralAmt: 10
+  neutralAmt: 2
 --- !u!114 &693593958
 MonoBehaviour:
   m_ObjectHideFlags: 0

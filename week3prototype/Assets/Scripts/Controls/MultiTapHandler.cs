@@ -48,16 +48,12 @@ public class MultiTapHandler : MonoBehaviour
     private bool invaderMusicActive;
 
     //dopamine manager testing 
-    DopamineManager dopInstance;
+    //DopamineManager dopInstance;
 
     private void Start()
     {
         //dopamine manager testing 
-        dopInstance = DopamineManager.Instance;
-        if (dopInstance != null)
-        {
-            dopInstance.Start();
-        }
+        //dopInstance = DopamineManager.Instance;
 
 
         if (scrollMechanic != null && scrollMechanic.targetCanvas != null)
@@ -183,9 +179,9 @@ public class MultiTapHandler : MonoBehaviour
         TriggerTapShake();
 
         //attempt to get dopamine bar change 
-        if(dopInstance != null)
+        if(DopamineManager.Instance != null)
         {
-            dopInstance.TrackDopEffects(info.currentType);
+            DopamineManager.Instance.TrackDopEffects(info.currentType);
         }
         
         

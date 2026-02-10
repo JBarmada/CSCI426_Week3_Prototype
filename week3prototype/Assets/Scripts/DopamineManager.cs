@@ -18,6 +18,14 @@ public class DopamineManager : MonoBehaviour
     [SerializeField] float neutralAmt = 10f;
     //private float crRunning = false; 
 
+    public void Awake()
+    {
+            if (Instance == null)
+                Instance = this;
+            else
+                Destroy(gameObject);
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
     {
@@ -35,6 +43,7 @@ public class DopamineManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             DecreaseDopSlightly(amtToConstDec); 
         }
+
     }
 
     public void DecreaseDopSlightly(float amount)
@@ -70,6 +79,12 @@ public class DopamineManager : MonoBehaviour
     public void changeDop(float amount)
     {
         dopBar.UpdateBar(dopBar.CurrentValue + amount);
+    }
+
+    //public method to access the current value of the dopamine bar at any time 
+    public float getCurrDop()
+    {
+        return dopBar.CurrentValue; 
     }
 
     // Update is called once per frame

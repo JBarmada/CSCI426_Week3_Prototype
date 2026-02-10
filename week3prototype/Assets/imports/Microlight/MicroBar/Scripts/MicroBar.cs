@@ -248,6 +248,64 @@ namespace Microlight.MicroBar
             previousAlpha = simpleBar.SetHealFlashAlpha(alpha);
             return true;
         }
+
+        /// <summary>
+        /// Applies a tint multiplier to simple mode bars. Returns false if not supported.
+        /// </summary>
+        public bool TrySetTint(Color tintColor)
+        {
+            if(editorMode != MicroBarEditorMode.Simple || simpleBar == null)
+            {
+                return false;
+            }
+
+            simpleBar.SetTint(tintColor);
+            return true;
+        }
+
+        /// <summary>
+        /// Applies a tint multiplier and refreshes the current bar color without triggering animations.
+        /// </summary>
+        public bool TrySetTintImmediate(Color tintColor)
+        {
+            if(editorMode != MicroBarEditorMode.Simple || simpleBar == null)
+            {
+                return false;
+            }
+
+            simpleBar.SetTint(tintColor);
+            simpleBar.ApplyTintToCurrentColor();
+            return true;
+        }
+
+        /// <summary>
+        /// Clears tint multiplier from simple mode bars. Returns false if not supported.
+        /// </summary>
+        public bool TryClearTint()
+        {
+            if(editorMode != MicroBarEditorMode.Simple || simpleBar == null)
+            {
+                return false;
+            }
+
+            simpleBar.ClearTint();
+            return true;
+        }
+
+        /// <summary>
+        /// Clears tint and refreshes the current bar color without triggering animations.
+        /// </summary>
+        public bool TryClearTintImmediate()
+        {
+            if(editorMode != MicroBarEditorMode.Simple || simpleBar == null)
+            {
+                return false;
+            }
+
+            simpleBar.ClearTint();
+            simpleBar.ApplyTintToCurrentColor();
+            return true;
+        }
         #endregion
     }
 }

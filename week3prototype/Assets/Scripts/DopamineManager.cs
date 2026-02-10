@@ -95,6 +95,8 @@ public class DopamineManager : MonoBehaviour
     private bool tintCached;
     private Color[] tintOriginalColors;
     private Coroutine catHealRoutine;
+    private bool barTintActive;
+    private Color barTintColor;
     //private float crRunning = false; 
 
     public void Awake()
@@ -376,13 +378,16 @@ public class DopamineManager : MonoBehaviour
 
     private void StartRainbow()
     {
-        if (!enableRainbow || rainbowTargets == null || rainbowTargets.Length == 0) return;
+        if (!enableRainbow) return;
         if (rainbowActive) return;
 
-        rainbowOriginalColors = new Color[rainbowTargets.Length];
-        for (int i = 0; i < rainbowTargets.Length; i++)
+        if (rainbowTargets != null && rainbowTargets.Length > 0)
         {
-            rainbowOriginalColors[i] = rainbowTargets[i] != null ? rainbowTargets[i].color : Color.white;
+            rainbowOriginalColors = new Color[rainbowTargets.Length];
+            for (int i = 0; i < rainbowTargets.Length; i++)
+            {
+                rainbowOriginalColors[i] = rainbowTargets[i] != null ? rainbowTargets[i].color : Color.white;
+            }
         }
 
         rainbowActive = true;
@@ -390,10 +395,17 @@ public class DopamineManager : MonoBehaviour
 
     private void UpdateRainbow()
     {
-        if (!rainbowActive || !enableRainbow || rainbowTargets == null || rainbowTargets.Length == 0) return;
+        if (!rainbowActive || !enableRainbow) return;
 
         float hue = Mathf.Repeat(Time.time * rainbowCycleSpeed, 1f);
         Color rainbow = Color.HSVToRGB(hue, rainbowSaturation, rainbowValue);
+
+        if (TrySetBarTintImmediate(rainbow))
+        {
+            return;
+        }
+
+        if (rainbowTargets == null || rainbowTargets.Length == 0) return;
 
         for (int i = 0; i < rainbowTargets.Length; i++)
         {
@@ -408,8 +420,10 @@ public class DopamineManager : MonoBehaviour
     {
         if (!rainbowActive) return;
         rainbowActive = false;
-        RefreshBaseBarVisuals();
-        tintCached = false;
+        if (!TryClearBarTintImmediate())
+        {
+            tintCached = false;
+        }
     }
 
     private void UpdateVisualStates()
@@ -422,29 +436,44 @@ public class DopamineManager : MonoBehaviour
 
         if (HasActiveEffect(PostInfo.PostSpecial.SpaceInvader) && enableSpaceInvaderTint)
         {
-            ApplyTint(spaceInvaderTintColor, GetTintTargets(spaceInvaderTintTargets));
+            if (!TrySetBarTint(spaceInvaderTintColor))
+            {
+                ApplyTint(spaceInvaderTintColor, GetTintTargets(spaceInvaderTintTargets));
+            }
             return;
         }
 
         if (HasActiveEffect(PostInfo.PostSpecial.Fire) && enableFireTint)
         {
-            ApplyTint(fireTintColor, GetTintTargets(fireTintTargets));
+            if (!TrySetBarTint(fireTintColor))
+            {
+                ApplyTint(fireTintColor, GetTintTargets(fireTintTargets));
+            }
             return;
         }
 
         if (HasActiveEffect(PostInfo.PostSpecial.Ice) && enableIceTint)
         {
-            ApplyTint(iceTintColor, GetTintTargets(iceTintTargets));
+            if (!TrySetBarTint(iceTintColor))
+            {
+                ApplyTint(iceTintColor, GetTintTargets(iceTintTargets));
+            }
             return;
         }
 
         if (HasActiveEffect(PostInfo.PostSpecial.Snoopdog) && enableSnoopTint)
         {
-            ApplyTint(snoopTintColor, GetTintTargets(snoopTintTargets));
+            if (!TrySetBarTint(snoopTintColor))
+            {
+                ApplyTint(snoopTintColor, GetTintTargets(snoopTintTargets));
+            }
             return;
         }
 
-        RestoreTint(GetTintTargets(null));
+        if (!TryClearBarTint())
+        {
+            RestoreTint(GetTintTargets(null));
+        }
     }
 
     private Graphic[] GetTintTargets(Graphic[] overrideTargets)
@@ -493,14 +522,45 @@ public class DopamineManager : MonoBehaviour
                 targets[i].color = tintOriginalColors[i];
             }
         }
-
-        RefreshBaseBarVisuals();
     }
 
-    private void RefreshBaseBarVisuals()
+    private bool TrySetBarTint(Color tintColor)
     {
-        if (dopBar == null) return;
-        dopBar.UpdateBar(dopBar.CurrentValue, true);
+        if (dopBar == null) return false;
+        if (!dopBar.TrySetTint(tintColor)) return false;
+
+        if (!barTintActive || barTintColor != tintColor)
+        {
+            barTintActive = true;
+            barTintColor = tintColor;
+            dopBar.UpdateBar(dopBar.CurrentValue, true);
+        }
+
+        return true;
+    }
+
+    private bool TryClearBarTint()
+    {
+        if (dopBar == null) return false;
+        if (!dopBar.TryClearTint()) return false;
+
+        if (barTintActive)
+        {
+            barTintActive = false;
+            dopBar.UpdateBar(dopBar.CurrentValue, true);
+        }
+
+        return true;
+    }
+
+    private bool TrySetBarTintImmediate(Color tintColor)
+    {
+        return dopBar != null && dopBar.TrySetTintImmediate(tintColor);
+    }
+
+    private bool TryClearBarTintImmediate()
+    {
+        return dopBar != null && dopBar.TryClearTintImmediate();
     }
 
     private IEnumerator CatHealRoutine(float duration)

@@ -80,6 +80,11 @@ namespace Microlight.MicroBar
         [SerializeField][Range(0f, 1f)] float _healAnimStrength = 0.5f;
         internal float HealAnimStrength => _healAnimStrength;
 
+        [SerializeField] bool _useTint;
+        internal bool UseTint => _useTint;
+        [SerializeField] Color _tintColor = Color.white;
+        internal Color TintColor => _tintColor;
+
         // Variables
         internal MicroBar ParentBar { get; private set; }
         Sequence sequence;   // Sequence for animations
@@ -167,6 +172,47 @@ namespace Microlight.MicroBar
             return previous;
         }
 
+        internal void SetTint(Color tintColor)
+        {
+            _useTint = true;
+            _tintColor = tintColor;
+        }
+
+        internal void ClearTint()
+        {
+            _useTint = false;
+            _tintColor = Color.white;
+        }
+
+        internal void ApplyTintToCurrentColor()
+        {
+            if(ParentBar == null)
+            {
+                return;
+            }
+
+            if(AdaptiveColor)
+            {
+                SimpleAnimBuilder.SetAdaptiveBarColor(this, false);
+                return;
+            }
+
+            if(RenderType == RenderType.Image)
+            {
+                UIPrimaryBar.color = ApplyTint(BarPrimaryColor);
+            }
+            else
+            {
+                SRPrimaryBar.color = ApplyTint(BarPrimaryColor);
+            }
+        }
+
+        internal Color ApplyTint(Color color)
+        {
+            if(!_useTint) return color;
+            return new Color(color.r * _tintColor.r, color.g * _tintColor.g, color.b * _tintColor.b, color.a);
+        }
+
         // Sets some starting values
         void InitializeValues()
         {
@@ -179,11 +225,11 @@ namespace Microlight.MicroBar
             {
                 if(isSprite)
                 {
-                    SRPrimaryBar.color = BarPrimaryColor;
+                    SRPrimaryBar.color = ApplyTint(BarPrimaryColor);
                 }
                 else
                 {
-                    UIPrimaryBar.color = BarPrimaryColor;
+                    UIPrimaryBar.color = ApplyTint(BarPrimaryColor);
                 }
             }
 
@@ -263,6 +309,17 @@ namespace Microlight.MicroBar
             if(AdaptiveColor)
             {
                 SimpleAnimBuilder.SetAdaptiveBarColor(this, false);
+            }
+            else
+            {
+                if(RenderType == RenderType.Image)
+                {
+                    UIPrimaryBar.color = ApplyTint(BarPrimaryColor);
+                }
+                else
+                {
+                    SRPrimaryBar.color = ApplyTint(BarPrimaryColor);
+                }
             }
 
             if(DualGhostBars)

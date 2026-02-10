@@ -9,10 +9,15 @@ public class GameMenusManager : MonoBehaviour
     [Header("UI")]
     public SlideUpPanel pauseMenu;
 
+    [Header("Game Over Music")]
+    public AudioClip gameOverMusicClip;
+    public float gameOverMusicFadeDuration = 0.5f;
+
     [Header("State")]
     public bool IsPaused { get; private set; }
 
     private bool tabHeld;
+    private bool gameOverMusicActive;
 
     void Awake()
     {
@@ -102,12 +107,31 @@ public class GameMenusManager : MonoBehaviour
             pauseMenu.Hide();
     }
 
+    public void PlayGameOverMusic()
+    {
+        if (!gameOverMusicActive && BackgroundMusic.Instance != null && gameOverMusicClip != null)
+        {
+            float duration = Time.timeScale == 0f ? 0f : gameOverMusicFadeDuration;
+            gameOverMusicActive = BackgroundMusic.Instance.PushTemporaryMusic(gameOverMusicClip, duration);
+        }
+    }
+
+    public void StopGameOverMusic()
+    {
+        if (gameOverMusicActive && BackgroundMusic.Instance != null && gameOverMusicClip != null)
+        {
+            BackgroundMusic.Instance.PopTemporaryMusic(gameOverMusicClip, gameOverMusicFadeDuration);
+            gameOverMusicActive = false;
+        }
+    }
+
     public void RestartScene()
     {
         IsPaused = false;
         Time.timeScale = 1f;
         if (BackgroundMusic.Instance != null)
         {
+            StopGameOverMusic();
             BackgroundMusic.Instance.RestartMusic();
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

@@ -29,6 +29,11 @@ public class DopamineTracker : MonoBehaviour
             }
             gameOverMenu.Show(); 
 
+            if (GameMenusManager.Instance != null)
+            {
+                GameMenusManager.Instance.PlayGameOverMusic();
+            }
+
             gameNotOverBefore = true; 
         }
 

@@ -174,6 +174,8 @@ namespace Microlight.MicroBar
                 flashColor = bar.DamageFlashColor;
             }
 
+            Color flashPrimaryColor = bar.ApplyTint(flashColor);
+
             // Set bars to the flash color
             if(bar.RenderType == RenderType.Sprite)
             {
@@ -181,7 +183,7 @@ namespace Microlight.MicroBar
                 {
                     bar.SRGhostBar.color = flashColor;
                 }
-                bar.SRPrimaryBar.color = flashColor;
+                bar.SRPrimaryBar.color = flashPrimaryColor;
             }
             else
             {
@@ -189,7 +191,7 @@ namespace Microlight.MicroBar
                 {
                     bar.UIGhostBar.color = flashColor;
                 }
-                bar.UIPrimaryBar.color = flashColor;
+                bar.UIPrimaryBar.color = flashPrimaryColor;
             }
 
             Transform srBarToAnimate;
@@ -466,7 +468,7 @@ namespace Microlight.MicroBar
         {
             if(!bar.AdaptiveColor)
             {
-                return bar.BarPrimaryColor;
+                return bar.ApplyTint(bar.BarPrimaryColor);
             }
 
             Color barColor;
@@ -480,6 +482,7 @@ namespace Microlight.MicroBar
                 {
                     barColor = Color.Lerp(bar.BarAdaptiveColor, bar.BarPrimaryColor, bar.ParentBar.HPPercent);
                 }
+                barColor = bar.ApplyTint(barColor);
                 bar.SRPrimaryBar.color = barColor;
             }
             else
@@ -492,6 +495,7 @@ namespace Microlight.MicroBar
                 {
                     barColor = Color.Lerp(bar.BarAdaptiveColor, bar.BarPrimaryColor, bar.ParentBar.HPPercent);
                 }
+                barColor = bar.ApplyTint(barColor);
                 bar.UIPrimaryBar.color = barColor;
             }
 

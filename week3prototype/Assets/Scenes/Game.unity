@@ -4643,20 +4643,20 @@ MonoBehaviour:
   constantDecOn: 1
   amtToConstDec: 7
   maxDopValue: 100
-  goldAmt: 25
+  goldAmt: 20
   posAmt: 5
-  negAmt: -10
-  neutralAmt: 2
+  negAmt: -12
+  neutralAmt: 3
   fireEffectDuration: 5
   iceEffectDuration: 5
   snoopEffectDuration: 5
   catEffectDuration: 5
   fireDrainMultiplier: 1.75
-  iceDrainMultiplier: 0.5
+  iceDrainMultiplier: 0.6
   snoopDrainMultiplier: 0.75
   iceValueMultiplier: 0.7
-  holdChargeDeductionMultiplier: 0.5
-  fastScrollDeductionMultiplier: 0.5
+  holdChargeDeductionMultiplier: 0.45
+  fastScrollDeductionMultiplier: 0.6
   fastScrollThreshold: 20
   enableRainbow: 1
   rainbowTargets:
@@ -12508,7 +12508,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 8019639e2e2f57f4e871e1fa684a05ba, type: 3}
     - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: evolvedInertiaSense
-      value: 0.35
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: flipstoSpawnInvaders

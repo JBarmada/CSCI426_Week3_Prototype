@@ -42,6 +42,7 @@ public class MultiTapHandler : MonoBehaviour
 
     // State
     private GameObject lastCenterObj;
+    private GameObject lastLikedCenterObj;
     private float timeSinceLastChange;
     private Vector2 originalCanvasPos;
     private Coroutine shakeRoutine;
@@ -107,6 +108,7 @@ public class MultiTapHandler : MonoBehaviour
     private void DetermineAndLikeTarget()
     {
         if (GameMenusManager.Instance != null && GameMenusManager.Instance.IsPaused) return;
+        if (scrollMechanic == null) return;
 
         GameObject currentCenter = scrollMechanic.GetCurrentCenterObject();
         GameObject target = currentCenter;
@@ -126,7 +128,19 @@ public class MultiTapHandler : MonoBehaviour
             PostInfo info = target.GetComponent<PostInfo>();
             if (info != null)
             {
+                bool isCenterTarget = target == currentCenter;
+                if (isCenterTarget && target == lastLikedCenterObj)
+                {
+                    ApplyTapInertia();
+                    return;
+                }
+
                 ApplyEffects(info);
+
+                if (isCenterTarget)
+                {
+                    lastLikedCenterObj = target;
+                }
             }
         }
     }
@@ -153,12 +167,7 @@ public class MultiTapHandler : MonoBehaviour
         }
 
         // 3. Force Move Logic
-        if (Mathf.Abs(scrollMechanic.Inertia) < 5f)
-        {
-            scrollMechanic.Inertia += pushForce; // Push forward on tap
-        }
-        
-        scrollMechanic.Inertia *= SpeedFactor;
+        ApplyTapInertia();
 
         // 4. Play Audio
         if (audioSource != null)
@@ -195,6 +204,18 @@ public class MultiTapHandler : MonoBehaviour
         
         
         Debug.Log($"Liked Post Type: {info.currentType}");
+    }
+
+    private void ApplyTapInertia()
+    {
+        if (scrollMechanic == null) return;
+
+        if (Mathf.Abs(scrollMechanic.Inertia) < 5f)
+        {
+            scrollMechanic.Inertia += pushForce; // Push forward on tap
+        }
+
+        scrollMechanic.Inertia *= SpeedFactor;
     }
 
     private void RegisterInvaderGameEvents(bool register)

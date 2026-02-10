@@ -163,9 +163,9 @@ public class GameMenusManager : MonoBehaviour
         Time.timeScale = 1f;
         if (BackgroundMusic.Instance != null)
         {
-            StopGameOverMusic();
-            StopWinMusic();
-            BackgroundMusic.Instance.RestartMusic();
+            gameOverMusicActive = false;
+            winMusicActive = false;
+            BackgroundMusic.Instance.RestartMusic(true);
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

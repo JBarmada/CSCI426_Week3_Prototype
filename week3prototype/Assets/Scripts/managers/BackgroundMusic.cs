@@ -87,17 +87,33 @@ public class BackgroundMusic : MonoBehaviour
         get { return _audioSource != null ? _audioSource.pitch : 1f; }
     }
 
-    public void RestartMusic()
+    public void RestartMusic(bool stopAllAudioSources = false)
     {
         if (_audioSource == null) return;
 
+        if (stopAllAudioSources)
+        {
+            AudioSource[] sources = FindObjectsOfType<AudioSource>();
+            for (int i = 0; i < sources.Length; i++)
+            {
+                sources[i].Stop();
+            }
+        }
+
         _temporaryStack.Clear();
         _pitchStack.Clear();
+
+        if (_activeFadeRoutine != null)
+        {
+            StopCoroutine(_activeFadeRoutine);
+            _activeFadeRoutine = null;
+        }
 
         _audioSource.Stop();
         _audioSource.pitch = 1f;
         _audioSource.volume = volume;
         _audioSource.clip = musicClip;
+        _audioSource.loop = true;
         _audioSource.time = 0f;
 
         if (musicClip != null)

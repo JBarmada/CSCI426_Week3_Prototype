@@ -4058,7 +4058,7 @@ MonoBehaviour:
     destroyDelay: 5
   - special: 5
     effectPrefab: {fileID: 5175911834173109684, guid: f60024989b648ed4a9cd28d4f616eaa6, type: 3}
-    effectSound: {fileID: 8300000, guid: d183ef085d4e0c54d9de0149586953f6, type: 3}
+    effectSound: {fileID: 0}
     parentToPost: 0
     useShakeContainer: 1
     destroyDelay: 5
@@ -4074,14 +4074,14 @@ MonoBehaviour:
     specialType: 2
     targetTypeToConvert: 1
     addOnStart: 1
-    startRatio: 0.55
+    startRatio: 0.47
     addOnFlip: 1
     flipRatio: 0.11
   - name: Snoop
     specialType: 5
     targetTypeToConvert: 1
     addOnStart: 1
-    startRatio: 0.63
+    startRatio: 0.5
     addOnFlip: 1
     flipRatio: 0.11
   audioSource: {fileID: 840196399}
@@ -6590,6 +6590,106 @@ MonoBehaviour:
   testData:
   - pls generate
   - come on
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

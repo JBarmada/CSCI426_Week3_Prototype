@@ -11,6 +11,7 @@ namespace Mechanics
         public float effectDuration = 5f;
         public float musicFadeTime = 0.5f;
         public AudioClip snoopMusicClip;
+        [Range(0f, 1f)] public float snoopMusicVolume = 1f;
 
         [Header("Spawn Tuning")]
         public float spawnRadius = 120f;
@@ -19,6 +20,7 @@ namespace Mechanics
 
         private BackgroundMusic _music;
         private bool _musicPushed;
+        private float _previousMusicVolume;
 
         void Start()
         {
@@ -37,6 +39,8 @@ namespace Mechanics
             _music = BackgroundMusic.Instance;
             if (_music != null && snoopMusicClip != null)
             {
+                _previousMusicVolume = _music.volume;
+                _music.SetVolume(snoopMusicVolume);
                 _music.PushTemporaryMusic(snoopMusicClip, musicFadeTime);
                 _musicPushed = true;
             }
@@ -55,11 +59,24 @@ namespace Mechanics
                 return;
             }
 
+            RectTransform containerRt = transform as RectTransform;
+            Rect containerRect = containerRt != null ? containerRt.rect : new Rect();
+
             for (int i = 0; i < spawnCount; i++)
             {
                 GameObject snoop = Instantiate(snoopPrefab, transform);
 
-                Vector2 startOffset = Random.insideUnitCircle * spawnRadius;
+                Vector2 startOffset;
+                if (containerRt != null && containerRect.width > 0f && containerRect.height > 0f)
+                {
+                    float x = Random.Range(containerRect.xMin, containerRect.xMax);
+                    float y = Random.Range(containerRect.yMin, containerRect.yMax);
+                    startOffset = new Vector2(x, y);
+                }
+                else
+                {
+                    startOffset = Random.insideUnitCircle * spawnRadius;
+                }
 
                 RectTransform snoopRt = snoop.GetComponent<RectTransform>();
                 if (snoopRt != null)
@@ -95,6 +112,7 @@ namespace Mechanics
             if (_music != null && snoopMusicClip != null && _musicPushed)
             {
                 _music.PopTemporaryMusic(snoopMusicClip, musicFadeTime);
+                _music.SetVolume(_previousMusicVolume);
                 _musicPushed = false;
             }
         }

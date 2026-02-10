@@ -136,9 +136,9 @@ MonoBehaviour:
   targetImages: []
   alpha: 56
   blueAlpha: 100
-  goldProbability: 0.05
-  positiveProbability: 0.1
-  negativeProbability: 0.5
+  goldProbability: 0.1
+  positiveProbability: 0.4
+  negativeProbability: 0.4
 --- !u!1 &2488041822422771106
 GameObject:
   m_ObjectHideFlags: 0

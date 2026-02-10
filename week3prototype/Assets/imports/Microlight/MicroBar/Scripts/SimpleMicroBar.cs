@@ -160,6 +160,13 @@ namespace Microlight.MicroBar
             return true;
         }
 
+        internal float SetHealFlashAlpha(float alpha)
+        {
+            float previous = _healFlashColor.a;
+            _healFlashColor = new Color(_healFlashColor.r, _healFlashColor.g, _healFlashColor.b, Mathf.Clamp01(alpha));
+            return previous;
+        }
+
         // Sets some starting values
         void InitializeValues()
         {

@@ -105,6 +105,11 @@ public class HoldChargeHandler : MonoBehaviour
             actionRef.action.canceled -= OnHoldCanceled;
             actionRef.action.Disable();
         }
+
+        if (DopamineManager.Instance != null)
+        {
+            DopamineManager.Instance.SetHoldChargeActive(false);
+        }
     }
 
     void Start()
@@ -135,6 +140,11 @@ public class HoldChargeHandler : MonoBehaviour
     void StartHold()
     {
         if (GameMenusManager.Instance != null && GameMenusManager.Instance.IsPaused) return;
+
+        if (DopamineManager.Instance != null)
+        {
+            DopamineManager.Instance.SetHoldChargeActive(true);
+        }
 
         if (releaseRoutine != null)
             StopCoroutine(releaseRoutine);
@@ -193,6 +203,11 @@ public class HoldChargeHandler : MonoBehaviour
 
         isHolding = false;
         isLooping = false;
+
+        if (DopamineManager.Instance != null)
+        {
+            DopamineManager.Instance.SetHoldChargeActive(false);
+        }
         if (fadeCheckRoutine != null) 
         {
             StopCoroutine(fadeCheckRoutine);

@@ -190,7 +190,7 @@ public class MultiTapHandler : MonoBehaviour
         //attempt to get dopamine bar change 
         if(DopamineManager.Instance != null)
         {
-            DopamineManager.Instance.TrackDopEffects(info.currentType);
+            DopamineManager.Instance.TrackDopEffects(info.currentType, info.currentSpecial);
         }
         
         
@@ -239,6 +239,11 @@ public class MultiTapHandler : MonoBehaviour
 
         if (BackgroundMusic.Instance == null) return;
         BackgroundMusic.Instance.PopTemporaryMusic(spaceInvaderMusicClip, spaceInvaderMusicFadeDuration);
+
+        if (DopamineManager.Instance != null)
+        {
+            DopamineManager.Instance.ApplyPendingSpaceInvaderNegative();
+        }
     }
 
     // --- Shake Logic ---

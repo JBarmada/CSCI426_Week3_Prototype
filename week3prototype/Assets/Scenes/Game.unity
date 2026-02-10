@@ -3429,12 +3429,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DopamineManager
   dopBar: {fileID: 1123049483}
+  scrollMechanic: {fileID: 1181148808}
   constantDecOn: 1
   amtToConstDec: 7
+  maxDopValue: 100
   goldAmt: 50
   posAmt: 5
   negAmt: -10
   neutralAmt: 2
+  fireEffectDuration: 5
+  iceEffectDuration: 5
+  snoopEffectDuration: 5
+  catEffectDuration: 5
+  fireDrainMultiplier: 1.5
+  iceDrainMultiplier: 0.5
+  snoopDrainMultiplier: 0.75
+  iceValueMultiplier: 0.7
+  holdChargeDeductionMultiplier: 0.5
+  fastScrollDeductionMultiplier: 0.5
+  fastScrollThreshold: 30
+  enableRainbow: 1
+  rainbowTargets:
+  - {fileID: 119995534}
+  rainbowCycleSpeed: 1
+  rainbowSaturation: 1
+  rainbowValue: 1
+  catHealPercent: 0.15
+  allowCatHealStacking: 1
+  enableSnoopTint: 1
+  snoopTintTargets:
+  - {fileID: 119995534}
+  snoopTintColor: {r: 0, g: 0.35, b: 0.1, a: 1}
+  enableFireTint: 1
+  fireTintTargets:
+  - {fileID: 119995534}
+  fireTintColor: {r: 1, g: 0.5, b: 0, a: 1}
+  enableIceTint: 1
+  iceTintTargets:
+  - {fileID: 119995534}
+  iceTintColor: {r: 0.2, g: 0.6, b: 1, a: 1}
+  enableSpaceInvaderTint: 1
+  spaceInvaderTintTargets:
+  - {fileID: 119995534}
+  spaceInvaderTintColor: {r: 0.6, g: 0.25, b: 0.8, a: 1}
 --- !u!114 &693593958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5636,7 +5673,7 @@ MonoBehaviour:
     _healAnim: 2
     _healAnimDuration: 0.5
     _healAnimDelay: 0.1
-    _healFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    _healFlashColor: {r: 0.88916916, g: 1, b: 0.84501344, a: 1}
     _healAnimStrength: 0
   editorMode: 1
   animations:

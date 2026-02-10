@@ -233,6 +233,21 @@ namespace Microlight.MicroBar
             }
             OnDefaultValuesSnapshot?.Invoke();
         }
+
+        /// <summary>
+        /// Updates heal flash opacity for simple mode bars. Returns false if not supported.
+        /// </summary>
+        public bool TrySetHealFlashAlpha(float alpha, out float previousAlpha)
+        {
+            previousAlpha = 1f;
+            if(editorMode != MicroBarEditorMode.Simple || simpleBar == null)
+            {
+                return false;
+            }
+
+            previousAlpha = simpleBar.SetHealFlashAlpha(alpha);
+            return true;
+        }
         #endregion
     }
 }

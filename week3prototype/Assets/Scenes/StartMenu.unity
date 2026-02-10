@@ -202,9 +202,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 653998198}
-        m_TargetAssemblyTypeName: GameMenusManager, Assembly-CSharp
-        m_MethodName: StartGame
+      - m_Target: {fileID: 653998200}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: PlayGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -418,7 +418,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 653998197}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8411896e4f4608f40ab22e1ce8c7ce37, type: 3}
   m_Name: 
@@ -426,6 +426,17 @@ MonoBehaviour:
   startButton: {fileID: 65776266}
   quitButton: {fileID: 855112101}
   holdToQuitTime: 1.5
+--- !u!114 &653998200 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1760273886407616983, guid: 19b744ee7ce32524aa5396611e8198d1, type: 3}
+  m_PrefabInstance: {fileID: 653998196}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653998197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c012861200a0e4fa77668f8afd90d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainMenu
 --- !u!1 &855112100
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,6 +800,7 @@ GameObject:
   - component: {fileID: 1447709821}
   - component: {fileID: 1447709820}
   - component: {fileID: 1447709819}
+  - component: {fileID: 1447709823}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -882,6 +894,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1447709823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447709818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d485bfa90182b94a89ab549e1a624e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuSpaceInput
+  menuRoot: {fileID: 1447709818}
+  primaryButton: {fileID: 65776266}
+  exitButton: {fileID: 855112101}
+  holdToExitTime: 1.5
 --- !u!1 &1466969935
 GameObject:
   m_ObjectHideFlags: 0

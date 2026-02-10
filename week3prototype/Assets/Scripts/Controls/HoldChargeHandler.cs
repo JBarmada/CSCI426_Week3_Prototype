@@ -64,8 +64,8 @@ public class HoldChargeHandler : MonoBehaviour
     public float flipstoSpawnInvaders = 2f; // How many flips before spawning invaders (e.g. 3 = on 6th charge)
     public bool bonusGameActive = false; // Flag to control if bonus game can be activated
     [Header("Post Specials")]
-    [Range(0f, 1f)]
-    public float spaceInvaderConversionRate = 0.05f;
+    // [Range(0f, 1f)]
+    // public float spaceInvaderConversionRate = 0.05f; // Moved to PostFXManager
 
 
     // --- Internal State ---
@@ -238,10 +238,19 @@ public class HoldChargeHandler : MonoBehaviour
                     }
                 }
                 screenFlipper.DoFlip();
-                if (scrollMechanic != null)
+                
+                // Convert posts based on PostFXManager rules
+                if (scrollMechanic != null && PostFXManager.Instance != null && PostFXManager.Instance.conversionRules != null)
                 {
-                    scrollMechanic.ConvertNegativeToSpecial(PostInfo.PostSpecial.SpaceInvader, spaceInvaderConversionRate);
+                    foreach (var rule in PostFXManager.Instance.conversionRules)
+                    {
+                        if (rule.addOnFlip && rule.flipRatio > 0f)
+                        {
+                            scrollMechanic.ConvertTypeToSpecial(rule.targetTypeToConvert, rule.specialType, rule.flipRatio);
+                        }
+                    }
                 }
+
                 flipEventCount++; 
                 if (enableEvolution && !hasEvolved)
                 {

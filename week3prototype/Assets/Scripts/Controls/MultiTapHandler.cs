@@ -46,7 +46,6 @@ public class MultiTapHandler : MonoBehaviour
     private Vector2 originalCanvasPos;
     private Coroutine shakeRoutine;
     private bool invaderMusicActive;
-    private AudioClip priorMusicClip;
 
     //dopamine manager testing 
     DopamineManager dopInstance;
@@ -224,9 +223,8 @@ public class MultiTapHandler : MonoBehaviour
             return;
         }
 
-        priorMusicClip = BackgroundMusic.Instance.CurrentClip;
         invaderMusicActive = true;
-        BackgroundMusic.Instance.CrossfadeMusic(spaceInvaderMusicClip, spaceInvaderMusicFadeDuration);
+        BackgroundMusic.Instance.PushTemporaryMusic(spaceInvaderMusicClip, spaceInvaderMusicFadeDuration);
     }
 
     private void HandleInvaderGameEnded(bool win)
@@ -235,17 +233,7 @@ public class MultiTapHandler : MonoBehaviour
         invaderMusicActive = false;
 
         if (BackgroundMusic.Instance == null) return;
-
-        if (priorMusicClip != null)
-        {
-            BackgroundMusic.Instance.CrossfadeMusic(priorMusicClip, spaceInvaderMusicFadeDuration);
-        }
-        else
-        {
-            BackgroundMusic.Instance.FadeIn(spaceInvaderMusicFadeDuration);
-        }
-
-        priorMusicClip = null;
+        BackgroundMusic.Instance.PopTemporaryMusic(spaceInvaderMusicClip, spaceInvaderMusicFadeDuration);
     }
 
     // --- Shake Logic ---

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BackgroundMusic : MonoBehaviour
@@ -10,6 +11,8 @@ public class BackgroundMusic : MonoBehaviour
     [Range(0f, 1f)] public float volume = 0.5f;
 
     private AudioSource _audioSource;
+    private Coroutine _activeFadeRoutine;
+    private readonly List<AudioClip> _temporaryStack = new List<AudioClip>();
 
     void Awake()
     {
@@ -57,22 +60,71 @@ public class BackgroundMusic : MonoBehaviour
         return _audioSource.clip == clip;
     }
 
+    public void PushTemporaryMusic(AudioClip clip, float duration = 1.0f)
+    {
+        if (_audioSource == null || clip == null) return;
+        if (IsPlayingClip(clip)) return;
+
+        _temporaryStack.Add(_audioSource.clip);
+        CrossfadeMusic(clip, duration);
+    }
+
+    public void PopTemporaryMusic(AudioClip clip, float duration = 1.0f)
+    {
+        if (_audioSource == null || clip == null) return;
+
+        if (IsPlayingClip(clip))
+        {
+            if (_temporaryStack.Count == 0) return;
+
+            AudioClip previous = _temporaryStack[_temporaryStack.Count - 1];
+            _temporaryStack.RemoveAt(_temporaryStack.Count - 1);
+
+            if (previous != null)
+            {
+                CrossfadeMusic(previous, duration);
+            }
+            else
+            {
+                if (_activeFadeRoutine != null) StopCoroutine(_activeFadeRoutine);
+                _audioSource.Stop();
+                _audioSource.clip = null;
+                _audioSource.volume = volume;
+            }
+        }
+        else
+        {
+            for (int i = _temporaryStack.Count - 1; i >= 0; i--)
+            {
+                if (_temporaryStack[i] == clip)
+                {
+                    _temporaryStack.RemoveAt(i);
+                    break;
+                }
+            }
+        }
+    }
+
     // --- NEW: Fading Logic ---
 
     public void FadeOut(float duration)
     {
-        StartCoroutine(FadeRoutine(0f, duration));
+        if (_activeFadeRoutine != null) StopCoroutine(_activeFadeRoutine);
+        _activeFadeRoutine = StartCoroutine(FadeRoutine(0f, duration));
     }
 
     public void FadeIn(float duration)
     {
-        StartCoroutine(FadeRoutine(volume, duration));
+        if (_activeFadeRoutine != null) StopCoroutine(_activeFadeRoutine);
+        _activeFadeRoutine = StartCoroutine(FadeRoutine(volume, duration));
     }
 
     public void CrossfadeMusic(AudioClip newClip, float duration = 1.0f)
     {
         if (newClip == _audioSource.clip) return; // Don't restart same song
-        StartCoroutine(CrossfadeRoutine(newClip, duration));
+        
+        if (_activeFadeRoutine != null) StopCoroutine(_activeFadeRoutine);
+        _activeFadeRoutine = StartCoroutine(CrossfadeRoutine(newClip, duration));
     }
 
     IEnumerator FadeRoutine(float targetVolume, float duration)
@@ -82,11 +134,14 @@ public class BackgroundMusic : MonoBehaviour
 
         while (elapsed < duration)
         {
+            if (_audioSource == null) yield break; // Safety check
+
             elapsed += Time.deltaTime;
             _audioSource.volume = Mathf.Lerp(startVol, targetVolume, elapsed / duration);
             yield return null;
         }
-        _audioSource.volume = targetVolume;
+        if (_audioSource != null) _audioSource.volume = targetVolume;
+        _activeFadeRoutine = null;
     }
 
     IEnumerator CrossfadeRoutine(AudioClip newClip, float duration)
@@ -97,10 +152,15 @@ public class BackgroundMusic : MonoBehaviour
         yield return FadeRoutine(0f, halfTime);
 
         // 2. Swap
-        _audioSource.clip = newClip;
-        _audioSource.Play();
+        if (_audioSource != null)
+        {
+            _audioSource.clip = newClip;
+            _audioSource.Play();
+        }
 
         // 3. Fade In
         yield return FadeRoutine(volume, halfTime);
+        
+        _activeFadeRoutine = null;
     }
 }

@@ -1,0 +1,458 @@
+fileFormatVersion: 2
+guid: e4aad8895e61d1346bd6c5fc3e9ee877
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -868411361075201775
+    second: nyan-cat_0
+  - first:
+      213: 1355019431568149991
+    second: nyan-cat_1
+  - first:
+      213: -1326382590522492712
+    second: nyan-cat_2
+  - first:
+      213: 7811864248825104328
+    second: nyan-cat_3
+  - first:
+      213: 3907924102332943891
+    second: nyan-cat_4
+  - first:
+      213: 3218526831219174506
+    second: nyan-cat_5
+  - first:
+      213: 2788291018176071994
+    second: nyan-cat_6
+  - first:
+      213: -431902125717327474
+    second: nyan-cat_7
+  - first:
+      213: 1826682257798866416
+    second: nyan-cat_8
+  - first:
+      213: 7345340963805793369
+    second: nyan-cat_9
+  - first:
+      213: 4706024701741785425
+    second: nyan-cat_10
+  - first:
+      213: 2101907942806491835
+    second: nyan-cat_11
+  - first:
+      213: 2491353799119843929
+    second: nyan-cat_12
+  - first:
+      213: 4627613448012257616
+    second: nyan-cat_13
+  - first:
+      213: 8107445986315413503
+    second: nyan-cat_14
+  - first:
+      213: -2289562285573607022
+    second: nyan-cat_15
+  - first:
+      213: -1816676732795760008
+    second: nyan-cat_16
+  - first:
+      213: -8190342702757968765
+    second: nyan-cat_17
+  - first:
+      213: 8171672233342676108
+    second: nyan-cat_18
+  - first:
+      213: 2686138877272256709
+    second: nyan-cat_19
+  - first:
+      213: -8603643118088491909
+    second: nyan-cat_20
+  - first:
+      213: 935100732694101774
+    second: nyan-cat_21
+  - first:
+      213: 2010919971183708690
+    second: nyan-cat_22
+  - first:
+      213: -1183707422132621552
+    second: nyan-cat_23
+  - first:
+      213: 5498367944564279337
+    second: nyan-cat_24
+  - first:
+      213: -8976422721953635111
+    second: nyan-cat_25
+  - first:
+      213: -7725027576505939132
+    second: nyan-cat_26
+  - first:
+      213: -1114489265803082267
+    second: nyan-cat_27
+  - first:
+      213: 6665770730037426990
+    second: nyan-cat_28
+  - first:
+      213: -8544543378889987411
+    second: nyan-cat_29
+  - first:
+      213: -6447282041178908562
+    second: nyan-cat_30
+  - first:
+      213: -2808396090486059897
+    second: nyan-cat_31
+  - first:
+      213: -5440450301459020444
+    second: nyan-cat_32
+  - first:
+      213: 8402340451814385065
+    second: nyan-cat_33
+  - first:
+      213: -4895757491638540468
+    second: nyan-cat_34
+  - first:
+      213: 736677217399630705
+    second: nyan-cat_35
+  - first:
+      213: -6173347928037106907
+    second: nyan-cat_36
+  - first:
+      213: 9153834861545288460
+    second: nyan-cat_37
+  - first:
+      213: 3109247767027407072
+    second: nyan-cat_38
+  - first:
+      213: 8541245568696801077
+    second: nyan-cat_39
+  - first:
+      213: 8697791335855816563
+    second: nyan-cat_40
+  - first:
+      213: -8657427971008397785
+    second: nyan-cat_41
+  - first:
+      213: -2274133354314794017
+    second: nyan-cat_42
+  - first:
+      213: -3197949949465950187
+    second: nyan-cat_43
+  - first:
+      213: -4607337493133121753
+    second: nyan-cat_44
+  - first:
+      213: 717608453175749095
+    second: nyan-cat_45
+  - first:
+      213: -7206575081120538402
+    second: nyan-cat_46
+  - first:
+      213: -7998447640477473262
+    second: nyan-cat_47
+  - first:
+      213: 6476757884796196030
+    second: nyan-cat_48
+  - first:
+      213: -6706119130205560981
+    second: nyan-cat_49
+  - first:
+      213: -1396148502674045934
+    second: nyan-cat_50
+  - first:
+      213: -6239286754593684764
+    second: nyan-cat_51
+  - first:
+      213: -7521646303519276164
+    second: nyan-cat_52
+  - first:
+      213: -72524084812757596
+    second: nyan-cat_53
+  - first:
+      213: -3994897010785729559
+    second: nyan-cat_54
+  - first:
+      213: -3888535749538022579
+    second: nyan-cat_55
+  - first:
+      213: -6376705485151073172
+    second: nyan-cat_56
+  - first:
+      213: 6720017233858568027
+    second: nyan-cat_57
+  - first:
+      213: 2305474510076960320
+    second: nyan-cat_58
+  - first:
+      213: -5982598283789911631
+    second: nyan-cat_59
+  - first:
+      213: -1997502512078349217
+    second: nyan-cat_60
+  - first:
+      213: -7561528032515145760
+    second: nyan-cat_61
+  - first:
+      213: 2979105144357694583
+    second: nyan-cat_62
+  - first:
+      213: 5048482717695847275
+    second: nyan-cat_63
+  - first:
+      213: 1690391993500106488
+    second: nyan-cat_64
+  - first:
+      213: 9085483756230613988
+    second: nyan-cat_65
+  - first:
+      213: 5749643162997512691
+    second: nyan-cat_66
+  - first:
+      213: 5862087203220549972
+    second: nyan-cat_67
+  - first:
+      213: -585957653020678005
+    second: nyan-cat_68
+  - first:
+      213: -7467741938571469208
+    second: nyan-cat_69
+  - first:
+      213: -4376573591347954398
+    second: nyan-cat_70
+  - first:
+      213: 642199867771702414
+    second: nyan-cat_71
+  - first:
+      213: 4456229349844643289
+    second: nyan-cat_72
+  - first:
+      213: -3546021732814245807
+    second: nyan-cat_73
+  - first:
+      213: 8587642729808561514
+    second: nyan-cat_74
+  - first:
+      213: -8477370848621882930
+    second: nyan-cat_75
+  - first:
+      213: 5037623011871638017
+    second: nyan-cat_76
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: nyan-cat_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1725
+        height: 800
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 119f238d778c2f3f0800000000000000
+      internalID: -868411361075201775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nyan-cat_1
+      rect:
+        serializedVersion: 2
+        x: 1725
+        y: 0
+        width: 1725
+        height: 800
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ed0f5a6efefdc210800000000000000
+      internalID: 1355019431568149991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nyan-cat_2
+      rect:
+        serializedVersion: 2
+        x: 3450
+        y: 0
+        width: 1725
+        height: 800
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d8f4a7bf0eb79de0800000000000000
+      internalID: -1326382590522492712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nyan-cat_3
+      rect:
+        serializedVersion: 2
+        x: 5175
+        y: 0
+        width: 1725
+        height: 800
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c74bc03521596c60800000000000000
+      internalID: 7811864248825104328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 87a49bd4b69372c4f8260779680328e8
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":1725.0,"y":800.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      nyan-cat_0: -868411361075201775
+      nyan-cat_1: 1355019431568149991
+      nyan-cat_2: -1326382590522492712
+      nyan-cat_3: 7811864248825104328
+      nyan-cat_4: 3907924102332943891
+      nyan-cat_5: 3218526831219174506
+      nyan-cat_6: 2788291018176071994
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -2585,7 +2585,7 @@ Transform:
   m_GameObject: {fileID: 574993025}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.64542, y: -1.62514, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4033,8 +4033,31 @@ MonoBehaviour:
     effectPrefab: {fileID: 3384366999043453948, guid: 7c19ad7a926fc084ea69d9ba4fedeeab, type: 3}
     effectSound: {fileID: 8300000, guid: e0b61cc9161cb254b985e29ad2b7235a, type: 3}
     parentToPost: 0
+    useShakeContainer: 0
     destroyDelay: 1
+  - special: 2
+    effectPrefab: {fileID: 5680953983370502749, guid: afcc159c20f2e8f44892fba0eee28e7a, type: 3}
+    effectSound: {fileID: 0}
+    parentToPost: 0
+    useShakeContainer: 1
+    destroyDelay: 5
+  conversionRules:
+  - name: SpaceInvader
+    specialType: 1
+    targetTypeToConvert: 2
+    addOnStart: 0
+    startRatio: 0.51
+    addOnFlip: 1
+    flipRatio: 0.5
+  - name: Cat
+    specialType: 2
+    targetTypeToConvert: 1
+    addOnStart: 1
+    startRatio: 0.84
+    addOnFlip: 1
+    flipRatio: 0.11
   audioSource: {fileID: 840196399}
+  shakeContainer: {fileID: 1581989729}
 --- !u!4 &840196398
 Transform:
   m_ObjectHideFlags: 0
@@ -6700,7 +6723,7 @@ MonoBehaviour:
   maxFontSize: 30
   isElastic: 0
   maxElastic: 50
-  inertiaSense: 0.4
+  inertiaSense: 0.5
   isCanUseMouseWheel: 1
   isInvertMouseWheel: 0
   mouseWheelSensibility: 0.5
@@ -10125,7 +10148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: evolvedTapPush
-      value: 10
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: maxChargeSound
@@ -10165,7 +10188,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 8019639e2e2f57f4e871e1fa684a05ba, type: 3}
     - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: evolvedInertiaSense
-      value: 0.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: flipstoSpawnInvaders

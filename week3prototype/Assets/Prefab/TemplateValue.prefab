@@ -132,12 +132,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Mechanics.PostInfo
   currentType: 0
-  targetImage: {fileID: 6631692673878510059}
+  currentSpecial: 0
+  targetImages: []
   alpha: 56
   blueAlpha: 100
-  goldProbability: 0.1
-  positiveProbability: 0.3
-  negativeProbability: 0.1
+  goldProbability: 0.05
+  positiveProbability: 0.1
+  negativeProbability: 0.5
 --- !u!1 &2488041822422771106
 GameObject:
   m_ObjectHideFlags: 0

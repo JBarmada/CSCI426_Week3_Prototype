@@ -173,6 +173,18 @@ public class NewScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeg
             }
         }
 
+        // Apply "Add On Start" rules from PostFXManager
+        if (PostFXManager.Instance != null && PostFXManager.Instance.conversionRules != null)
+        {
+             foreach (var rule in PostFXManager.Instance.conversionRules)
+             {
+                 if (rule.addOnStart && rule.startRatio > 0f)
+                 {
+                     ConvertTypeToSpecial(rule.targetTypeToConvert, rule.specialType, rule.startRatio);
+                 }
+             }
+        }
+
         contentSize.UpdateLayout();
         isInitialized = true;
     }
@@ -203,7 +215,7 @@ public class NewScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeg
         return contentTarget.GetChild(currentCenter).gameObject;
     }
 
-    public int ConvertNegativeToSpecial(PostInfo.PostSpecial special, float fraction)
+    public int ConvertTypeToSpecial(PostInfo.PostType targetType, PostInfo.PostSpecial special, float fraction)
     {
         if (contentTarget == null || fraction <= 0f) return 0;
 
@@ -212,7 +224,7 @@ public class NewScrollMechanic : MonoBehaviour, IDropHandler, IDragHandler, IBeg
         {
             var postInfo = contentTarget.GetChild(i).GetComponent<PostInfo>();
             if (postInfo == null) continue;
-            if (postInfo.currentType != PostInfo.PostType.Negative) continue;
+            if (postInfo.currentType != targetType) continue; 
             if (postInfo.currentSpecial != PostInfo.PostSpecial.None) continue;
             candidates.Add(postInfo);
         }

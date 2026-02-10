@@ -24,15 +24,35 @@ public class PostFXManager : MonoBehaviour
         public GameObject effectPrefab;
         public AudioClip effectSound;
         public bool parentToPost;
+        public bool useShakeContainer; // NEW: Spawn on shake container
         public float destroyDelay;
+    }
+
+    [System.Serializable]
+    public struct SpecialConversionRule
+    {
+        public string name; // purely for inspector organization
+        public PostInfo.PostSpecial specialType;
+        [Tooltip("Type of post to replace (e.g. Negative, Neutral)")]
+        public PostInfo.PostType targetTypeToConvert; 
+        
+        public bool addOnStart;
+        [Range(0f, 1f)] public float startRatio;
+
+        public bool addOnFlip;
+        [Range(0f, 1f)] public float flipRatio;
     }
 
     [Header("Configuration")]
     public List<TypeEffect> effectsList;
     public List<SpecialEffect> specialEffectsList;
+    public List<SpecialConversionRule> conversionRules;
+
 
     [Header("References")]
     public AudioSource audioSource; // Assign this in Inspector!
+    public Transform shakeContainer; // Assign or auto-detect
+
 
     // Internal dictionary for faster lookup, instead of looping through list every time
     private Dictionary<PostInfo.PostType, TypeEffect> effectsDict;
@@ -48,6 +68,16 @@ public class PostFXManager : MonoBehaviour
         {
             audioSource = GetComponent<AudioSource>();
             if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        // Auto-detect shake container if missing
+        if (shakeContainer == null)
+        {
+            var scrollMechanic = FindObjectOfType<NewScrollMechanic>();
+            if (scrollMechanic != null)
+            {
+                shakeContainer = scrollMechanic.targetCanvas; // Assuming targetCanvas is the shake container
+            }
         }
 
         // Build the dictionary
@@ -80,31 +110,45 @@ public class PostFXManager : MonoBehaviour
     {
         if (effectsDict.TryGetValue(type, out TypeEffect effectData))
         {
-            // 1. Play Sound (if exists)
-            if (effectData.effectSound != null && audioSource != null)
-            {
-                audioSource.PlayOneShot(effectData.effectSound);
-            }
+            GameObject instance = null;
 
-            // 2. Spawn Visual Effect (if exists)
+            // 1. Spawn Visual Effect (if exists)
             if (effectData.effectPrefab != null)
             {
-                // Determine parent
-                Transform parent = effectData.parentToPost ? targetTransform : targetTransform.root; // root is usually Canvas
+                Transform parent = effectData.parentToPost ? targetTransform : targetTransform.root;
+                instance = Instantiate(effectData.effectPrefab, parent);
                 
-                // Spawn
-                GameObject instance = Instantiate(effectData.effectPrefab, parent);
-                
-                // If not parented to post, we must manually set position to match target
                 if (!effectData.parentToPost)
                 {
                     instance.transform.position = targetTransform.position;
                 }
 
-                // Auto Destroy?
                 if (effectData.destroyDelay > 0f)
                 {
                     Destroy(instance, effectData.destroyDelay);
+                }
+            }
+
+            // 2. Play Sound (attached to instance if possible, so it stops on destroy)
+            if (effectData.effectSound != null)
+            {
+                if (instance != null)
+                {
+                    AudioSource instSource = instance.GetComponent<AudioSource>();
+                    if (instSource == null) instSource = instance.AddComponent<AudioSource>();
+                    
+                    // Copy basic settings from manager source
+                    if (audioSource != null)
+                    {
+                        instSource.volume = audioSource.volume;
+                        instSource.outputAudioMixerGroup = audioSource.outputAudioMixerGroup;
+                    }
+                    
+                    instSource.PlayOneShot(effectData.effectSound);
+                }
+                else if (audioSource != null)
+                {
+                    audioSource.PlayOneShot(effectData.effectSound);
                 }
             }
         }
@@ -117,17 +161,33 @@ public class PostFXManager : MonoBehaviour
 
         if (specialEffectsDict.TryGetValue(special, out SpecialEffect effectData))
         {
-            if (effectData.effectSound != null && audioSource != null)
-            {
-                audioSource.PlayOneShot(effectData.effectSound);
-            }
+            GameObject instance = null;
 
             if (effectData.effectPrefab != null)
             {
-                Transform parent = effectData.parentToPost ? targetTransform : targetTransform.root;
-                GameObject instance = Instantiate(effectData.effectPrefab, parent);
+                Transform parent = null;
 
-                if (!effectData.parentToPost)
+                if (effectData.parentToPost) 
+                {
+                    parent = targetTransform;
+                }
+                else if (effectData.useShakeContainer && shakeContainer != null) 
+                {
+                    parent = shakeContainer;
+                }
+                else 
+                {
+                    parent = targetTransform.root;
+                }
+
+                instance = Instantiate(effectData.effectPrefab, parent);
+
+                if (effectData.useShakeContainer)
+                {
+                    instance.transform.SetAsLastSibling();
+                }
+
+                if (!effectData.parentToPost && !effectData.useShakeContainer)
                 {
                     instance.transform.position = targetTransform.position;
                 }
@@ -135,6 +195,28 @@ public class PostFXManager : MonoBehaviour
                 if (effectData.destroyDelay > 0f)
                 {
                     Destroy(instance, effectData.destroyDelay);
+                }
+            }
+
+            // Play Sound on the instance to respect its lifecycle
+            if (effectData.effectSound != null)
+            {
+                if (instance != null)
+                {
+                    AudioSource instSource = instance.GetComponent<AudioSource>();
+                    if (instSource == null) instSource = instance.AddComponent<AudioSource>();
+                    
+                    if (audioSource != null)
+                    {
+                        instSource.volume = audioSource.volume;
+                        instSource.outputAudioMixerGroup = audioSource.outputAudioMixerGroup;
+                    }
+
+                    instSource.PlayOneShot(effectData.effectSound);
+                }
+                else if (audioSource != null)
+                {
+                    audioSource.PlayOneShot(effectData.effectSound);
                 }
             }
         }

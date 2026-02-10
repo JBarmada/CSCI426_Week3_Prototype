@@ -86,7 +86,7 @@ public class TapScrollHandler : MonoBehaviour
             spedUp = true;
             if (audioSource != null && speedUpSound != null)
                 audioSource.PlayOneShot(speedUpSound, speedUpVolume);
-            Debug.Log("[Tap] Speed UP");
+            Debug.Log("[Tap] Speed UP to " + speed);
         }
         else
         {
@@ -94,7 +94,7 @@ public class TapScrollHandler : MonoBehaviour
             spedUp = false;
             if (audioSource != null && slowDownSound != null)
                 audioSource.PlayOneShot(slowDownSound, slowDownVolume);
-            Debug.Log("[Tap] Slow DOWN");
+            Debug.Log("[Tap] Slow DOWN to " + speed);
         }
 
         scrollMechanic.Inertia = speed * direction;

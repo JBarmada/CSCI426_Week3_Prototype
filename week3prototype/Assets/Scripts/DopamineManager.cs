@@ -408,6 +408,8 @@ public class DopamineManager : MonoBehaviour
     {
         if (!rainbowActive) return;
         rainbowActive = false;
+        RefreshBaseBarVisuals();
+        tintCached = false;
     }
 
     private void UpdateVisualStates()
@@ -491,6 +493,14 @@ public class DopamineManager : MonoBehaviour
                 targets[i].color = tintOriginalColors[i];
             }
         }
+
+        RefreshBaseBarVisuals();
+    }
+
+    private void RefreshBaseBarVisuals()
+    {
+        if (dopBar == null) return;
+        dopBar.UpdateBar(dopBar.CurrentValue, true);
     }
 
     private IEnumerator CatHealRoutine(float duration)

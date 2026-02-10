@@ -3392,7 +3392,6 @@ GameObject:
   m_Component:
   - component: {fileID: 693593956}
   - component: {fileID: 693593957}
-  - component: {fileID: 693593958}
   - component: {fileID: 693593959}
   m_Layer: 0
   m_Name: DopamineManager
@@ -3433,7 +3432,7 @@ MonoBehaviour:
   constantDecOn: 1
   amtToConstDec: 7
   maxDopValue: 100
-  goldAmt: 50
+  goldAmt: 25
   posAmt: 5
   negAmt: -10
   neutralAmt: 2
@@ -3441,13 +3440,13 @@ MonoBehaviour:
   iceEffectDuration: 5
   snoopEffectDuration: 5
   catEffectDuration: 5
-  fireDrainMultiplier: 1.5
+  fireDrainMultiplier: 1.75
   iceDrainMultiplier: 0.5
   snoopDrainMultiplier: 0.75
   iceValueMultiplier: 0.7
   holdChargeDeductionMultiplier: 0.5
   fastScrollDeductionMultiplier: 0.5
-  fastScrollThreshold: 30
+  fastScrollThreshold: 20
   enableRainbow: 1
   rainbowTargets:
   - {fileID: 119995534}
@@ -3456,6 +3455,7 @@ MonoBehaviour:
   rainbowValue: 1
   catHealPercent: 0.15
   allowCatHealStacking: 1
+  skipCatHealAnimation: 1
   enableSnoopTint: 1
   snoopTintTargets:
   - {fileID: 119995534}
@@ -3472,21 +3472,6 @@ MonoBehaviour:
   spaceInvaderTintTargets:
   - {fileID: 119995534}
   spaceInvaderTintColor: {r: 0.6, g: 0.25, b: 0.8, a: 1}
---- !u!114 &693593958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693593954}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c258286569b0ca4caa4d4ef610d1221, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DopamineDecreaser
-  dopBar: {fileID: 1123049483}
-  constantDecOn: 1
-  amtToDec: 1
 --- !u!114 &693593959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9207,7 +9192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6251255081673306082, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: tapSpeedThreshold
-      value: 7
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 6272226424064685878, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: actionRef
@@ -9309,6 +9294,10 @@ PrefabInstance:
     - target: {fileID: 1920011739414336137, guid: b57cbfed7a045c140b4496215f5a7ed0, type: 3}
       propertyPath: m_Name
       value: ScrollSystemInfinite
+      objectReference: {fileID: 0}
+    - target: {fileID: 5601418132121223947, guid: b57cbfed7a045c140b4496215f5a7ed0, type: 3}
+      propertyPath: inertiaSense
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5601418132121223947, guid: b57cbfed7a045c140b4496215f5a7ed0, type: 3}
       propertyPath: targetCamera
@@ -9610,6 +9599,7 @@ SceneRoots:
   - {fileID: 99455787}
   - {fileID: 175786490}
   - {fileID: 840196398}
+  - {fileID: 693593956}
   - {fileID: 619394802}
   - {fileID: 692275969}
   - {fileID: 574993026}
@@ -9618,7 +9608,6 @@ SceneRoots:
   - {fileID: 712162774}
   - {fileID: 575608265}
   - {fileID: 5556583614088968820}
-  - {fileID: 693593956}
   - {fileID: 1611893486}
   - {fileID: 1555220994}
   - {fileID: 1621772311}

@@ -3409,6 +3409,7 @@ GameObject:
   - component: {fileID: 693593956}
   - component: {fileID: 693593957}
   - component: {fileID: 693593958}
+  - component: {fileID: 693593959}
   m_Layer: 0
   m_Name: DopamineManager
   m_TagString: Untagged
@@ -3444,7 +3445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DopamineManager
   dopBar: {fileID: 1123049483}
-  constantDecOn: 0
+  constantDecOn: 1
   amtToConstDec: 1
   goldAmt: 50
   posAmt: 10
@@ -3465,6 +3466,20 @@ MonoBehaviour:
   dopBar: {fileID: 1123049483}
   constantDecOn: 1
   amtToDec: 1
+--- !u!114 &693593959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693593954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19edea522226cea48be6d989fc6f475f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DopamineTracker
+  manager: {fileID: 693593957}
+  gameOverMenu: {fileID: 277631543}
 --- !u!1 &710248356
 GameObject:
   m_ObjectHideFlags: 0

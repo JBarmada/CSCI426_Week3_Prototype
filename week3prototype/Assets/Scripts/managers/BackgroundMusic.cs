@@ -13,6 +13,7 @@ public class BackgroundMusic : MonoBehaviour
     private AudioSource _audioSource;
     private Coroutine _activeFadeRoutine;
     private readonly List<TemporaryMusicState> _temporaryStack = new List<TemporaryMusicState>();
+    private readonly List<float> _pitchStack = new List<float>();
 
     private struct TemporaryMusicState
     {
@@ -57,6 +58,23 @@ public class BackgroundMusic : MonoBehaviour
     public void SetPitch(float pitch)
     {
         if (_audioSource != null) _audioSource.pitch = pitch;
+    }
+
+    public void PushPitch(float pitch)
+    {
+        if (_audioSource == null) return;
+        _pitchStack.Add(_audioSource.pitch);
+        _audioSource.pitch = pitch;
+    }
+
+    public void PopPitch()
+    {
+        if (_audioSource == null) return;
+        if (_pitchStack.Count == 0) return;
+
+        float previous = _pitchStack[_pitchStack.Count - 1];
+        _pitchStack.RemoveAt(_pitchStack.Count - 1);
+        _audioSource.pitch = previous;
     }
 
     public AudioClip CurrentClip

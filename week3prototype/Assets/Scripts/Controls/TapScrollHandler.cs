@@ -35,19 +35,35 @@ public class TapScrollHandler : MonoBehaviour
     private Vector2 originalCanvasPos;
     private Coroutine shakeRoutine;
 
-    void OnEnable() => actionRef.action.Enable();
-    void OnDisable() => actionRef.action.Disable();
+    void OnEnable()
+    {
+        if (actionRef != null)
+        {
+            actionRef.action.Enable();
+            actionRef.action.performed += OnTapPerformed;
+        }
+    }
+
+    void OnDisable()
+    {
+        if (actionRef != null)
+        {
+            actionRef.action.performed -= OnTapPerformed;
+            actionRef.action.Disable();
+        }
+    }
 
     void Start()
     {
          // Cache original canvas position once
         if (scrollMechanic != null && scrollMechanic.targetCanvas != null)
             originalCanvasPos = scrollMechanic.targetCanvas.anchoredPosition;
-        actionRef.action.performed += ctx =>
-        {
-            if (ctx.interaction is TapInteraction)
-                ProcessTap();
-        };
+    }
+
+    void OnTapPerformed(InputAction.CallbackContext ctx)
+    {
+        if (ctx.interaction is TapInteraction)
+            ProcessTap();
     }
 
     void ProcessTap()

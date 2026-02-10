@@ -59,11 +59,6 @@ public class MultiTapHandler : MonoBehaviour
         if (scrollMechanic != null && scrollMechanic.targetCanvas != null)
             originalCanvasPos = scrollMechanic.targetCanvas.anchoredPosition;
 
-        actionRef.action.performed += ctx =>
-        {
-            if (ctx.interaction is MultiTapInteraction)
-                DetermineAndLikeTarget();
-        };
     }
 
     private void Update()
@@ -85,14 +80,28 @@ public class MultiTapHandler : MonoBehaviour
 
     void OnEnable()
     {
-        actionRef.action.Enable();
+        if (actionRef != null)
+        {
+            actionRef.action.Enable();
+            actionRef.action.performed += OnMultiTapPerformed;
+        }
         RegisterInvaderGameEvents(true);
     }
 
     void OnDisable()
     {
-        actionRef.action.Disable();
+        if (actionRef != null)
+        {
+            actionRef.action.performed -= OnMultiTapPerformed;
+            actionRef.action.Disable();
+        }
         RegisterInvaderGameEvents(false);
+    }
+
+    void OnMultiTapPerformed(InputAction.CallbackContext ctx)
+    {
+        if (ctx.interaction is MultiTapInteraction)
+            DetermineAndLikeTarget();
     }
 
     private void DetermineAndLikeTarget()

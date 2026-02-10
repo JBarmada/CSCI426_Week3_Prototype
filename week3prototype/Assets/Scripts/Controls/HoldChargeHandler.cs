@@ -87,31 +87,49 @@ public class HoldChargeHandler : MonoBehaviour
     bool launchLoopWasPlaying;
 
 
-    void OnEnable() => actionRef.action.Enable();
-    void OnDisable() => actionRef.action.Disable();
+    void OnEnable()
+    {
+        if (actionRef != null)
+        {
+            actionRef.action.Enable();
+            actionRef.action.performed += OnHoldPerformed;
+            actionRef.action.canceled += OnHoldCanceled;
+        }
+    }
+
+    void OnDisable()
+    {
+        if (actionRef != null)
+        {
+            actionRef.action.performed -= OnHoldPerformed;
+            actionRef.action.canceled -= OnHoldCanceled;
+            actionRef.action.Disable();
+        }
+    }
 
     void Start()
     {
         originalCanvasPos = scrollMechanic.targetCanvas.anchoredPosition;
         originalCanvasScale = scrollMechanic.targetCanvas.localScale;
 
-        actionRef.action.performed += ctx =>
-        {
-            if (ctx.interaction is HoldInteraction)
-            {
-                Debug.Log("[Hold] Hold PERFORMED");
-                StartHold();
-            }
-        };
+    }
 
-        actionRef.action.canceled += _ =>
+    void OnHoldPerformed(InputAction.CallbackContext ctx)
+    {
+        if (ctx.interaction is HoldInteraction)
         {
-            if (isHolding)
-            {
-                Debug.Log("[Hold] Hold RELEASED");
-                ReleaseHold();
-            }
-        };
+            Debug.Log("[Hold] Hold PERFORMED");
+            StartHold();
+        }
+    }
+
+    void OnHoldCanceled(InputAction.CallbackContext ctx)
+    {
+        if (isHolding)
+        {
+            Debug.Log("[Hold] Hold RELEASED");
+            ReleaseHold();
+        }
     }
 
     void StartHold()

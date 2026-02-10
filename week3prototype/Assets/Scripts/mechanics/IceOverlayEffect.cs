@@ -24,7 +24,6 @@ namespace Mechanics
 
         private CanvasGroup _canvasGroup;
         private AudioSource _audioSource;
-        private float _previousMusicPitch = 1f;
         private bool _musicPitchAdjusted;
         private float _previousInertiaSense;
         private bool _inertiaAdjusted;
@@ -62,8 +61,8 @@ namespace Mechanics
 
             if (BackgroundMusic.Instance != null)
             {
-                _previousMusicPitch = BackgroundMusic.Instance.CurrentPitch;
-                BackgroundMusic.Instance.SetPitch(_previousMusicPitch * musicPitchMultiplier);
+                float targetPitch = BackgroundMusic.Instance.CurrentPitch * musicPitchMultiplier;
+                BackgroundMusic.Instance.PushPitch(targetPitch);
                 _musicPitchAdjusted = true;
             }
 
@@ -128,7 +127,7 @@ namespace Mechanics
         {
             if (BackgroundMusic.Instance != null && _musicPitchAdjusted)
             {
-                BackgroundMusic.Instance.SetPitch(_previousMusicPitch);
+                BackgroundMusic.Instance.PopPitch();
                 _musicPitchAdjusted = false;
             }
         }

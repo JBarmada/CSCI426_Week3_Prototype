@@ -1021,6 +1021,7 @@ GameObject:
   - component: {fileID: 204701091}
   - component: {fileID: 204701090}
   - component: {fileID: 204701089}
+  - component: {fileID: 204701092}
   m_Layer: 0
   m_Name: Menu Panel
   m_TagString: Untagged
@@ -1103,6 +1104,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 204701087}
   m_CullTransparentMesh: 1
+--- !u!114 &204701092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204701087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d485bfa90182b94a89ab549e1a624e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuSpaceInput
+  menuRoot: {fileID: 204701087}
+  primaryButton: {fileID: 661729943}
+  exitButton: {fileID: 521867390}
+  holdToExitTime: 1.5
 --- !u!1 &253817503
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,6 +1164,7 @@ GameObject:
   - component: {fileID: 277631545}
   - component: {fileID: 277631544}
   - component: {fileID: 277631543}
+  - component: {fileID: 277631546}
   m_Layer: 0
   m_Name: Menu Panel
   m_TagString: Untagged
@@ -1229,6 +1247,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 277631541}
   m_CullTransparentMesh: 1
+--- !u!114 &277631546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277631541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d485bfa90182b94a89ab549e1a624e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuSpaceInput
+  menuRoot: {fileID: 277631541}
+  primaryButton: {fileID: 914444839}
+  exitButton: {fileID: 1658676752}
+  holdToExitTime: 1.5
 --- !u!1 &278606558
 GameObject:
   m_ObjectHideFlags: 0
@@ -6514,6 +6548,7 @@ GameObject:
   - component: {fileID: 1267771182}
   - component: {fileID: 1267771181}
   - component: {fileID: 1267771179}
+  - component: {fileID: 1267771183}
   m_Layer: 0
   m_Name: Pause Panel
   m_TagString: Untagged
@@ -6595,6 +6630,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1267771178}
   m_CullTransparentMesh: 1
+--- !u!114 &1267771183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267771178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d485bfa90182b94a89ab549e1a624e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuSpaceInput
+  menuRoot: {fileID: 1267771178}
+  primaryButton: {fileID: 604001663}
+  exitButton: {fileID: 2143080938}
+  holdToExitTime: 1.5
 --- !u!1 &1273762965
 GameObject:
   m_ObjectHideFlags: 0

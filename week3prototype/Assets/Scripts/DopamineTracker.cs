@@ -23,6 +23,10 @@ public class DopamineTracker : MonoBehaviour
         {
             //throw up end screen 
             Debug.Log("GAME OVER");
+            if (GameMenusManager.Instance != null)
+            {
+                GameMenusManager.Instance.PauseForGameOver();
+            }
             gameOverMenu.Show(); 
 
             gameNotOverBefore = true; 

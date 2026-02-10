@@ -49,8 +49,8 @@ public class HoldChargeHandler : MonoBehaviour
     public AudioClip funMusicClip; // Assign "Fun" music here
     [Header("Gameplay Evolution")]
     public bool enableEvolution = true; // Flag to enable/disable this feature
-    public float evolvedInertiaSense = 0.2f; // New friction (very slippery)
-    public float evolvedTapPush = 20f; 
+    public float evolvedInertiaSense = 0.35f; // New friction (very slippery)
+    public float evolvedTapPush = 4f; 
 
     [Header("Hyperdrive FX")]
     public GameObject hyperdrivePrefab;
@@ -158,10 +158,7 @@ public class HoldChargeHandler : MonoBehaviour
         maxSoundPlayed = false;
         holdTimer = 0f;
         // FADE OUT CURRENT MUSIC
-        if(fullChargeCount >= 1)
-        {
-            fadeCheckRoutine = StartCoroutine(CheckMusicFade());
-        }
+        fadeCheckRoutine = StartCoroutine(CheckMusicFade());
         
         // Play buildup audio
         loopSource.Stop();
@@ -236,7 +233,7 @@ public class HoldChargeHandler : MonoBehaviour
 
             // CHECK EVEN NUMBER (2, 4, 6...)
             
-            if (screenFlipper != null && fullChargeCount % 2 == 0)
+            if (screenFlipper != null && fullChargeCount % 1 == 0)
             {
                  // MUSIC SWAP LOGIC
                 if (BackgroundMusic.Instance != null)
@@ -301,9 +298,6 @@ public class HoldChargeHandler : MonoBehaviour
                     }
                  }
             }
-            
-        
-
             
             if (activeHyperdrive != null) Destroy(activeHyperdrive);
             

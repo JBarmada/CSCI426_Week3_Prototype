@@ -5,6 +5,8 @@ namespace Mechanics
 {
     public class CatSwarmEffect : MonoBehaviour
     {
+        public static int ActiveCount;
+
         [Header("Settings")]
         [Tooltip("Prefab for the individual bouncing cat")]
         public GameObject catVisualPrefab;
@@ -12,9 +14,14 @@ namespace Mechanics
         public float effectDuration = 5.0f;
         public float musicFadeTime = 0.5f;
         public AudioClip nyanMusicClip;
+        public int goldRushThreshold = 4;
+        public float goldRushDuration = 5f;
+        public GoldRushEffect goldRushPrefab;
+        public bool debugForceGoldRush;
 
         private BackgroundMusic _music;
         private bool _musicPushed;
+        private bool _counted;
 
         void Start()
         {
@@ -35,8 +42,7 @@ namespace Mechanics
             {
                 if (nyanMusicClip != null)
                 {
-                    _music.PushTemporaryMusic(nyanMusicClip, musicFadeTime);
-                    _musicPushed = true;
+                    _musicPushed = _music.PushTemporaryMusic(nyanMusicClip, musicFadeTime);
                 }
                 else
                 {
@@ -46,6 +52,17 @@ namespace Mechanics
 
             // 3. Spawn Cats
             SpawnCats();
+
+            ActiveCount++;
+            _counted = true;
+            if (debugForceGoldRush || ActiveCount >= goldRushThreshold)
+            {
+                if (goldRushPrefab == null)
+                {
+                    Debug.LogWarning("CatSwarmEffect: No GoldRushEffect prefab assigned; using defaults.");
+                }
+                GoldRushEffect.Trigger(goldRushPrefab, goldRushDuration);
+            }
 
             // 4. Timer to die
             StartCoroutine(LifeCycleRoutine());
@@ -98,6 +115,12 @@ namespace Mechanics
             {
                 _music.PopTemporaryMusic(nyanMusicClip, musicFadeTime);
                 _musicPushed = false;
+            }
+
+            if (_counted)
+            {
+                ActiveCount = Mathf.Max(0, ActiveCount - 1);
+                _counted = false;
             }
         }
     }

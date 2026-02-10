@@ -41,8 +41,7 @@ namespace Mechanics
             {
                 _previousMusicVolume = _music.volume;
                 _music.SetVolume(snoopMusicVolume);
-                _music.PushTemporaryMusic(snoopMusicClip, musicFadeTime);
-                _musicPushed = true;
+                _musicPushed = _music.PushTemporaryMusic(snoopMusicClip, musicFadeTime);
             }
 
             if (effectDuration > 0f)

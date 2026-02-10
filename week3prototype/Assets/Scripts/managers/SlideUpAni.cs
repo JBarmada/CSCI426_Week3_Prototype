@@ -26,6 +26,12 @@ public class SlideUpPanel : MonoBehaviour
 
     public void Hide()
     {
+        if (!gameObject.activeInHierarchy)
+        {
+            panel.anchoredPosition = hiddenPos;
+            return;
+        }
+
         StartSlide(visiblePos, hiddenPos, () =>
         {
             gameObject.SetActive(false);

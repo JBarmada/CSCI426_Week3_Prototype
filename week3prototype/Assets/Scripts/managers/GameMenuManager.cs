@@ -93,9 +93,23 @@ public class GameMenusManager : MonoBehaviour
             pauseMenu.Hide();
     }
 
+    public void PauseForGameOver()
+    {
+        IsPaused = true;
+        Time.timeScale = 0f;
+
+        if (pauseMenu)
+            pauseMenu.Hide();
+    }
+
     public void RestartScene()
     {
+        IsPaused = false;
         Time.timeScale = 1f;
+        if (BackgroundMusic.Instance != null)
+        {
+            BackgroundMusic.Instance.RestartMusic();
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

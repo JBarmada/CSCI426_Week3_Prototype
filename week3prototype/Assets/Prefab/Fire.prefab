@@ -93,9 +93,9 @@ MonoBehaviour:
   fadeInDuration: 0.3
   effectDuration: 5
   scrollMechanic: {fileID: 0}
-  inertiaSenseMultiplier: 0.7
-  changeFraction: 0.6
-  negativeChance: 0.5
+  inertiaSenseMultiplier: 1.5
+  changeFraction: 0.35
+  negativeChance: 0.35
   fireLoopClip: {fileID: 8300000, guid: 6f52ce5963bb37f408142c97a0d19347, type: 3}
   fireVolume: 1
   musicPitchMultiplier: 1.32

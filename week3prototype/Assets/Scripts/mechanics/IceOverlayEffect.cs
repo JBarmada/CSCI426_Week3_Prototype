@@ -6,6 +6,7 @@ namespace Mechanics
 {
     public class IceOverlayEffect : MonoBehaviour
     {
+        public static IceOverlayEffect Active;
         [Header("Overlay")]
         public Graphic overlayGraphic;
         public float fadeInDuration = 0.3f;
@@ -27,6 +28,7 @@ namespace Mechanics
         private bool _musicPitchAdjusted;
         private float _previousInertiaSense;
         private bool _inertiaAdjusted;
+        private bool _isEnding;
 
         void Start()
         {
@@ -51,6 +53,13 @@ namespace Mechanics
             {
                 scrollMechanic = FindFirstObjectByType<NewScrollMechanic>();
             }
+
+            if (FireOverlayEffect.Active != null)
+            {
+                FireOverlayEffect.Active.ForceEnd();
+            }
+
+            Active = this;
 
             if (scrollMechanic != null)
             {
@@ -80,13 +89,13 @@ namespace Mechanics
 
             yield return new WaitForSeconds(effectDuration);
 
-            _audioSource.Stop();
+            if (_audioSource != null) _audioSource.Stop();
             yield return FadeCanvas(1f, 0f, fadeInDuration);
 
             RestoreMusicPitch();
             RestoreInertiaSense();
 
-            Destroy(gameObject);
+            EndAndDestroy();
         }
 
         IEnumerator FadeCanvas(float from, float to, float duration)
@@ -110,8 +119,37 @@ namespace Mechanics
 
         void OnDestroy()
         {
+            if (Active == this) Active = null;
             RestoreMusicPitch();
             RestoreInertiaSense();
+        }
+
+        public void ForceEnd()
+        {
+            if (_isEnding) return;
+            _isEnding = true;
+
+            StopAllCoroutines();
+
+            if (_audioSource != null) _audioSource.Stop();
+            _canvasGroup.alpha = 0f;
+
+            RestoreMusicPitch();
+            RestoreInertiaSense();
+
+            EndAndDestroy();
+        }
+
+        void EndAndDestroy()
+        {
+            if (_isEnding)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            _isEnding = true;
+            Destroy(gameObject);
         }
 
         void RestoreInertiaSense()

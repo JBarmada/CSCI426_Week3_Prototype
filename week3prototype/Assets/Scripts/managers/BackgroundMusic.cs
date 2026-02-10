@@ -87,6 +87,25 @@ public class BackgroundMusic : MonoBehaviour
         get { return _audioSource != null ? _audioSource.pitch : 1f; }
     }
 
+    public void RestartMusic()
+    {
+        if (_audioSource == null) return;
+
+        _temporaryStack.Clear();
+        _pitchStack.Clear();
+
+        _audioSource.Stop();
+        _audioSource.pitch = 1f;
+        _audioSource.volume = volume;
+        _audioSource.clip = musicClip;
+        _audioSource.time = 0f;
+
+        if (musicClip != null)
+        {
+            _audioSource.Play();
+        }
+    }
+
      // NEW HELPER
     public bool IsPlayingClip(AudioClip clip)
     {
@@ -94,10 +113,10 @@ public class BackgroundMusic : MonoBehaviour
         return _audioSource.clip == clip;
     }
 
-    public void PushTemporaryMusic(AudioClip clip, float duration = 1.0f)
+    public bool PushTemporaryMusic(AudioClip clip, float duration = 1.0f)
     {
-        if (_audioSource == null || clip == null) return;
-        if (IsPlayingClip(clip)) return;
+        if (_audioSource == null || clip == null) return false;
+        if (IsPlayingClip(clip)) return false;
 
         _temporaryStack.Add(new TemporaryMusicState
         {
@@ -105,6 +124,7 @@ public class BackgroundMusic : MonoBehaviour
             time = _audioSource.clip != null ? _audioSource.time : 0f
         });
         CrossfadeMusic(clip, duration);
+        return true;
     }
 
     public void PopTemporaryMusic(AudioClip clip, float duration = 1.0f)

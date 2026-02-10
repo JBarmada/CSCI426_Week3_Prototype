@@ -4433,7 +4433,7 @@ MonoBehaviour:
     addOnStart: 0
     startRatio: 0
     addOnFlip: 1
-    flipRatio: 0.2
+    flipRatio: 0.3
   - name: Cat
     specialType: 2
     targetTypeToConvert: 1
@@ -4446,22 +4446,22 @@ MonoBehaviour:
     targetTypeToConvert: 1
     addOnStart: 1
     startRatio: 0.3
-    addOnFlip: 0
-    flipRatio: 0.1
+    addOnFlip: 1
+    flipRatio: 0.05
   - name: Ice
     specialType: 3
     targetTypeToConvert: 0
     addOnStart: 1
     startRatio: 0.3
     addOnFlip: 1
-    flipRatio: 0.065
+    flipRatio: 0.05
   - name: Fire
     specialType: 4
     targetTypeToConvert: 2
     addOnStart: 1
     startRatio: 0.25
     addOnFlip: 1
-    flipRatio: 0.085
+    flipRatio: 0.08
   audioSource: {fileID: 840196399}
   shakeContainer: {fileID: 1581989729}
 --- !u!4 &840196398
@@ -9554,7 +9554,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: fc5af015011ea3745b7f78ea1dd1049f, type: 3}
     - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: maxHoldPower
-      value: 100
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: oneShotSource
@@ -9581,6 +9581,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: b9996a258ee565e46b38ffca6ba21d91, type: 3}
     - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: recoilDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: scrollMechanic
       value: 
       objectReference: {fileID: 1181148808}
@@ -9594,7 +9598,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 728d43b6b0df6d64b9d6b114e8799317, type: 3}
     - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: maxHoldDuration
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: hyperdrivePrefab

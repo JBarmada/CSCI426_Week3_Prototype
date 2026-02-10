@@ -93,7 +93,7 @@ MonoBehaviour:
   effectDuration: 5
   musicFadeTime: 0.5
   nyanMusicClip: {fileID: 8300000, guid: 663b4bb07a3d2a148b43cb18b910d918, type: 3}
-  goldRushThreshold: 4
+  goldRushThreshold: 3
   goldRushDuration: 5
   goldRushPrefab: {fileID: 2237183616406256168, guid: 687df69d82c6f53469e9d19e45c09936, type: 3}
   debugForceGoldRush: 0

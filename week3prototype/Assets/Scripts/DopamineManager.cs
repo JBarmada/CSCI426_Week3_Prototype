@@ -376,6 +376,19 @@ public class DopamineManager : MonoBehaviour
         return false;
     }
 
+    public int GetActiveSpecialCount(PostInfo.PostSpecial special)
+    {
+        int count = 0;
+        foreach (var effect in activeEffects)
+        {
+            if (effect.special == special)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
     private void StartRainbow()
     {
         if (!enableRainbow) return;

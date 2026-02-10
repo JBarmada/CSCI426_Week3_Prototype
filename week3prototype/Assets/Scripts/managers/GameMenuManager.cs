@@ -13,11 +13,16 @@ public class GameMenusManager : MonoBehaviour
     public AudioClip gameOverMusicClip;
     public float gameOverMusicFadeDuration = 0.5f;
 
+    [Header("Win Music")]
+    public AudioClip winMusicClip;
+    public float winMusicFadeDuration = 0.5f;
+
     [Header("State")]
     public bool IsPaused { get; private set; }
 
     private bool tabHeld;
     private bool gameOverMusicActive;
+    private bool winMusicActive;
 
     void Awake()
     {
@@ -107,12 +112,30 @@ public class GameMenusManager : MonoBehaviour
             pauseMenu.Hide();
     }
 
+    public void PauseForWin()
+    {
+        IsPaused = true;
+        Time.timeScale = 0f;
+
+        if (pauseMenu)
+            pauseMenu.Hide();
+    }
+
     public void PlayGameOverMusic()
     {
         if (!gameOverMusicActive && BackgroundMusic.Instance != null && gameOverMusicClip != null)
         {
             float duration = Time.timeScale == 0f ? 0f : gameOverMusicFadeDuration;
             gameOverMusicActive = BackgroundMusic.Instance.PushTemporaryMusic(gameOverMusicClip, duration);
+        }
+    }
+
+    public void PlayWinMusic()
+    {
+        if (!winMusicActive && BackgroundMusic.Instance != null && winMusicClip != null)
+        {
+            float duration = Time.timeScale == 0f ? 0f : winMusicFadeDuration;
+            winMusicActive = BackgroundMusic.Instance.PushTemporaryMusic(winMusicClip, duration);
         }
     }
 
@@ -125,6 +148,15 @@ public class GameMenusManager : MonoBehaviour
         }
     }
 
+    public void StopWinMusic()
+    {
+        if (winMusicActive && BackgroundMusic.Instance != null && winMusicClip != null)
+        {
+            BackgroundMusic.Instance.PopTemporaryMusic(winMusicClip, winMusicFadeDuration);
+            winMusicActive = false;
+        }
+    }
+
     public void RestartScene()
     {
         IsPaused = false;
@@ -132,6 +164,7 @@ public class GameMenusManager : MonoBehaviour
         if (BackgroundMusic.Instance != null)
         {
             StopGameOverMusic();
+            StopWinMusic();
             BackgroundMusic.Instance.RestartMusic();
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

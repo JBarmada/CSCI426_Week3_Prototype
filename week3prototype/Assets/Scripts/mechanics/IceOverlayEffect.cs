@@ -11,15 +11,21 @@ namespace Mechanics
         public float fadeInDuration = 0.3f;
         public float effectDuration = 5f;
 
+        [Header("Gameplay")]
+        public NewScrollMechanic scrollMechanic;
+        public float inertiaBoost = 20f;
+
         [Header("Audio")]
         public AudioClip frostLoopClip;
         public float frostVolume = 1f;
 
         [Header("Music")]
-        public float musicFadeTime = 0.5f;
+        [Range(0.1f, 2f)] public float musicPitchMultiplier = 0.7f;
 
         private CanvasGroup _canvasGroup;
         private AudioSource _audioSource;
+        private float _previousMusicPitch = 1f;
+        private bool _musicPitchAdjusted;
 
         void Start()
         {
@@ -40,9 +46,16 @@ namespace Mechanics
             _audioSource.loop = true;
             _audioSource.volume = frostVolume;
 
+            if (scrollMechanic != null)
+            {
+                scrollMechanic.AddInertia(inertiaBoost);
+            }
+
             if (BackgroundMusic.Instance != null)
             {
-                BackgroundMusic.Instance.FadeOut(musicFadeTime);
+                _previousMusicPitch = BackgroundMusic.Instance.CurrentPitch;
+                BackgroundMusic.Instance.SetPitch(_previousMusicPitch * musicPitchMultiplier);
+                _musicPitchAdjusted = true;
             }
 
             StartCoroutine(EffectRoutine());
@@ -59,13 +72,10 @@ namespace Mechanics
 
             yield return new WaitForSeconds(effectDuration);
 
-            if (BackgroundMusic.Instance != null)
-            {
-                BackgroundMusic.Instance.FadeIn(musicFadeTime);
-            }
-
             _audioSource.Stop();
             yield return FadeCanvas(1f, 0f, fadeInDuration);
+
+            RestoreMusicPitch();
 
             Destroy(gameObject);
         }
@@ -87,6 +97,20 @@ namespace Mechanics
                 yield return null;
             }
             _canvasGroup.alpha = to;
+        }
+
+        void OnDestroy()
+        {
+            RestoreMusicPitch();
+        }
+
+        void RestoreMusicPitch()
+        {
+            if (BackgroundMusic.Instance != null && _musicPitchAdjusted)
+            {
+                BackgroundMusic.Instance.SetPitch(_previousMusicPitch);
+                _musicPitchAdjusted = false;
+            }
         }
     }
 }

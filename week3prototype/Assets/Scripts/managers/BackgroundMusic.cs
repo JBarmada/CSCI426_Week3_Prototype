@@ -54,9 +54,19 @@ public class BackgroundMusic : MonoBehaviour
         if (_audioSource != null) _audioSource.volume = volume;
     }
 
+    public void SetPitch(float pitch)
+    {
+        if (_audioSource != null) _audioSource.pitch = pitch;
+    }
+
     public AudioClip CurrentClip
     {
         get { return _audioSource != null ? _audioSource.clip : null; }
+    }
+
+    public float CurrentPitch
+    {
+        get { return _audioSource != null ? _audioSource.pitch : 1f; }
     }
 
      // NEW HELPER

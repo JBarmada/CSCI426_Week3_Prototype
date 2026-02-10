@@ -1782,6 +1782,8 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1907,6 +1909,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9044ef733a99ffa4aa7a986bb5e9a7f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FrostEffect
+  FrostAmount: 0.5
+  EdgeSharpness: 1
+  minFrost: 0
+  maxFrost: 1
+  seethroughness: 0.2
+  distortion: 0.1
+  Frost: {fileID: 2800000, guid: 210743b88c99bcf45b28c3a4a4a3e178, type: 3}
+  FrostNormals: {fileID: 2800000, guid: 065247d136abaa042a330ab6a7b030fc, type: 3}
+  Shader: {fileID: 4800000, guid: db8aebe950ae3794aae5ed890f38549b, type: 3}
+  material: {fileID: 0}
+--- !u!124 &519420034
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
 --- !u!1 &521867388
 GameObject:
   m_ObjectHideFlags: 0
@@ -4062,6 +4094,12 @@ MonoBehaviour:
     parentToPost: 0
     useShakeContainer: 1
     destroyDelay: 5
+  - special: 3
+    effectPrefab: {fileID: 5810078952412985449, guid: 6ef2847ff886e7845a6d3f9df07895bc, type: 3}
+    effectSound: {fileID: 8300000, guid: 562d47c8848dd4f4ab666e9c457776e6, type: 3}
+    parentToPost: 0
+    useShakeContainer: 1
+    destroyDelay: 5
   conversionRules:
   - name: SpaceInvader
     specialType: 1
@@ -4084,6 +4122,13 @@ MonoBehaviour:
     startRatio: 0.5
     addOnFlip: 1
     flipRatio: 0.11
+  - name: Ice
+    specialType: 3
+    targetTypeToConvert: 0
+    addOnStart: 1
+    startRatio: 0.5
+    addOnFlip: 1
+    flipRatio: 0.2
   audioSource: {fileID: 840196399}
   shakeContainer: {fileID: 1581989729}
 --- !u!4 &840196398

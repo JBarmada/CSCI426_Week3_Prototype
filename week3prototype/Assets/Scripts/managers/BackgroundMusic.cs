@@ -12,7 +12,13 @@ public class BackgroundMusic : MonoBehaviour
 
     private AudioSource _audioSource;
     private Coroutine _activeFadeRoutine;
-    private readonly List<AudioClip> _temporaryStack = new List<AudioClip>();
+    private readonly List<TemporaryMusicState> _temporaryStack = new List<TemporaryMusicState>();
+
+    private struct TemporaryMusicState
+    {
+        public AudioClip clip;
+        public float time;
+    }
 
     void Awake()
     {
@@ -65,7 +71,11 @@ public class BackgroundMusic : MonoBehaviour
         if (_audioSource == null || clip == null) return;
         if (IsPlayingClip(clip)) return;
 
-        _temporaryStack.Add(_audioSource.clip);
+        _temporaryStack.Add(new TemporaryMusicState
+        {
+            clip = _audioSource.clip,
+            time = _audioSource.clip != null ? _audioSource.time : 0f
+        });
         CrossfadeMusic(clip, duration);
     }
 
@@ -77,12 +87,12 @@ public class BackgroundMusic : MonoBehaviour
         {
             if (_temporaryStack.Count == 0) return;
 
-            AudioClip previous = _temporaryStack[_temporaryStack.Count - 1];
+            TemporaryMusicState previous = _temporaryStack[_temporaryStack.Count - 1];
             _temporaryStack.RemoveAt(_temporaryStack.Count - 1);
 
-            if (previous != null)
+            if (previous.clip != null)
             {
-                CrossfadeMusic(previous, duration);
+                StartCrossfade(previous.clip, duration, previous.time);
             }
             else
             {
@@ -96,7 +106,7 @@ public class BackgroundMusic : MonoBehaviour
         {
             for (int i = _temporaryStack.Count - 1; i >= 0; i--)
             {
-                if (_temporaryStack[i] == clip)
+                if (_temporaryStack[i].clip == clip)
                 {
                     _temporaryStack.RemoveAt(i);
                     break;
@@ -122,9 +132,13 @@ public class BackgroundMusic : MonoBehaviour
     public void CrossfadeMusic(AudioClip newClip, float duration = 1.0f)
     {
         if (newClip == _audioSource.clip) return; // Don't restart same song
-        
+        StartCrossfade(newClip, duration, 0f);
+    }
+
+    private void StartCrossfade(AudioClip newClip, float duration, float startTime)
+    {
         if (_activeFadeRoutine != null) StopCoroutine(_activeFadeRoutine);
-        _activeFadeRoutine = StartCoroutine(CrossfadeRoutine(newClip, duration));
+        _activeFadeRoutine = StartCoroutine(CrossfadeRoutine(newClip, duration, startTime));
     }
 
     IEnumerator FadeRoutine(float targetVolume, float duration)
@@ -144,7 +158,7 @@ public class BackgroundMusic : MonoBehaviour
         _activeFadeRoutine = null;
     }
 
-    IEnumerator CrossfadeRoutine(AudioClip newClip, float duration)
+    IEnumerator CrossfadeRoutine(AudioClip newClip, float duration, float startTime)
     {
         float halfTime = duration / 2f;
 
@@ -155,6 +169,11 @@ public class BackgroundMusic : MonoBehaviour
         if (_audioSource != null)
         {
             _audioSource.clip = newClip;
+            if (newClip != null)
+            {
+                float clampedTime = Mathf.Clamp(startTime, 0f, newClip.length - 0.01f);
+                _audioSource.time = clampedTime;
+            }
             _audioSource.Play();
         }
 

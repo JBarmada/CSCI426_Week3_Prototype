@@ -9,6 +9,9 @@ namespace Mechanics
     public class FireOverlayEffect : MonoBehaviour
     {
         public static FireOverlayEffect Active;
+        private static int _activeCount;
+        private static float _cachedInertiaSense;
+        private static bool _hasCachedInertiaSense;
         [Header("Overlay")]
         public Graphic overlayGraphic;
         public float fadeInDuration = 0.3f;
@@ -36,6 +39,7 @@ namespace Mechanics
         private bool _inertiaAdjusted;
         private Dictionary<PostInfo, PostInfo.PostType> _originalTypes;
         private bool _isEnding;
+        private bool _registeredInertia;
 
         void Start()
         {
@@ -70,8 +74,16 @@ namespace Mechanics
 
             if (scrollMechanic != null)
             {
-                _previousInertiaSense = scrollMechanic.inertiaSense;
-                scrollMechanic.inertiaSense = _previousInertiaSense * inertiaSenseMultiplier;
+                if (!_hasCachedInertiaSense)
+                {
+                    _cachedInertiaSense = scrollMechanic.inertiaSense;
+                    _hasCachedInertiaSense = true;
+                }
+
+                _previousInertiaSense = _cachedInertiaSense;
+                _activeCount++;
+                _registeredInertia = true;
+                scrollMechanic.inertiaSense = Mathf.Max(_previousInertiaSense * inertiaSenseMultiplier, 0.25f);
                 _inertiaAdjusted = true;
             }
 
@@ -238,8 +250,17 @@ namespace Mechanics
         {
             if (scrollMechanic != null && _inertiaAdjusted)
             {
-                scrollMechanic.inertiaSense = _previousInertiaSense;
                 _inertiaAdjusted = false;
+                if (_registeredInertia)
+                {
+                    _registeredInertia = false;
+                    _activeCount = Mathf.Max(0, _activeCount - 1);
+                    if (_activeCount == 0 && _hasCachedInertiaSense)
+                    {
+                        scrollMechanic.inertiaSense = _cachedInertiaSense;
+                        _hasCachedInertiaSense = false;
+                    }
+                }
             }
         }
 

@@ -7,6 +7,9 @@ namespace Mechanics
     public class IceOverlayEffect : MonoBehaviour
     {
         public static IceOverlayEffect Active;
+        private static int _activeCount;
+        private static float _cachedInertiaSense;
+        private static bool _hasCachedInertiaSense;
         [Header("Overlay")]
         public Graphic overlayGraphic;
         public float fadeInDuration = 0.3f;
@@ -29,6 +32,7 @@ namespace Mechanics
         private float _previousInertiaSense;
         private bool _inertiaAdjusted;
         private bool _isEnding;
+        private bool _registeredInertia;
 
         void Start()
         {
@@ -63,8 +67,16 @@ namespace Mechanics
 
             if (scrollMechanic != null)
             {
-                _previousInertiaSense = scrollMechanic.inertiaSense;
-                scrollMechanic.inertiaSense = _previousInertiaSense * inertiaSenseMultiplier;
+                if (!_hasCachedInertiaSense)
+                {
+                    _cachedInertiaSense = scrollMechanic.inertiaSense;
+                    _hasCachedInertiaSense = true;
+                }
+
+                _previousInertiaSense = _cachedInertiaSense;
+                _activeCount++;
+                _registeredInertia = true;
+                scrollMechanic.inertiaSense = Mathf.Min(_previousInertiaSense * inertiaSenseMultiplier, 3f);
                 _inertiaAdjusted = true;
             }
 
@@ -156,8 +168,17 @@ namespace Mechanics
         {
             if (scrollMechanic != null && _inertiaAdjusted)
             {
-                scrollMechanic.inertiaSense = _previousInertiaSense;
                 _inertiaAdjusted = false;
+                if (_registeredInertia)
+                {
+                    _registeredInertia = false;
+                    _activeCount = Mathf.Max(0, _activeCount - 1);
+                    if (_activeCount == 0 && _hasCachedInertiaSense)
+                    {
+                        scrollMechanic.inertiaSense = _cachedInertiaSense;
+                        _hasCachedInertiaSense = false;
+                    }
+                }
             }
         }
 

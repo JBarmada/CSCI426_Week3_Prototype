@@ -443,6 +443,7 @@ GameObject:
   m_Component:
   - component: {fileID: 77028706}
   - component: {fileID: 77028705}
+  - component: {fileID: 77028707}
   m_Layer: 0
   m_Name: GameWinTimer
   m_TagString: Untagged
@@ -465,6 +466,13 @@ MonoBehaviour:
   winTimeSeconds: 90
   dopamineManager: {fileID: 693593957}
   winMenu: {fileID: 204701089}
+  winSfxSource: {fileID: 77028707}
+  winSfxClip: {fileID: 8300000, guid: c4ebc449c4548604eb92b82bbad7666b, type: 3}
+  winHitStopDuration: 1
+  winPanelSlideDuration: 1.2
+  lowTimeClip: {fileID: 8300000, guid: cab62dd74c8a98d44a79b2200945bac7, type: 3}
+  lowTimeVolume: 0.7
+  lowTimeThresholdSeconds: 5
   timerText: {fileID: 883498571}
 --- !u!4 &77028706
 Transform:
@@ -481,6 +489,103 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &77028707
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77028704}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &99455785
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,7 +1418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlideUpPanel
   panel: {fileID: 204701088}
-  slideDuration: 0.4
+  slideDuration: 1.2
 --- !u!114 &204701090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4706,8 +4811,8 @@ MonoBehaviour:
   gameOverPanelSlideDuration: 1.2
   gameOverMusicFadeOutDuration: 0.15
   lowDopamineClip: {fileID: 8300000, guid: bfa0a43285643af40a401771bbae58bb, type: 3}
-  lowDopamineVolume: 0.58
-  lowDopamineThresholdPercent: 0.2
+  lowDopamineVolume: 0.7
+  lowDopamineThresholdPercent: 0.3
   lowDopamineCooldown: 2
 --- !u!82 &693593960
 AudioSource:
@@ -8853,6 +8958,7 @@ MonoBehaviour:
   effectsSources:
   - {fileID: 840196399}
   - {fileID: 693593960}
+  - {fileID: 77028707}
   interactionSources:
   - {fileID: 554749495}
   - {fileID: 554749495}

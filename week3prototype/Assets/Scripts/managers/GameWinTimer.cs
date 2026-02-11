@@ -55,7 +55,8 @@ public class GameWinTimer : MonoBehaviour
         if (timerText == null) return;
 
         float remaining = Mathf.Max(0f, winTimeSeconds - elapsed);
-        int seconds = Mathf.CeilToInt(remaining);
-        timerText.text = seconds.ToString();
-    }
+        int minutes = Mathf.FloorToInt(remaining / 60);
+        int seconds = Mathf.CeilToInt(remaining % 60);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    } 
 }

@@ -12821,6 +12821,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
+      propertyPath: holdChargeText
+      value: 
+      objectReference: {fileID: 2083791273}
+    - target: {fileID: 2410560930230008884, guid: 21a59cc5bc35afa4089c45abd2a3d91f, type: 3}
       propertyPath: maxChargeSound
       value: 
       objectReference: {fileID: 8300000, guid: b9996a258ee565e46b38ffca6ba21d91, type: 3}

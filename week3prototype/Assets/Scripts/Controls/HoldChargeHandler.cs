@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 using Mechanics;
+using TMPro;
 
 /// <summary>
 /// Handles HOLD interaction:
@@ -45,6 +46,14 @@ public class HoldChargeHandler : MonoBehaviour
     public AudioClip launchSound;
 
     [Range(1f, 3f)] public float maxChargePitch = 2f;
+
+    [Header("Hold Charge Text")]
+    public TMP_Text holdChargeText;
+    public Color holdChargeBaseColor = Color.white;
+    public Color holdChargeFillColor = new Color(0.2f, 0.6f, 1f, 1f);
+    public Color fullChargeBlinkColorA = Color.white;
+    public Color fullChargeBlinkColorB = new Color(0.2f, 0.6f, 1f, 1f);
+    public float fullChargeBlinkSpeed = 6f;
     [Header("Music Switch")]
     public AudioClip funMusicClip; // Assign "Fun" music here
     [Header("Gameplay Evolution")]
@@ -430,10 +439,16 @@ public class HoldChargeHandler : MonoBehaviour
                 }
             }
         }
-        if (!isHolding) return;
+        if (!isHolding)
+        {
+            UpdateHoldChargeTextVisual(0f);
+            return;
+        }
 
         holdTimer += Time.deltaTime;
         float ratio = Mathf.Clamp01(holdTimer / maxHoldDuration);
+
+        UpdateHoldChargeTextVisual(ratio);
 
         // --- Visuals ---
         Vector3 targetScale = originalCanvasScale * zoomAmount;
@@ -464,6 +479,68 @@ public class HoldChargeHandler : MonoBehaviour
         {
             maxSoundPlayed = true;
             oneShotSource.PlayOneShot(maxChargeSound);
+        }
+    }
+
+    private void UpdateHoldChargeTextVisual(float ratio)
+    {
+        if (holdChargeText == null) return;
+
+        holdChargeText.ForceMeshUpdate();
+        TMP_TextInfo textInfo = holdChargeText.textInfo;
+        if (textInfo.characterCount == 0) return;
+
+        if (ratio >= 1f)
+        {
+            float blinkT = (Mathf.Sin(Time.unscaledTime * fullChargeBlinkSpeed) + 1f) * 0.5f;
+            Color32 blinkColor = Color.Lerp(fullChargeBlinkColorA, fullChargeBlinkColorB, blinkT);
+
+            for (int meshIndex = 0; meshIndex < textInfo.meshInfo.Length; meshIndex++)
+            {
+                Color32[] colors = textInfo.meshInfo[meshIndex].colors32;
+                for (int i = 0; i < colors.Length; i++)
+                {
+                    colors[i] = blinkColor;
+                }
+                textInfo.meshInfo[meshIndex].mesh.colors32 = colors;
+                holdChargeText.UpdateGeometry(textInfo.meshInfo[meshIndex].mesh, meshIndex);
+            }
+            return;
+        }
+
+        float minX = float.MaxValue;
+        float maxX = float.MinValue;
+        for (int i = 0; i < textInfo.characterCount; i++)
+        {
+            TMP_CharacterInfo charInfo = textInfo.characterInfo[i];
+            if (!charInfo.isVisible) continue;
+            Vector3[] verts = textInfo.meshInfo[charInfo.materialReferenceIndex].vertices;
+            int vIndex = charInfo.vertexIndex;
+            minX = Mathf.Min(minX, verts[vIndex + 0].x, verts[vIndex + 1].x, verts[vIndex + 2].x, verts[vIndex + 3].x);
+            maxX = Mathf.Max(maxX, verts[vIndex + 0].x, verts[vIndex + 1].x, verts[vIndex + 2].x, verts[vIndex + 3].x);
+        }
+
+        float fillX = Mathf.Lerp(minX, maxX, ratio);
+        Color32 baseColor32 = holdChargeBaseColor;
+        Color32 fillColor32 = holdChargeFillColor;
+
+        for (int i = 0; i < textInfo.characterCount; i++)
+        {
+            TMP_CharacterInfo charInfo = textInfo.characterInfo[i];
+            if (!charInfo.isVisible) continue;
+
+            int meshIndex = charInfo.materialReferenceIndex;
+            int vIndex = charInfo.vertexIndex;
+            Vector3[] verts = textInfo.meshInfo[meshIndex].vertices;
+            Color32[] colors = textInfo.meshInfo[meshIndex].colors32;
+
+            for (int v = 0; v < 4; v++)
+            {
+                colors[vIndex + v] = verts[vIndex + v].x <= fillX ? fillColor32 : baseColor32;
+            }
+
+            textInfo.meshInfo[meshIndex].mesh.colors32 = colors;
+            holdChargeText.UpdateGeometry(textInfo.meshInfo[meshIndex].mesh, meshIndex);
         }
     }
 

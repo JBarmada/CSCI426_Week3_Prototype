@@ -4,6 +4,11 @@ using UnityEngine.UI;
 
 public class PauseMenuAudioSlider : MonoBehaviour
 {
+    private const string MusicVolumeKey = "Audio.MusicVolume";
+    private const string ScrollVolumeKey = "Audio.ScrollVolume";
+    private const string EffectsVolumeKey = "Audio.EffectsVolume";
+    private const string InteractionVolumeKey = "Audio.InteractionVolume";
+
     [Header("UI")]
     public Slider volumeSlider;
     public Slider musicSlider;
@@ -30,9 +35,21 @@ public class PauseMenuAudioSlider : MonoBehaviour
 
     void Awake()
     {
-        scrollHandler = value => ApplyCategoryVolume(value, scrollSources, scrollBaseVolumes);
-        effectsHandler = value => ApplyCategoryVolume(value, effectsSources, effectsBaseVolumes);
-        interactionHandler = value => ApplyCategoryVolume(value, interactionSources, interactionBaseVolumes);
+        scrollHandler = value =>
+        {
+            ApplyCategoryVolume(value, scrollSources, scrollBaseVolumes);
+            SaveFloat(ScrollVolumeKey, value);
+        };
+        effectsHandler = value =>
+        {
+            ApplyCategoryVolume(value, effectsSources, effectsBaseVolumes);
+            SaveFloat(EffectsVolumeKey, value);
+        };
+        interactionHandler = value =>
+        {
+            ApplyCategoryVolume(value, interactionSources, interactionBaseVolumes);
+            SaveFloat(InteractionVolumeKey, value);
+        };
 
         CacheBaseVolumes(scrollSources, scrollBaseVolumes);
         CacheBaseVolumes(effectsSources, effectsBaseVolumes);
@@ -40,8 +57,18 @@ public class PauseMenuAudioSlider : MonoBehaviour
 
         if (BackgroundMusic.Instance != null)
         {
-            musicBaseVolume = BackgroundMusic.Instance.volume;
+            float savedMusicValue = PlayerPrefs.GetFloat(MusicVolumeKey, 1f);
+            if (PlayerPrefs.HasKey(MusicVolumeKey) && savedMusicValue > 0f)
+            {
+                musicBaseVolume = BackgroundMusic.Instance.volume / savedMusicValue;
+            }
+            else
+            {
+                musicBaseVolume = BackgroundMusic.Instance.volume;
+            }
         }
+
+        ApplySavedValues();
     }
 
     void OnEnable()
@@ -84,7 +111,11 @@ public class PauseMenuAudioSlider : MonoBehaviour
     private void HandleMusicChanged(float value)
     {
         if (BackgroundMusic.Instance == null) return;
-        BackgroundMusic.Instance.SetVolume(musicBaseVolume * Mathf.Clamp01(value));
+        float clamped = Mathf.Clamp01(value);
+        BackgroundMusic.Instance.SetVolume(musicBaseVolume * clamped);
+        SetSliderValue(volumeSlider, clamped);
+        SetSliderValue(musicSlider, clamped);
+        SaveFloat(MusicVolumeKey, clamped);
     }
 
     private void ApplyCategoryVolume(float value, List<AudioSource> sources, Dictionary<AudioSource, float> baseVolumes)
@@ -105,6 +136,29 @@ public class PauseMenuAudioSlider : MonoBehaviour
 
             source.volume = baseVolume * clamped;
         }
+    }
+
+    private void ApplySavedValues()
+    {
+        float savedMusic = PlayerPrefs.GetFloat(MusicVolumeKey, 1f);
+        float savedScroll = PlayerPrefs.GetFloat(ScrollVolumeKey, 1f);
+        float savedEffects = PlayerPrefs.GetFloat(EffectsVolumeKey, 1f);
+        float savedInteraction = PlayerPrefs.GetFloat(InteractionVolumeKey, 1f);
+
+        if (BackgroundMusic.Instance != null)
+        {
+            BackgroundMusic.Instance.SetVolume(musicBaseVolume * Mathf.Clamp01(savedMusic));
+        }
+
+        ApplyCategoryVolume(savedScroll, scrollSources, scrollBaseVolumes);
+        ApplyCategoryVolume(savedEffects, effectsSources, effectsBaseVolumes);
+        ApplyCategoryVolume(savedInteraction, interactionSources, interactionBaseVolumes);
+
+        SetSliderValue(volumeSlider, savedMusic);
+        SetSliderValue(musicSlider, savedMusic);
+        SetSliderValue(scrollSlider, savedScroll);
+        SetSliderValue(effectsSlider, savedEffects);
+        SetSliderValue(interactionSlider, savedInteraction);
     }
 
     private float GetCategoryValue(List<AudioSource> sources, Dictionary<AudioSource, float> baseVolumes)
@@ -156,5 +210,11 @@ public class PauseMenuAudioSlider : MonoBehaviour
     {
         if (slider == null) return;
         slider.SetValueWithoutNotify(Mathf.Clamp01(value));
+    }
+
+    private void SaveFloat(string key, float value)
+    {
+        PlayerPrefs.SetFloat(key, Mathf.Clamp01(value));
+        PlayerPrefs.Save();
     }
 }

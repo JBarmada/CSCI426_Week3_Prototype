@@ -17,11 +17,32 @@ public class DopamineTracker : MonoBehaviour
     [Header("Game Over Audio")]
     public AudioSource gameOverSfxSource;
     public AudioClip gameOverSfxClip;
+    public float gameOverPanelSlideDuration = 1.2f;
+    public float gameOverMusicFadeOutDuration = 0.15f;
+
+    [Header("Low Dopamine Warning")]
+    public AudioClip lowDopamineClip;
+    [Range(0f, 1f)] public float lowDopamineVolume = 0.4f;
+    [Range(0f, 1f)] public float lowDopamineThresholdPercent = 0.2f;
+    public float lowDopamineCooldown = 1f;
+
+    private AudioSource _lowDopamineSource;
+    private bool _lowDopaminePlaying = false;
+    private float _nextLowDopamineAllowedTime = 0f;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if (lowDopamineClip != null)
+        {
+            _lowDopamineSource = gameObject.AddComponent<AudioSource>();
+            _lowDopamineSource.clip = lowDopamineClip;
+            _lowDopamineSource.loop = true;
+            _lowDopamineSource.volume = lowDopamineVolume;
+            _lowDopamineSource.playOnAwake = false;
+            _lowDopamineSource.ignoreListenerPause = true; // important so hitstop doesn't mute it
+        }
     }
 
     // Update is called once per frame
@@ -32,14 +53,73 @@ public class DopamineTracker : MonoBehaviour
         if (currDop <= 0 && !gameNotOverBefore)
         {
             gameNotOverBefore = true;
+            StopLowDopamineWarning(false);
             StartCoroutine(GameOverSequence());
         }
 
+        UpdateLowDopamineWarning();
+
+    }
+
+    private void UpdateLowDopamineWarning()
+    {
+        if (_lowDopamineSource == null || manager == null || gameNotOverBefore)
+        {
+            return;
+        }
+
+        if (GameMenusManager.Instance != null && GameMenusManager.Instance.IsPaused)
+        {
+            StopLowDopamineWarning(true);
+            return;
+        }
+
+        float maxDop = manager.GetMaxDop();
+        if (maxDop <= 0f)
+        {
+            return;
+        }
+
+        bool shouldPlay = currDop > 0f && (currDop / maxDop) <= lowDopamineThresholdPercent;
+        if (shouldPlay && !_lowDopaminePlaying)
+        {
+            if (Time.unscaledTime < _nextLowDopamineAllowedTime)
+            {
+                return;
+            }
+            _lowDopamineSource.Play();
+            _lowDopaminePlaying = true;
+        }
+        else if (!shouldPlay && _lowDopaminePlaying)
+        {
+            StopLowDopamineWarning(true);
+        }
+    }
+
+    private void StopLowDopamineWarning(bool applyCooldown)
+    {
+        if (_lowDopamineSource == null || !_lowDopaminePlaying)
+        {
+            return;
+        }
+
+        _lowDopamineSource.Stop();
+        _lowDopaminePlaying = false;
+
+        if (applyCooldown)
+        {
+            _nextLowDopamineAllowedTime = Time.unscaledTime + lowDopamineCooldown;
+        }
     }
 
     private IEnumerator GameOverSequence()
     {
         Debug.Log("GAME OVER");
+
+        if (BackgroundMusic.Instance != null)
+        {
+            BackgroundMusic.Instance.FadeOut(gameOverMusicFadeOutDuration);
+        }
 
         if (GameMenusManager.Instance != null)
         {
@@ -50,17 +130,6 @@ public class DopamineTracker : MonoBehaviour
             gameOverMenu.Show();
         }
 
-        AudioListener.pause = true;
-        if (dopamineBarTransform != null)
-        {
-            yield return StartCoroutine(ShakeBar(hitStopDuration));
-        }
-        else
-        {
-            yield return new WaitForSecondsRealtime(hitStopDuration);
-        }
-        AudioListener.pause = false;
-
         float sfxDelay = 0f;
         if (gameOverSfxSource != null && gameOverSfxClip != null)
         {
@@ -68,9 +137,15 @@ public class DopamineTracker : MonoBehaviour
             sfxDelay = gameOverSfxClip.length;
         }
 
-        if (sfxDelay > 0f)
+        if (dopamineBarTransform != null)
         {
-            yield return new WaitForSecondsRealtime(sfxDelay);
+            StartCoroutine(ShakeBar(hitStopDuration));
+        }
+
+        float waitDuration = Mathf.Max(gameOverPanelSlideDuration, sfxDelay, hitStopDuration);
+        if (waitDuration > 0f)
+        {
+            yield return new WaitForSecondsRealtime(waitDuration);
         }
 
         if (GameMenusManager.Instance != null)

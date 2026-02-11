@@ -9,6 +9,7 @@ public class BackgroundMusic : MonoBehaviour
     [Header("Settings")]
     public AudioClip musicClip;
     [Range(0f, 1f)] public float volume = 0.5f;
+    
 
     private AudioSource _audioSource;
     private Coroutine _activeFadeRoutine;
@@ -214,7 +215,7 @@ public class BackgroundMusic : MonoBehaviour
         {
             if (_audioSource == null) yield break; // Safety check
 
-            elapsed += Time.deltaTime;
+            elapsed += Time.unscaledDeltaTime;
             _audioSource.volume = Mathf.Lerp(startVol, targetVolume, elapsed / duration);
             yield return null;
         }

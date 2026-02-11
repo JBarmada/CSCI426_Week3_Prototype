@@ -1567,7 +1567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlideUpPanel
   panel: {fileID: 277631542}
-  slideDuration: 1.5
+  slideDuration: 1.2
 --- !u!114 &277631544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4703,6 +4703,12 @@ MonoBehaviour:
   barShakeIntensity: 8
   gameOverSfxSource: {fileID: 693593960}
   gameOverSfxClip: {fileID: 8300000, guid: 516035e3613af58468562839947ff155, type: 3}
+  gameOverPanelSlideDuration: 1.2
+  gameOverMusicFadeOutDuration: 0.15
+  lowDopamineClip: {fileID: 8300000, guid: bfa0a43285643af40a401771bbae58bb, type: 3}
+  lowDopamineVolume: 0.58
+  lowDopamineThresholdPercent: 0.2
+  lowDopamineCooldown: 2
 --- !u!82 &693593960
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8846,6 +8852,7 @@ MonoBehaviour:
   - {fileID: 7817251506447220282}
   effectsSources:
   - {fileID: 840196399}
+  - {fileID: 693593960}
   interactionSources:
   - {fileID: 554749495}
   - {fileID: 554749495}

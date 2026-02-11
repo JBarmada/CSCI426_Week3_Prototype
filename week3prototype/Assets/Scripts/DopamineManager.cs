@@ -216,6 +216,11 @@ public class DopamineManager : MonoBehaviour
         return dopBar.CurrentValue; 
     }
 
+    public float GetMaxDop()
+    {
+        return maxDopValue;
+    }
+
     // Update is called once per frame
     void Update()
     {
